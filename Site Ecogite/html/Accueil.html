@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../css/Accueil.css">
+    <title>Accueil</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="../image/logo.png">
+    
+    <audio id="audio" autoplay>
+        <source src="../Son/forêt.mp4">
+    </audio>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light menu">
+        <a class="navbar-brand" href="../html/Accueil.html">
+            <img src="../image/logo.png" alt="Logo" class="logo-img">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-center " id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="../html/Accueil.html">Accueil</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../html/Catalogue.html">Catalogue</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../html/Contact.html">Contact</a>
+                </li>
+            </ul>
+        </div>
+        <div class="navbar-text text-dark">
+            <div class="compteur">
+                <span>Visiteurs : </span>
+                <span id="compteur">0</span>
+                </div>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="presentationgite">
+        <div class="titre">Découvrez nos hébergements écologiques</div>
+            <div class="presentation">
+            <p>Nos gîtes écologiques vous offrent une expérience unique au cœur de la nature, dans le respect de l’environnement. Profitez d'un séjour confortable et écoresponsable dans nos gîtes labellisés.</p>
+            </div>
+        </div>
+        <div class="mission">
+          <h5>Notre Mission</h5>
+          <p>L'Écogîte a été créé avec la conviction que le tourisme peut être à la fois agréable et respectueux de l'environnement. Nous souhaitons offrir aux voyageurs un lieu où ils peuvent se reconnecter à la nature tout en minimisant leur impact écologique. </p>
+          <br>
+          <p>Nous croyons fermement que chaque geste compte et que des choix durables peuvent contribuer à préserver notre planète pour les générations futures. C'est pourquoi nous avons conçu notre gîte en utilisant des matériaux écologiques et en adoptant des pratiques durables.</p>
+        </div>
+      
+        <h5 style="text-align: center;"> Nos Labels</h5>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="certification">
+              <img src="../image/ecolabeleu.png" alt="Ecolabel Européen">
+              <h6>Écolabel Européen</h6>
+              <p>Certifié pour notre engagement environnemental</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="certification">
+              <img src="../image/cleverte.png" alt="Clef Verte">
+              <h6>La Clef Verte</h6>
+              <p>Label de tourisme durable</p>
+              <br>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="certification">
+              <img src="../image/gitedefrance.png" alt="Gîtes de France">
+              <h6>Gîtes de France</h6>
+              <p>Qualité et authenticité garanties</p>
+              <br>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br>
+      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>    
+        </body>
+<footer class="footer-custom d-flex justify-content-between">
+    <a class="legal" href="../html/Mentions_légales.html">Mentions légales</a>
+    <div class="social-icons">
+        <a href="https://www.instagram.com/esupeccholet/" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.facebook.com/people/ESUPEC-Lyc%C3%A9e-Sainte-Marie-Cholet/100092878575705/" target="_blank"><i class="fab fa-facebook"></i></a>
+    </div>
+</footer>    
+</html>
+
+<script>
+
+    document.addEventListener("DOMContentLoaded", function() {
+        var audio = document.getElementById('audio');
+        audio.volume = 0.4;
+    });
+</script>
+
+<script>
+
+    document.addEventListener("DOMContentLoaded", function() {
+        let compteurElement = document.getElementById('compteur');
+        let visites = localStorage.getItem('visites');
+
+
+        if (visites === null) {
+            visites = 0;
+        } else {
+            visites = parseInt(visites);
+        }
+
+        
+        visites++;
+        localStorage.setItem('visites', visites);
+        compteurElement.textContent = visites;
+    });
+</script>

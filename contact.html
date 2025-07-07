@@ -1,62 +1,116 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact - Julien TOUZEAU</title>
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/contact.css">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="Contact.css">
+    <link rel="icon" type="image/x-icon" href="logo.png">   
+    <title>Contact</title>
 </head>
 <body>
-    <header>
-        <nav>
-            <div class="logo">Portfolio - Julien TOUZEAU</div>
-            <ul class="nav-links">
-                <li><a href="index.html">À propos</a></li>
-                <li><a href="ppe.html">PPE</a></li>
-                <li><a href="veille.html">Veille techno</a></li>
-                <li><a href="contact.html" class="active">Contact</a></li>
+    <nav class="navbar navbar-expand-lg navbar-light menu">
+        <a class="navbar-brand" href="Accueil.html">
+            <img src="logo.png" alt="Logo" class="logo-img">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-center " id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="Accueil.html">Accueil</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="Catalogue.html">Catalogue</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="Contact.html">Contact</a>
+                </li>
             </ul>
-        </nav>
+        </div>
+        <div class="navbar-text text-dark">
+            <div class="compteur">
+                <span>Visiteurs : </span>
+                <span id="compteur">0</span>
+                </div>
+        </div>
+    </nav>
+
+    <header>
+        <h1>Contactez-nous</h1>
+        <link rel="icon" type="image/x-icon" href="logo.png">
     </header>
 
     <main>
-        <h1>Contactez-moi</h1>
-        
-        <section class="contact-section">
-            <div class="contact-info">
-                <h2>Informations de contact</h2>
-                <p>N'hésitez pas à me contacter pour toute question ou opportunité professionnelle.</p>
-                
-                <div class="contact-details">
-                    <div class="contact-item">
-                        <i class="icon">📧</i>
-                        <span>touzeau.julien49@gmail.com</span>
-                    </div>
-                    <div class="contact-item">
-                        <i class="icon">📱</i>
-                        <span>06 47 85 38 39</span>
-                    </div>
-                    <div class="contact-item">
-                        <i class="icon">🏠</i>
-                        <span>7 rue du bois robin, Villedieu-La-Blouère 49450</span>
-                    </div>
+        <h2>Formulaire de contact</h2>
+        <form action="Mail.php" method="post">
+            <fieldset>
+                <legend>Quel est votre statut ?</legend>
+                <div>
+                    <input type="radio" id="Particulier" name="statut" value="Particulier" required />
+                    <label for="Particulier">Particulier</label>
                 </div>
-                
-                <div class="social-links">
-                    <a href="https://www.linkedin.com/in/julien-touzeau-157507250/" target="_blank" class="social-link">LinkedIn</a>
+                <div>
+                    <input type="radio" id="Professionnel" name="statut" value="Professionnel" required />
+                    <label for="Professionnel">Professionnel</label>
                 </div>
-                
-                <div class="cv-download">
-                    <h3>Téléchargez mon CV</h3>
-                    <a href="assets/pdf/cv-julien-touzeau.pdf" download class="download-btn">Télécharger mon CV (PDF)</a>
+            </fieldset>
+
+            <label for="name">Nom :</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="prenom">Prénom :</label>
+            <input type="text" id="prenom" name="prenom" required>
+
+            <label for="email">Email :</label>
+            <input type="email" id="email" name="email" required>
+
+            <fieldset>
+                <legend>Raison de la demande de contact :</legend>
+                <div>
+                    <input type="radio" id="Réservation" name="raison" value="Réservation" required />
+                    <label for="Réservation">Réservation</label>
                 </div>
-            </div>
-        </section>
+                <div>
+                    <input type="radio" id="Questions" name="raison" value="Questions" required />
+                    <label for="Questions">Questions</label>
+                </div>
+            </fieldset>
+
+            <label>Écrivez votre message ici :</label>
+            <textarea rows="10" cols="30" name="message" required></textarea>
+            <input type="submit" value="Envoyer">
+        </form>
     </main>
 
-    <footer>
-        <p>&copy; 2024 Julien TOUZEAU - Tous droits réservés</p>
-    </footer>
-</body>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>    
+
+    <footer class="footer-custom d-flex justify-content-between">
+        <a class="legal" href="Mentions_légales.html">Mentions légales</a>
+    <div class="social-icons">
+        <a href="https://www.instagram.com/esupeccholet/" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.facebook.com/people/ESUPEC-Lyc%C3%A9e-Sainte-Marie-Cholet/100092878575705/" target="_blank"><i class="fab fa-facebook"></i></a>
+    </div>
+    </footer>    
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        let compteurElement = document.getElementById('compteur');
+        let visites = localStorage.getItem('visites');
+
+        if (visites === null) {
+            visites = 0;
+        } else {
+            visites = parseInt(visites);
+        }
+
+        visites++;
+        localStorage.setItem('visites', visites);
+        compteurElement.textContent = visites;
+    });
+</script>
 </html>

@@ -24,10 +24,6 @@
     overflow: hidden;
     border-radius: 8px;
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-
-    transform: scale(0.50);   /* 50% de la taille normale */
-    transform-origin: top left;
-    width: 118%; /* compense le scale pour que ça remplisse */
 }
 
 .iframe-container iframe {

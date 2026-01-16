@@ -1,0 +1,114 @@
+.stage-entreprise {
+    margin-bottom: 3rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.entreprise-header {
+    display: flex;
+    align-items: center;
+    background-color: #3498db;
+    color: white;
+    padding: 1.5rem;
+    gap: 2rem;
+}
+
+.entreprise-logo {
+    width: 120px;
+    height: 60px;
+    object-fit: contain;
+    background-color: white;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.entreprise-info h2 {
+    color: white;
+    margin-bottom: 0.5rem;
+}
+
+.entreprise-dates {
+    font-style: italic;
+    opacity: 0.9;
+}
+
+.entreprise-description {
+    padding: 2rem;
+}
+
+.entreprise-description h3 {
+    color: #2c3e50;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.entreprise-description h3:first-child {
+    margin-top: 0;
+}
+
+.activites-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+}
+
+.activite-categorie {
+    background-color: #f8f9fa;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    padding: 1rem;
+    text-align: center;
+}
+
+.activite-categorie h4 {
+    color: #3498db;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.activite-categorie p {
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: #2c3e50;
+}
+
+.etablissements-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin: 2rem;
+}
+
+.etablissement-card {
+    background-color: #f8f9fa;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    padding: 1.5rem;
+}
+
+.etablissement-card h3 {
+    color: #2c3e50;
+    margin-bottom: 1rem;
+}
+
+.etablissement-card ul {
+    margin-left: 1.5rem;
+    margin-top: 1rem;
+}
+
+@media (max-width: 768px) {
+    .entreprise-header {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .activites-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .etablissements-grid {
+        grid-template-columns: 1fr;
+    }
+}

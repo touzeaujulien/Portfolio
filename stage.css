@@ -3,12 +3,13 @@
     border: 1px solid #e0e0e0;
     border-radius: 8px;
     overflow: hidden;
+    background-color: white;
 }
 
 .entreprise-header {
     display: flex;
     align-items: center;
-    background-color: #3498db;
+    background-color: #2c3e50;
     color: white;
     padding: 1.5rem;
     gap: 2rem;
@@ -26,11 +27,14 @@
 .entreprise-info h2 {
     color: white;
     margin-bottom: 0.5rem;
+    font-size: 1.8rem;
 }
 
 .entreprise-dates {
     font-style: italic;
     opacity: 0.9;
+    color: #3498db;
+    font-weight: 500;
 }
 
 .entreprise-description {
@@ -41,44 +45,37 @@
     color: #2c3e50;
     margin-top: 1.5rem;
     margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #3498db;
 }
 
 .entreprise-description h3:first-child {
     margin-top: 0;
 }
 
-.activites-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 1rem;
-    margin: 1.5rem 0;
+.entreprise-description ul {
+    margin-left: 1.5rem;
+    margin-bottom: 1.5rem;
 }
 
-.activite-categorie {
-    background-color: #f8f9fa;
-    border: 1px solid #e0e0e0;
-    border-radius: 5px;
-    padding: 1rem;
-    text-align: center;
-}
-
-.activite-categorie h4 {
-    color: #3498db;
+.entreprise-description li {
     margin-bottom: 0.5rem;
-    font-size: 0.9rem;
+    padding-left: 0.5rem;
 }
 
-.activite-categorie p {
-    font-weight: bold;
-    font-size: 1.2rem;
-    color: #2c3e50;
+.chart-container {
+    max-width: 600px;
+    margin: 2rem auto;
+    position: relative;
+    height: 400px;
 }
 
 .etablissements-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
-    margin: 2rem;
+    margin: 2rem 0;
+    padding: 0 2rem;
 }
 
 .etablissement-card {
@@ -86,29 +83,58 @@
     border: 1px solid #e0e0e0;
     border-radius: 5px;
     padding: 1.5rem;
+    transition: transform 0.3s, box-shadow 0.3s;
+    border-top: 4px solid #3498db;
+}
+
+.etablissement-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
 .etablissement-card h3 {
     color: #2c3e50;
     margin-bottom: 1rem;
+    font-size: 1.3rem;
+}
+
+.etablissement-card p {
+    margin-bottom: 1rem;
+    color: #7f8c8d;
 }
 
 .etablissement-card ul {
-    margin-left: 1.5rem;
+    margin-left: 1.2rem;
     margin-top: 1rem;
+}
+
+.etablissement-card li {
+    margin-bottom: 0.5rem;
+    color: #555;
 }
 
 @media (max-width: 768px) {
     .entreprise-header {
         flex-direction: column;
         text-align: center;
+        padding: 1rem;
     }
     
-    .activites-grid {
-        grid-template-columns: repeat(2, 1fr);
+    .entreprise-logo {
+        width: 100px;
+        height: 50px;
+    }
+    
+    .chart-container {
+        height: 300px;
     }
     
     .etablissements-grid {
         grid-template-columns: 1fr;
+        padding: 0 1rem;
+    }
+    
+    .entreprise-description {
+        padding: 1.5rem;
     }
 }

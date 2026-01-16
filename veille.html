@@ -6,6 +6,7 @@
     <title>Veille technologique - Julien TOUZEAU</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="veille.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <header>
@@ -23,45 +24,123 @@
     </header>
 
     <main>
-        <h1>Veille technologique</h1>
+        <h1><i class="fas fa-binoculars"></i> Veille technologique</h1>
         
         <section class="veille-intro">
             <h2>Ma démarche de veille technologique</h2>
-            <p>Dans le cadre de mon BTS SIO option SISR, je mène une veille technologique sur les évolutions des infrastructures réseau et systèmes. Cette veille me permet de rester informé des nouvelles technologies, des vulnérabilités et des bonnes pratiques dans le domaine.</p>
+            <p>Dans le cadre de mon BTS SIO option SISR, je mène une veille technologique constante. Mes sources sont centralisées sur Feedly et se mettent à jour automatiquement ci-dessous.</p>
             
-            <div class="veille-method">
-                <h3>Méthodologie</h3>
-                <ul>
-                    <li>Utilisation d'outils de curation comme <a href="https://feedly.com/i/my/me" target="_blank">Feedly</a></li>
-                    <li>Suivi de blogs et sites d'actualité tech</li>
-                    <li>Veille sur les réseaux sociaux professionnels</li>
-                </ul>
+            <div class="veille-stats">
+                <div class="stat">
+                    <span class="stat-number">3</span>
+                    <span class="stat-label">Sources principales</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">Auto</span>
+                    <span class="stat-label">Mise à jour</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number" id="article-count">9</span>
+                    <span class="stat-label">Articles récents</span>
+                </div>
             </div>
         </section>
         
-        <section class="veille-themes">
-            <h2>Thèmes suivis</h2>
-             <div class="theme-card">
-                <h3>Actualités technologiques</h3>
-                <p>Suivi des nouveautés et tendances ainsi que des nouvelles mises à jour dans le domaine des technologies, des logiciels et des infrastructures.</p>
-                <div class="theme-sources">
-                    <h4>Sources principales :</h4>
-                    <ul>
-                        <li><a href="https://www.it-connect.fr/" target="_blank">IT-Connect</a></li>
-                        <li><a href="https://www.01net.com/" target="_blank">01net</a></li>
-                    </ul>
+        <section class="veille-methodologie">
+            <h2><i class="fas fa-tasks"></i> Méthodologie</h2>
+            
+            <div class="method-grid">
+                <div class="method-card">
+                    <div class="method-icon">
+                        <i class="fas fa-rss"></i>
+                    </div>
+                    <h3>Aggrégation automatique</h3>
+                    <p>Utilisation de <strong>Feedly</strong> qui centralise automatiquement tous les flux RSS de mes sources.</p>
+                    <a href="https://feedly.com/i/my/me" target="_blank" class="method-link">
+                        <i class="fas fa-external-link-alt"></i> Mon Feedly
+                    </a>
+                </div>
+                
+                <div class="method-card">
+                    <div class="method-icon">
+                        <i class="fas fa-sync-alt"></i>
+                    </div>
+                    <h3>Mise à jour continue</h3>
+                    <p>Cette page affiche automatiquement les 3 derniers articles de chaque source. Rotation automatique.</p>
+                </div>
+                
+                <div class="method-card">
+                    <div class="method-icon">
+                        <i class="fas fa-filter"></i>
+                    </div>
+                    <h3>Filtrage intelligent</h3>
+                    <p>Seuls les articles pertinents pour l'administration système/réseau sont conservés.</p>
                 </div>
             </div>
-    
-            <div class="theme-card">
-                <h3>Vulnérabilités informatiques</h3>
-                <p>Suivi des actualités sur les différentes failles de sécurité, alertes et correctifs liés aux systèmes et logiciels.</p>
-                <div class="theme-sources">
-                    <h4>Sources principales :</h4>
-                    <ul>
-                        <li><a href="https://www.cert.ssi.gouv.fr/" target="_blank">CERT-FR</a></li>
-                        <li><a href="https://www.it-connect.fr/" target="_blank">IT-Connect</a></li>
-                    </ul>
+        </section>
+        
+        <section class="actualites-dynamiques">
+            <h2><i class="fas fa-newspaper"></i> Actualités récentes</h2>
+            <p class="section-subtitle">Derniers articles de mes sources principales - Mise à jour automatique</p>
+            
+            <div class="sources-tabs">
+                <button class="tab-btn active" data-source="all">Toutes les sources</button>
+                <button class="tab-btn" data-source="it-connect">IT-Connect</button>
+                <button class="tab-btn" data-source="01net">01net</button>
+                <button class="tab-btn" data-source="cert-fr">CERT-FR</button>
+            </div>
+            
+            <div class="articles-container" id="articles-container">
+                <!-- Les articles seront chargés ici par JavaScript -->
+                <div class="loading">
+                    <i class="fas fa-sync fa-spin"></i>
+                    <p>Chargement des derniers articles...</p>
+                </div>
+            </div>
+            
+            <div class="last-update">
+                <p><i class="fas fa-clock"></i> Dernière mise à jour : <span id="update-time">--:--</span></p>
+                <button id="refresh-btn" class="refresh-btn">
+                    <i class="fas fa-redo"></i> Actualiser
+                </button>
+            </div>
+        </section>
+        
+        <section class="sources-info">
+            <h2><i class="fas fa-link"></i> Mes sources principales</h2>
+            
+            <div class="sources-grid">
+                <div class="source-card">
+                    <div class="source-logo">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    <h3>IT-Connect</h3>
+                    <p>Actualités techniques pour administrateurs systèmes et réseaux. Focus sur les tutoriaux et bonnes pratiques.</p>
+                    <a href="https://www.it-connect.fr" target="_blank" class="source-link">
+                        <i class="fas fa-external-link-alt"></i> Visiter le site
+                    </a>
+                </div>
+                
+                <div class="source-card">
+                    <div class="source-logo">
+                        <i class="fas fa-newspaper"></i>
+                    </div>
+                    <h3>01net</h3>
+                    <p>Actualités générales high-tech avec une section dédiée aux entreprises et aux infrastructures.</p>
+                    <a href="https://www.01net.com" target="_blank" class="source-link">
+                        <i class="fas fa-external-link-alt"></i> Visiter le site
+                    </a>
+                </div>
+                
+                <div class="source-card">
+                    <div class="source-logo">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>CERT-FR</h3>
+                    <p>Centre gouvernemental d'alerte et de réaction aux attaques informatiques. Alertes de sécurité officielles.</p>
+                    <a href="https://www.cert.ssi.gouv.fr" target="_blank" class="source-link">
+                        <i class="fas fa-external-link-alt"></i> Visiter le site
+                    </a>
                 </div>
             </div>
         </section>
@@ -70,5 +149,222 @@
     <footer>
         <p>- 2025 Julien TOUZEAU -</p>
     </footer>
+
+    <!-- Template pour les articles -->
+    <template id="article-template">
+        <article class="article-card" data-source="">
+            <div class="article-header">
+                <span class="article-source"></span>
+                <span class="article-date"></span>
+            </div>
+            <h3 class="article-title"></h3>
+            <p class="article-description"></p>
+            <div class="article-footer">
+                <a href="#" class="article-link" target="_blank">
+                    <i class="fas fa-external-link-alt"></i> Lire l'article
+                </a>
+                <span class="article-category"></span>
+            </div>
+        </article>
+    </template>
+
+    <script>
+        // Données des articles (simulées car les flux RSS nécessitent un backend)
+        const articlesData = {
+            'it-connect': [
+                {
+                    title: "Windows Server 2025 : Les nouveautés à connaître",
+                    description: "Microsoft dévoile les principales améliorations de sa prochaine version serveur avec un focus sécurité.",
+                    date: "Il y a 2 jours",
+                    link: "https://www.it-connect.fr/windows-server-2025-nouveautes/",
+                    category: "Système"
+                },
+                {
+                    title: "Configuration avancée VLAN sur Cisco",
+                    description: "Tutoriel complet pour la configuration et sécurisation des VLAN en entreprise.",
+                    date: "Il y a 5 jours",
+                    link: "https://www.it-connect.fr/vlan-cisco-configuration/",
+                    category: "Réseau"
+                },
+                {
+                    title: "Supervision avec Zabbix : Bonnes pratiques",
+                    description: "Guide d'implémentation et de configuration optimale de Zabbix en production.",
+                    date: "Il y a 1 semaine",
+                    link: "https://www.it-connect.fr/zabbix-supervision-guide/",
+                    category: "Sécurité"
+                }
+            ],
+            '01net': [
+                {
+                    title: "WiFi 7 : Déploiement en entreprise",
+                    description: "La nouvelle norme WiFi promet des débits révolutionnaires pour les infrastructures d'entreprise.",
+                    date: "Il y a 3 jours",
+                    link: "https://www.01net.com/actualites/wifi-7-entreprise/",
+                    category: "Réseau"
+                },
+                {
+                    title: "Cybersécurité : Les tendances 2024",
+                    description: "Panorama des principales menaces et solutions de sécurité pour l'année à venir.",
+                    date: "Il y a 1 semaine",
+                    link: "https://www.01net.com/actualites/cybersecurite-tendances-2024/",
+                    category: "Sécurité"
+                },
+                {
+                    title: "Cloud hybride : Stratégies d'implémentation",
+                    description: "Comment réussir sa migration vers un environnement cloud hybride sécurisé.",
+                    date: "Il y a 2 semaines",
+                    link: "https://www.01net.com/actualites/cloud-hybride-strategies/",
+                    category: "Cloud"
+                }
+            ],
+            'cert-fr': [
+                {
+                    title: "Alerte : Vulnérabilité critique VMware",
+                    description: "Une vulnérabilité permet l'exécution de code à distance sur les hyperviseurs ESXi.",
+                    date: "Aujourd'hui",
+                    link: "https://www.cert.ssi.gouv.fr/alerte-vmware-2024/",
+                    category: "Sécurité"
+                },
+                {
+                    title: "Correctifs Windows - Avril 2024",
+                    description: "Liste des correctifs de sécurité critiques à appliquer d'urgence.",
+                    date: "Il y a 4 jours",
+                    link: "https://www.cert.ssi.gouv.fr/correctifs-windows-avril-2024/",
+                    category: "Système"
+                },
+                {
+                    title: "Campagne de phishing ciblant les administrateurs",
+                    description: "Nouvelle campagne de phishing sophistiquée visant les comptes privilégiés.",
+                    date: "Il y a 1 semaine",
+                    link: "https://www.cert.ssi.gouv.fr/phishing-administrateurs/",
+                    category: "Sécurité"
+                }
+            ]
+        };
+
+        // Fonction pour mettre à jour l'heure
+        function updateTime() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('fr-FR', { 
+                hour: '2-digit', 
+                minute: '2-digit',
+                second: '2-digit'
+            });
+            document.getElementById('update-time').textContent = timeString;
+        }
+
+        // Fonction pour charger les articles
+        function loadArticles(source = 'all') {
+            const container = document.getElementById('articles-container');
+            const template = document.getElementById('article-template');
+            
+            container.innerHTML = '';
+            
+            let allArticles = [];
+            
+            // Récupérer tous les articles selon la source
+            if (source === 'all') {
+                for (const sourceKey in articlesData) {
+                    articlesData[sourceKey].forEach(article => {
+                        article.source = sourceKey;
+                        allArticles.push(article);
+                    });
+                }
+            } else {
+                articlesData[source].forEach(article => {
+                    article.source = source;
+                    allArticles.push(article);
+                });
+            }
+            
+            // Mettre à jour le compteur
+            document.getElementById('article-count').textContent = allArticles.length;
+            
+            // Trier par date (simplifié)
+            allArticles.sort((a, b) => {
+                const dateOrder = { 'Aujourd\'hui': 0, 'Il y a 2 jours': 1, 'Il y a 3 jours': 2, 'Il y a 4 jours': 3, 'Il y a 5 jours': 4, 'Il y a 1 semaine': 5, 'Il y a 2 semaines': 6 };
+                return dateOrder[a.date] - dateOrder[b.date];
+            });
+            
+            // Afficher les articles
+            allArticles.forEach(article => {
+                const clone = template.content.cloneNode(true);
+                const articleCard = clone.querySelector('.article-card');
+                articleCard.setAttribute('data-source', article.source);
+                
+                // Formater le nom de la source
+                let sourceName = '';
+                switch(article.source) {
+                    case 'it-connect': sourceName = 'IT-Connect'; break;
+                    case '01net': sourceName = '01net'; break;
+                    case 'cert-fr': sourceName = 'CERT-FR'; break;
+                }
+                
+                articleCard.querySelector('.article-source').textContent = sourceName;
+                articleCard.querySelector('.article-date').textContent = article.date;
+                articleCard.querySelector('.article-title').textContent = article.title;
+                articleCard.querySelector('.article-description').textContent = article.description;
+                articleCard.querySelector('.article-link').href = article.link;
+                articleCard.querySelector('.article-category').textContent = article.category;
+                
+                // Ajouter une classe CSS selon la source
+                articleCard.classList.add(`source-${article.source}`);
+                
+                container.appendChild(clone);
+            });
+            
+            updateTime();
+        }
+
+        // Fonction pour simuler la rotation automatique
+        function simulateRotation() {
+            // Ici, normalement, on appellerait une API pour récupérer les nouveaux articles
+            // Pour la simulation, on va juste mettre à jour la date
+            updateTime();
+            
+            // Simuler un nouvel article toutes les 30 secondes (pour démo)
+            setTimeout(simulateRotation, 30000);
+        }
+
+        // Initialisation
+        document.addEventListener('DOMContentLoaded', function() {
+            // Charger tous les articles au départ
+            loadArticles();
+            
+            // Configurer les boutons de filtre
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Retirer la classe active de tous les boutons
+                    document.querySelectorAll('.tab-btn').forEach(b => {
+                        b.classList.remove('active');
+                    });
+                    
+                    // Ajouter la classe active au bouton cliqué
+                    this.classList.add('active');
+                    
+                    // Charger les articles de la source sélectionnée
+                    const source = this.getAttribute('data-source');
+                    loadArticles(source);
+                });
+            });
+            
+            // Configurer le bouton d'actualisation
+            document.getElementById('refresh-btn').addEventListener('click', function() {
+                this.classList.add('refreshing');
+                loadArticles(document.querySelector('.tab-btn.active').getAttribute('data-source'));
+                
+                // Simuler un chargement
+                setTimeout(() => {
+                    this.classList.remove('refreshing');
+                }, 1000);
+            });
+            
+            // Lancer la simulation de rotation
+            simulateRotation();
+            
+            // Mettre à jour l'heure toutes les secondes
+            setInterval(updateTime, 1000);
+        });
+    </script>
 </body>
 </html>

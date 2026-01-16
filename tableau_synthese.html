@@ -66,189 +66,218 @@
             <div class="table-header">
                 <h2><i class="fas fa-list-alt"></i> Compétences acquises</h2>
                 <div class="table-info">
-                    <span class="info-item"><i class="fas fa-check-circle"></i> 23 compétences</span>
+                    <span class="info-item"><i class="fas fa-check-circle"></i> 28 compétences</span>
                     <span class="info-item"><i class="fas fa-folder-open"></i> 5 catégories</span>
                 </div>
             </div>
             
             <div class="table-responsive">
-                <table class="competences-table">
-                    <thead>
-                        <tr>
-                            <th>Compétence</th>
-                            <th>Catégorie</th>
-                            <th>Contexte d'acquisition</th>
-                            <th>Description</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Compétences Réseau -->
-                        <tr class="competence-item" data-category="reseau">
-                            <td class="competence-name">Configuration VLAN</td>
-                            <td><span class="category-tag reseau">Réseau</span></td>
-                            <td>AP 3 - MDS49</td>
-                            <td>Configuration de VLAN (10, 20, 30, 100) avec routage inter-VLAN et ACL</td>
-                        </tr>
-                        
-                        <tr class="competence-item" data-category="reseau">
-                            <td class="competence-name">Routage OSPF</td>
-                            <td><span class="category-tag reseau">Réseau</span></td>
-                            <td>AP 3 - MDS49</td>
-                            <td>Configuration du protocole OSPF entre routeurs Cisco</td>
-                        </tr>
-                        
-                        <tr class="competence-item" data-category="reseau">
-                            <td class="competence-name">Configuration Switch</td>
-                            <td><span class="category-tag reseau">Réseau</span></td>
-                            <td>AP 3 - MDS49</td>
-                            <td>Configuration avancée de switchs Cisco avec gestion des ports</td>
-                        </tr>
-                        
-                        <tr class="competence-item" data-category="reseau">
-                            <td class="competence-name">NAT/PAT</td>
-                            <td><span class="category-tag reseau">Réseau</span></td>
-                            <td>AP 3 - MDS49</td>
-                            <td>Configuration de NAT/PAT pour l'accès web externe</td>
-                        </tr>
-                        
-                        <!-- Compétences Système -->
-                        <tr class="competence-item" data-category="systeme">
-                            <td class="competence-name">Windows Server 2019</td>
-                            <td><span class="category-tag systeme">Système</span></td>
-                            <td>AP 1-2, AP 2, AP 3</td>
-                            <td>Installation, configuration AD, GPO, DHCP, DNS, gestion des utilisateurs</td>
-                        </tr>
-                        
-                        <tr class="competence-item" data-category="systeme">
-                            <td class="competence-name">Debian Server</td>
-                            <td><span class="category-tag systeme">Système</span></td>
-                            <td>AP 1-2, AP 2, AP 3</td>
-                            <td>Serveur web Apache, DNS Bind9, configuration réseau</td>
-                        </tr>
-                        
-                        <tr class="competence-item" data-category="systeme">
-                            <td class="competence-name">Virtualisation (ESX, Hyper-V)</td>
-                            <td><span class="category-tag systeme">Système</span></td>
-                            <td>AP 1-2, AP 2, Stage Almeria</td>
-                            <td>Déploiement et gestion de machines virtuelles</td>
-                        </tr>
-                        
-                        <tr class="competence-item" data-category="systeme">
-                            <td class="competence-name">Système RAID 5</td>
-                            <td><span class="category-tag systeme">Système</span></td>
-                            <td>AP 2 - LOGONET</td>
-                            <td>Mise en place de RAID 5 pour tolérance aux pannes</td>
-                        </tr>
-                        
-                        <tr class="competence-item" data-category="systeme">
-                            <td class="competence-name">Windows Server 2022</td>
-                            <td><span class="category-tag systeme">Système</span></td>
-                            <td>AP 4 - TOBAT</td>
-                            <td>Installation, configuration, réplication pour haute disponibilité</td>
-                        </tr>
-                        
-                        <tr class="competence-item" data-category="systeme">
-                            <td class="competence-name">DHCP Linux avec répartition de charge</td>
-                            <td><span class="category-tag systeme">Système</span></td>
-                            <td>AP 4 - TOBAT</td>
-                            <td>Configuration de 2 serveurs DHCP Linux en répartition de charge</td>
-                        </tr>
-                        
-                        <tr class="competence-item" data-category="systeme">
-                            <td class="competence-name">DFS (Distributed File System)</td>
-                            <td><span class="category-tag systeme">Système</span></td>
-                            <td>AP 4 - TOBAT</td>
-                            <td>Mise en place de système de fichiers distribué</td>
-                        </tr>
-                        
-                        <tr class="competence-item" data-category="systeme">
-                            <td class="competence-name">FOG Project</td>
-                            <td><span class="category-tag systeme">Système</span></td>
-                            <td>AP 4 - TOBAT</td>
-                            <td>Serveur de déploiement d'images système</td>
-                        </tr>
-                        
-                        <!-- Compétences Sécurité -->
-                        <tr class="competence-item" data-category="securite">
-                            <td class="competence-name">Pare-feu Watchguard</td>
-                            <td><span class="category-tag securite">Sécurité</span></td>
-                            <td>Stage - Almeria</td>
-                            <td>Configuration de règles, filtrage, VPN</td>
-                        </tr>
-                        
-                        <tr class="competence-item" data-category="securite">
-                            <td class="competence-name">ACL Cisco</td>
-                            <td><span class="category-tag securite">Sécurité</span></td>
-                            <td>AP 3 - MDS49</td>
-                            <td>ACL standards et étendues pour filtrage inter-VLAN</td>
-                        </tr>
-                        
-                        <tr class="competence-item" data-category="securite">
-                            <td class="competence-name">WiFi Sécurisé (WPA2 + Radius)</td>
-                            <td><span class="category-tag securite">Sécurité</span></td>
-                            <td>AP 3 - MDS49</td>
-                            <td>Configuration de WiFi d'entreprise avec authentification Radius</td>
-                        </tr>
-                        
-                        <tr class="competence-item" data-category="securite">
-                            <td class="competence-name">Audit PingCastle</td>
-                            <td><span class="category-tag securite">Sécurité</span></td>
-                            <td>AP, Stage Almeria</td>
-                            <td>Audit de sécurité Active Directory</td>
-                        </tr>
-                        
-                        <tr class="competence-item" data-category="securite">
-                            <td class="competence-name">Zabbix avancé</td>
-                            <td><span class="category-tag securite">Sécurité</span></td>
-                            <td>AP 4 - TOBAT</td>
-                            <td>Supervision CPU, mémoire, stockage + alertes par mail</td>
-                        </tr>
-                        
-                        <!-- Compétences Téléphonie -->
-                        <tr class="competence-item" data-category="telephonie">
-                            <td class="competence-name">3CX Softphone</td>
-                            <td><span class="category-tag telephonie">Téléphonie</span></td>
-                            <td>Stage - Almeria</td>
-                            <td>Installation et configuration de softphones 3CX</td>
-                        </tr>
-                        
-                        <tr class="competence-item" data-category="telephonie">
-                            <td class="competence-name">Administration 3CX</td>
-                            <td><span class="category-tag telephonie">Téléphonie</span></td>
-                            <td>Stage - Almeria</td>
-                            <td>Gestion des utilisateurs, groupes, horaires, jours fériés</td>
-                        </tr>
-                        
-                        <!-- Compétences Transverses -->
-                        <tr class="competence-item" data-category="transverse">
-                            <td class="competence-name">Rédaction de documentation technique</td>
-                            <td><span class="category-tag transverse">Transverse</span></td>
-                            <td>Tous les AP</td>
-                            <td>Rédaction de guides, procédures, rapports techniques</td>
-                        </tr>
-                        
-                        <tr class="competence-item" data-category="transverse">
-                            <td class="competence-name">Communication professionnelle</td>
-                            <td><span class="category-tag transverse">Transverse</span></td>
-                            <td>AP, Stages</td>
-                            <td>Présentations, réunions, support utilisateurs</td>
-                        </tr>
-                        
-                        <tr class="competence-item" data-category="transverse">
-                            <td class="competence-name">Autonomie et prise d'initiative</td>
-                            <td><span class="category-tag transverse">Transverse</span></td>
-                            <td>Tous projets</td>
-                            <td>Gestion de projets, résolution de problèmes</td>
-                        </tr>
-                        
-                        <tr class="competence-item" data-category="transverse">
-                            <td class="competence-name">Script PowerShell AD</td>
-                            <td><span class="category-tag transverse">Transverse</span></td>
-                            <td>AP 4 - TOBAT</td>
-                            <td>Automatisation de création de comptes Active Directory</td>
-                        </tr>
-                    </tbody>
-                </table>
+               <table class="competences-table">
+    <thead>
+        <tr>
+            <th>Compétence</th>
+            <th>Catégorie</th>
+            <th>Contexte d'acquisition</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Compétences Réseau -->
+        <tr class="competence-item" data-category="reseau">
+            <td class="competence-name">Configuration VLAN</td>
+            <td><span class="category-tag reseau">Réseau</span></td>
+            <td>AP 3 - MDS49</td>
+            <td>Configuration de VLAN (10, 20, 30, 100) avec routage inter-VLAN</td>
+        </tr>
+        
+        <tr class="competence-item" data-category="reseau">
+            <td class="competence-name">Routage OSPF</td>
+            <td><span class="category-tag reseau">Réseau</span></td>
+            <td>AP 3 - MDS49</td>
+            <td>Configuration du protocole OSPF entre routeurs Cisco</td>
+        </tr>
+        
+        <tr class="competence-item" data-category="reseau">
+            <td class="competence-name">Configuration Switch</td>
+            <td><span class="category-tag reseau">Réseau</span></td>
+            <td>AP 3 - MDS49, Stage</td>
+            <td>Configuration avancée de switchs avec gestion des ports</td>
+        </tr>
+        
+        <tr class="competence-item" data-category="reseau">
+            <td class="competence-name">NAT/PAT</td>
+            <td><span class="category-tag reseau">Réseau</span></td>
+            <td>AP 3 - MDS49</td>
+            <td>Configuration de NAT/PAT pour l'accès web externe</td>
+        </tr>
+        
+        <!-- Compétences Système -->
+        <tr class="competence-item" data-category="systeme">
+            <td class="competence-name">Windows Server 2019</td>
+            <td><span class="category-tag systeme">Système</span></td>
+            <td>AP 1-2, AP 2, AP 3</td>
+            <td>Installation, configuration AD, GPO, DHCP, DNS, gestion des utilisateurs</td>
+        </tr>
+        
+        <tr class="competence-item" data-category="systeme">
+            <td class="competence-name">Debian Server</td>
+            <td><span class="category-tag systeme">Système</span></td>
+            <td>AP 1-2, AP 2, AP 3</td>
+            <td>Serveur web Apache, DNS Bind9, configuration réseau</td>
+        </tr>
+        
+        <tr class="competence-item" data-category="systeme">
+            <td class="competence-name">Virtualisation (ESX, Hyper-V)</td>
+            <td><span class="category-tag systeme">Système</span></td>
+            <td>AP 1-2, AP 2, Stage</td>
+            <td>Déploiement et gestion de machines virtuelles</td>
+        </tr>
+        
+        <tr class="competence-item" data-category="systeme">
+            <td class="competence-name">Système RAID 5</td>
+            <td><span class="category-tag systeme">Système</span></td>
+            <td>AP 2 - LOGONET</td>
+            <td>Mise en place de RAID 5 pour tolérance aux pannes</td>
+        </tr>
+        
+        <!-- Compétences Sécurité -->
+        <tr class="competence-item" data-category="securite">
+            <td class="competence-name">Pare-feu Watchguard</td>
+            <td><span class="category-tag securite">Sécurité</span></td>
+            <td>Stage - Almeria</td>
+            <td>Configuration de règles, filtrage, VPN</td>
+        </tr>
+        
+        <tr class="competence-item" data-category="securite">
+            <td class="competence-name">ACL Cisco</td>
+            <td><span class="category-tag securite">Sécurité</span></td>
+            <td>AP 3 - MDS49</td>
+            <td>ACL standards et étendues pour filtrage inter-VLAN</td>
+        </tr>
+        
+        <tr class="competence-item" data-category="securite">
+            <td class="competence-name">WiFi Sécurisé (WPA2 + Radius)</td>
+            <td><span class="category-tag securite">Sécurité</span></td>
+            <td>AP 3 - MDS49</td>
+            <td>Configuration de WiFi d'entreprise avec authentification Radius</td>
+        </tr>
+        
+        <tr class="competence-item" data-category="securite">
+            <td class="competence-name">Audit PingCastle</td>
+            <td><span class="category-tag securite">Sécurité</span></td>
+            <td>Stage</td>
+            <td>Audit de sécurité Active Directory</td>
+        </tr>
+        
+        <!-- Compétences Téléphonie -->
+        <tr class="competence-item" data-category="telephonie">
+            <td class="competence-name">3CX Softphone</td>
+            <td><span class="category-tag telephonie">Téléphonie</span></td>
+            <td>Stage - Almeria</td>
+            <td>Installation et configuration de softphones 3CX</td>
+        </tr>
+        
+        <tr class="competence-item" data-category="telephonie">
+            <td class="competence-name">Administration 3CX</td>
+            <td><span class="category-tag telephonie">Téléphonie</span></td>
+            <td>Stage - Almeria</td>
+            <td>Gestion des utilisateurs, groupes, horaires, jours fériés</td>
+        </tr>
+        
+        <!-- Nouvelles compétences Stage -->
+        <tr class="competence-item" data-category="systeme">
+            <td class="competence-name">Configuration Postes</td>
+            <td><span class="category-tag systeme">Système</span></td>
+            <td>Stage - Almeria</td>
+            <td>Installation et configuration de postes clients Windows</td>
+        </tr>
+        
+        <tr class="competence-item" data-category="reseau">
+            <td class="competence-name">Audit Réseau</td>
+            <td><span class="category-tag reseau">Réseau</span></td>
+            <td>Stage - Almeria</td>
+            <td>Audit d'infrastructures réseau existantes</td>
+        </tr>
+        
+        <tr class="competence-item" data-category="systeme">
+            <td class="competence-name">Installation OS Serveurs</td>
+            <td><span class="category-tag systeme">Système</span></td>
+            <td>Stage - Almeria</td>
+            <td>Installation d'OS serveurs (Windows Server, ESX)</td>
+        </tr>
+        
+        <tr class="competence-item" data-category="systeme">
+            <td class="competence-name">Installation NAS</td>
+            <td><span class="category-tag systeme">Système</span></td>
+            <td>Stage - Almeria</td>
+            <td>Installation et configuration de serveurs NAS</td>
+        </tr>
+        
+        <tr class="competence-item" data-category="securite">
+            <td class="competence-name">Supervision</td>
+            <td><span class="category-tag securite">Sécurité</span></td>
+            <td>Stage - Almeria</td>
+            <td>Supervision des systèmes et réseaux</td>
+        </tr>
+        
+        <tr class="competence-item" data-category="reseau">
+            <td class="competence-name">Bornes WiFi</td>
+            <td><span class="category-tag reseau">Réseau</span></td>
+            <td>Stage - Almeria</td>
+            <td>Configuration de bornes WiFi d'entreprise</td>
+        </tr>
+        
+        <tr class="competence-item" data-category="systeme">
+            <td class="competence-name">Support Technique</td>
+            <td><span class="category-tag systeme">Système</span></td>
+            <td>Stage - Almeria</td>
+            <td>Support technique niveau 1 et 2 aux utilisateurs</td>
+        </tr>
+        
+        <tr class="competence-item" data-category="transverse">
+            <td class="competence-name">Rédaction de documentation technique</td>
+            <td><span class="category-tag transverse">Transverse</span></td>
+            <td>Tous les AP, Stage</td>
+            <td>Rédaction de guides, procédures, rapports techniques</td>
+        </tr>
+        
+        <tr class="competence-item" data-category="transverse">
+            <td class="competence-name">Communication professionnelle</td>
+            <td><span class="category-tag transverse">Transverse</span></td>
+            <td>AP, Stages</td>
+            <td>Présentations, réunions, support utilisateurs</td>
+        </tr>
+        
+        <tr class="competence-item" data-category="transverse">
+            <td class="competence-name">Autonomie et prise d'initiative</td>
+            <td><span class="category-tag transverse">Transverse</span></td>
+            <td>Tous projets</td>
+            <td>Gestion de projets, résolution de problèmes</td>
+        </tr>
+        
+        <!-- Compétences des établissements scolaires -->
+        <tr class="competence-item" data-category="systeme">
+            <td class="competence-name">Gestion de parc informatique</td>
+            <td><span class="category-tag systeme">Système</span></td>
+            <td>Stage - Lycées</td>
+            <td>Gestion et maintenance du parc informatique éducatif</td>
+        </tr>
+        
+        <tr class="competence-item" data-category="systeme">
+            <td class="competence-name">Installation logiciels éducatifs</td>
+            <td><span class="category-tag systeme">Système</span></td>
+            <td>Stage - Lycées</td>
+            <td>Installation et configuration de logiciels pédagogiques</td>
+        </tr>
+        
+        <tr class="competence-item" data-category="reseau">
+            <td class="competence-name">Support réseau pédagogique</td>
+            <td><span class="category-tag reseau">Réseau</span></td>
+            <td>Stage - Lycées</td>
+            <td>Support et maintenance du réseau pédagogique</td>
+        </tr>
+    </tbody>
+</table>
             </div>
             
             <div class="table-footer">

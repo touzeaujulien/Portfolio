@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tableau de Synthèse - Julien TOUZEAU</title>
+    <title>Tableau de synthèse - Julien TOUZEAU</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="tableau_synthese.css">
+    <link rel="stylesheet" href="tableau.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <header>
@@ -23,19 +24,322 @@
     </header>
 
     <main>
-        <h1>Tableau de Synthèse</h1>
-
-        <section class="tableau-section">
-            <p>Voici mon tableau de synthèse directement intégré ci-dessous :</p>
-
-            <div class="iframe-container">
-                <!-- ⚠️ Remplace ce lien par celui généré via Google Sheets ou OneDrive -->
-                <iframe 
-                    src="https://docs.google.com/spreadsheets/d/1tLOPFlHLofdp6sRG3-yP2irpBgr2ldB9/edit?usp=sharing&ouid=110111996262336951237&rtpof=true&sd=true" 
-                    width="100%" 
-                    height="600" 
-                    frameborder="0">
-                </iframe>
+        <h1><i class="fas fa-chart-bar"></i> Tableau de synthèse des compétences</h1>
+        
+        <section class="tableau-intro">
+            <p>Ce tableau présente l'ensemble des compétences acquises durant mon BTS SIO option SISR, classées par catégorie et évaluées selon mon niveau de maîtrise.</p>
+            
+            <div class="filters">
+                <button class="filter-btn active" data-filter="all">Toutes</button>
+                <button class="filter-btn" data-filter="reseau">Réseau</button>
+                <button class="filter-btn" data-filter="systeme">Système</button>
+                <button class="filter-btn" data-filter="securite">Sécurité</button>
+                <button class="filter-btn" data-filter="telephonie">Téléphonie</button>
+                <button class="filter-btn" data-filter="transverse">Transverse</button>
+            </div>
+            
+            <div class="legend">
+                <div class="legend-item">
+                    <span class="legend-dot niveau-1"></span>
+                    <span>Débutant</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-dot niveau-2"></span>
+                    <span>Intermédiaire</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-dot niveau-3"></span>
+                    <span>Avancé</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-dot niveau-4"></span>
+                    <span>Expert</span>
+                </div>
+            </div>
+        </section>
+        
+        <section class="competences-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Compétence</th>
+                        <th>Catégorie</th>
+                        <th>Niveau</th>
+                        <th>AP/Stage</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Réseau -->
+                    <tr class="competence-item" data-category="reseau">
+                        <td>Configuration VLAN</td>
+                        <td><span class="category-tag reseau">Réseau</span></td>
+                        <td>
+                            <div class="niveau-indicator">
+                                <div class="niveau-bar niveau-4" data-niveau="4"></div>
+                                <span class="niveau-text">Expert</span>
+                            </div>
+                        </td>
+                        <td>AP 3 - MDS49</td>
+                        <td>Configuration de VLAN (10, 20, 30, 100) avec routage inter-VLAN et ACL</td>
+                    </tr>
+                    
+                    <tr class="competence-item" data-category="reseau">
+                        <td>Routage OSPF</td>
+                        <td><span class="category-tag reseau">Réseau</span></td>
+                        <td>
+                            <div class="niveau-indicator">
+                                <div class="niveau-bar niveau-3" data-niveau="3"></div>
+                                <span class="niveau-text">Avancé</span>
+                            </div>
+                        </td>
+                        <td>AP 3 - MDS49</td>
+                        <td>Configuration du protocole OSPF entre routeurs Cisco</td>
+                    </tr>
+                    
+                    <tr class="competence-item" data-category="reseau">
+                        <td>Configuration Switch</td>
+                        <td><span class="category-tag reseau">Réseau</span></td>
+                        <td>
+                            <div class="niveau-indicator">
+                                <div class="niveau-bar niveau-4" data-niveau="4"></div>
+                                <span class="niveau-text">Expert</span>
+                            </div>
+                        </td>
+                        <td>AP 3 - MDS49</td>
+                        <td>Configuration avancée de switchs Cisco avec gestion des ports</td>
+                    </tr>
+                    
+                    <!-- Système -->
+                    <tr class="competence-item" data-category="systeme">
+                        <td>Windows Server 2019</td>
+                        <td><span class="category-tag systeme">Système</span></td>
+                        <td>
+                            <div class="niveau-indicator">
+                                <div class="niveau-bar niveau-4" data-niveau="4"></div>
+                                <span class="niveau-text">Expert</span>
+                            </div>
+                        </td>
+                        <td>AP 1-2, AP 2, AP 3</td>
+                        <td>Installation, configuration AD, GPO, DHCP, DNS, gestion des utilisateurs</td>
+                    </tr>
+                    
+                    <tr class="competence-item" data-category="systeme">
+                        <td>Debian Server</td>
+                        <td><span class="category-tag systeme">Système</span></td>
+                        <td>
+                            <div class="niveau-indicator">
+                                <div class="niveau-bar niveau-3" data-niveau="3"></div>
+                                <span class="niveau-text">Avancé</span>
+                            </div>
+                        </td>
+                        <td>AP 1-2, AP 2, AP 3</td>
+                        <td>Serveur web Apache, DNS Bind9, configuration réseau</td>
+                    </tr>
+                    
+                    <tr class="competence-item" data-category="systeme">
+                        <td>Virtualisation (ESX, Hyper-V)</td>
+                        <td><span class="category-tag systeme">Système</span></td>
+                        <td>
+                            <div class="niveau-indicator">
+                                <div class="niveau-bar niveau-3" data-niveau="3"></div>
+                                <span class="niveau-text">Avancé</span>
+                            </div>
+                        </td>
+                        <td>AP 1-2, AP 2, Stage</td>
+                        <td>Déploiement et gestion de machines virtuelles</td>
+                    </tr>
+                    
+                    <tr class="competence-item" data-category="systeme">
+                        <td>Système RAID 5</td>
+                        <td><span class="category-tag systeme">Système</span></td>
+                        <td>
+                            <div class="niveau-indicator">
+                                <div class="niveau-bar niveau-3" data-niveau="3"></div>
+                                <span class="niveau-text">Avancé</span>
+                            </div>
+                        </td>
+                        <td>AP 2 - LOGONET</td>
+                        <td>Mise en place de RAID 5 pour tolérance aux pannes</td>
+                    </tr>
+                    
+                    <!-- Sécurité -->
+                    <tr class="competence-item" data-category="securite">
+                        <td>Pare-feu Watchguard</td>
+                        <td><span class="category-tag securite">Sécurité</span></td>
+                        <td>
+                            <div class="niveau-indicator">
+                                <div class="niveau-bar niveau-4" data-niveau="4"></div>
+                                <span class="niveau-text">Expert</span>
+                            </div>
+                        </td>
+                        <td>Stage - Almeria</td>
+                        <td>Configuration de règles, filtrage, VPN</td>
+                    </tr>
+                    
+                    <tr class="competence-item" data-category="securite">
+                        <td>ACL Cisco</td>
+                        <td><span class="category-tag securite">Sécurité</span></td>
+                        <td>
+                            <div class="niveau-indicator">
+                                <div class="niveau-bar niveau-3" data-niveau="3"></div>
+                                <span class="niveau-text">Avancé</span>
+                            </div>
+                        </td>
+                        <td>AP 3 - MDS49</td>
+                        <td>ACL standards et étendues pour filtrage inter-VLAN</td>
+                    </tr>
+                    
+                    <tr class="competence-item" data-category="securite">
+                        <td>WiFi Sécurisé (WPA2 + Radius)</td>
+                        <td><span class="category-tag securite">Sécurité</span></td>
+                        <td>
+                            <div class="niveau-indicator">
+                                <div class="niveau-bar niveau-3" data-niveau="3"></div>
+                                <span class="niveau-text">Avancé</span>
+                            </div>
+                        </td>
+                        <td>AP 3 - MDS49</td>
+                        <td>Configuration de WiFi d'entreprise avec authentification Radius</td>
+                    </tr>
+                    
+                    <tr class="competence-item" data-category="securite">
+                        <td>Audit PingCastle</td>
+                        <td><span class="category-tag securite">Sécurité</span></td>
+                        <td>
+                            <div class="niveau-indicator">
+                                <div class="niveau-bar niveau-3" data-niveau="3"></div>
+                                <span class="niveau-text">Avancé</span>
+                            </div>
+                        </td>
+                        <td>AP, Stage</td>
+                        <td>Audit de sécurité Active Directory</td>
+                    </tr>
+                    
+                    <!-- Téléphonie -->
+                    <tr class="competence-item" data-category="telephonie">
+                        <td>3CX Softphone</td>
+                        <td><span class="category-tag telephonie">Téléphonie</span></td>
+                        <td>
+                            <div class="niveau-indicator">
+                                <div class="niveau-bar niveau-3" data-niveau="3"></div>
+                                <span class="niveau-text">Avancé</span>
+                            </div>
+                        </td>
+                        <td>Stage - Almeria</td>
+                        <td>Installation et configuration de softphones 3CX</td>
+                    </tr>
+                    
+                    <tr class="competence-item" data-category="telephonie">
+                        <td>Administration 3CX</td>
+                        <td><span class="category-tag telephonie">Téléphonie</span></td>
+                        <td>
+                            <div class="niveau-indicator">
+                                <div class="niveau-bar niveau-3" data-niveau="3"></div>
+                                <span class="niveau-text">Avancé</span>
+                            </div>
+                        </td>
+                        <td>Stage - Almeria</td>
+                        <td>Gestion des utilisateurs, groupes, horaires, jours fériés</td>
+                    </tr>
+                    
+                    <!-- Transverse -->
+                    <tr class="competence-item" data-category="transverse">
+                        <td>Rédaction de documentation technique</td>
+                        <td><span class="category-tag transverse">Transverse</span></td>
+                        <td>
+                            <div class="niveau-indicator">
+                                <div class="niveau-bar niveau-4" data-niveau="4"></div>
+                                <span class="niveau-text">Expert</span>
+                            </div>
+                        </td>
+                        <td>Tous les AP</td>
+                        <td>Rédaction de guides, procédures, rapports techniques</td>
+                    </tr>
+                    
+                    <tr class="competence-item" data-category="transverse">
+                        <td>Communication professionnelle</td>
+                        <td><span class="category-tag transverse">Transverse</span></td>
+                        <td>
+                            <div class="niveau-indicator">
+                                <div class="niveau-bar niveau-4" data-niveau="4"></div>
+                                <span class="niveau-text">Expert</span>
+                            </div>
+                        </td>
+                        <td>AP, Stages</td>
+                        <td>Présentations, réunions, support utilisateurs</td>
+                    </tr>
+                    
+                    <tr class="competence-item" data-category="transverse">
+                        <td>Autonomie et prise d'initiative</td>
+                        <td><span class="category-tag transverse">Transverse</span></td>
+                        <td>
+                            <div class="niveau-indicator">
+                                <div class="niveau-bar niveau-4" data-niveau="4"></div>
+                                <span class="niveau-text">Expert</span>
+                            </div>
+                        </td>
+                        <td>Tous projets</td>
+                        <td>Gestion de projets, résolution de problèmes</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        
+        <section class="stats-section">
+            <h2><i class="fas fa-chart-pie"></i> Statistiques des compétences</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>Compétences Réseau</h3>
+                        <div class="stat-bar">
+                            <div class="stat-progress" style="width: 85%"></div>
+                        </div>
+                        <p>85% - Niveau expert</p>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>Compétences Système</h3>
+                        <div class="stat-bar">
+                            <div class="stat-progress" style="width: 80%"></div>
+                        </div>
+                        <p>80% - Niveau avancé</p>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>Compétences Sécurité</h3>
+                        <div class="stat-bar">
+                            <div class="stat-progress" style="width: 75%"></div>
+                        </div>
+                        <p>75% - Niveau avancé</p>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>Compétences Téléphonie</h3>
+                        <div class="stat-bar">
+                            <div class="stat-progress" style="width: 70%"></div>
+                        </div>
+                        <p>70% - Niveau avancé</p>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
@@ -43,5 +347,10 @@
     <footer>
         <p>- 2025 Julien TOUZEAU -</p>
     </footer>
-</body>
-</html>
+
+    <script>
+        // Filtrage des compétences
+        document.querySelectorAll('.filter-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                // Retirer la classe active de tous les boutons
+                document.querySelectorAll('.filter-btn').forEach(btn =>

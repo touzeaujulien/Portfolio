@@ -27,13 +27,15 @@
         <h1><i class="fas fa-table"></i> Tableau de synthèse des compétences BTS SIO</h1>
         
         <section class="tableau-intro">
-            <p>Ce tableau présente l'ensemble des compétences acquises durant mon BTS SIO option SISR. Chaque compétence est associée aux projets et stages correspondants avec les preuves disponibles.</p>
+            <p>Ce tableau présente l'ensemble des compétences acquises durant mon BTS SIO option SISR. Toutes les preuves détaillées (documents, captures d'écran, évaluations) sont disponibles dans le tableau Excel complet.</p>
             
-            <div class="tableau-links">
-                <a href="https://1drv.ms/x/s!AoutP5a4P_DlhPNcx-9ixrm5bEDlkw?e=K8WRMZ" target="_blank" class="excel-link">
-                    <i class="fas fa-file-excel"></i> Voir le tableau Excel complet
-                </a>
-            </div>
+            <a href="https://1drv.ms/x/s!AoutP5a4P_DlhPNcx-9ixrm5bEDlkw?e=K8WRMZ" target="_blank" class="excel-main-link">
+                <i class="fas fa-file-excel"></i> 
+                <div>
+                    <h3>Tableau Excel complet</h3>
+                    <p>Cliquez ici pour accéder à toutes les preuves détaillées</p>
+                </div>
+            </a>
             
             <div class="filters-section">
                 <h3>Filtrer par catégorie :</h3>
@@ -64,7 +66,8 @@
             <div class="table-header">
                 <h2><i class="fas fa-list-alt"></i> Compétences acquises</h2>
                 <div class="table-info">
-                    <span class="info-item"><i class="fas fa-check-circle"></i> 23 compétences répertoriées</span>
+                    <span class="info-item"><i class="fas fa-check-circle"></i> 23 compétences</span>
+                    <span class="info-item"><i class="fas fa-folder-open"></i> 5 catégories</span>
                 </div>
             </div>
             
@@ -74,9 +77,8 @@
                         <tr>
                             <th>Compétence</th>
                             <th>Catégorie</th>
-                            <th>Contexte</th>
+                            <th>Contexte d'acquisition</th>
                             <th>Description</th>
-                            <th>Preuve</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -86,11 +88,6 @@
                             <td><span class="category-tag reseau">Réseau</span></td>
                             <td>AP 3 - MDS49</td>
                             <td>Configuration de VLAN (10, 20, 30, 100) avec routage inter-VLAN et ACL</td>
-                            <td>
-                                <a href="Documentation_Technique_MDS49_PPE3.pdf" class="proof-link">
-                                    <i class="fas fa-file-pdf"></i> Documentation AP3
-                                </a>
-                            </td>
                         </tr>
                         
                         <tr class="competence-item" data-category="reseau">
@@ -98,11 +95,6 @@
                             <td><span class="category-tag reseau">Réseau</span></td>
                             <td>AP 3 - MDS49</td>
                             <td>Configuration du protocole OSPF entre routeurs Cisco</td>
-                            <td>
-                                <a href="Documentation_Technique_MDS49_PPE3.pdf" class="proof-link">
-                                    <i class="fas fa-file-pdf"></i> Documentation AP3
-                                </a>
-                            </td>
                         </tr>
                         
                         <tr class="competence-item" data-category="reseau">
@@ -110,11 +102,6 @@
                             <td><span class="category-tag reseau">Réseau</span></td>
                             <td>AP 3 - MDS49</td>
                             <td>Configuration avancée de switchs Cisco avec gestion des ports</td>
-                            <td>
-                                <a href="Documentation_Technique_MDS49_PPE3.pdf" class="proof-link">
-                                    <i class="fas fa-file-pdf"></i> Documentation AP3
-                                </a>
-                            </td>
                         </tr>
                         
                         <tr class="competence-item" data-category="reseau">
@@ -122,11 +109,6 @@
                             <td><span class="category-tag reseau">Réseau</span></td>
                             <td>AP 3 - MDS49</td>
                             <td>Configuration de NAT/PAT pour l'accès web externe</td>
-                            <td>
-                                <a href="Documentation_Technique_MDS49_PPE3.pdf" class="proof-link">
-                                    <i class="fas fa-file-pdf"></i> Documentation AP3
-                                </a>
-                            </td>
                         </tr>
                         
                         <!-- Compétences Système -->
@@ -135,16 +117,6 @@
                             <td><span class="category-tag systeme">Système</span></td>
                             <td>AP 1-2, AP 2, AP 3</td>
                             <td>Installation, configuration AD, GPO, DHCP, DNS, gestion des utilisateurs</td>
-                            <td>
-                                <div class="proof-links">
-                                    <a href="PPE1-2.pdf" class="proof-link">
-                                        <i class="fas fa-file-pdf"></i> AP 1-2
-                                    </a>
-                                    <a href="PPE - Logonet.docx" class="proof-link">
-                                        <i class="fas fa-file-word"></i> AP 2
-                                    </a>
-                                </div>
-                            </td>
                         </tr>
                         
                         <tr class="competence-item" data-category="systeme">
@@ -152,21 +124,13 @@
                             <td><span class="category-tag systeme">Système</span></td>
                             <td>AP 1-2, AP 2, AP 3</td>
                             <td>Serveur web Apache, DNS Bind9, configuration réseau</td>
-                            <td>
-                                <a href="PPE1-2.pdf" class="proof-link">
-                                    <i class="fas fa-file-pdf"></i> Documentation AP1-2
-                                </a>
-                            </td>
                         </tr>
                         
                         <tr class="competence-item" data-category="systeme">
                             <td class="competence-name">Virtualisation (ESX, Hyper-V)</td>
                             <td><span class="category-tag systeme">Système</span></td>
-                            <td>AP 1-2, AP 2, Stage</td>
+                            <td>AP 1-2, AP 2, Stage Almeria</td>
                             <td>Déploiement et gestion de machines virtuelles</td>
-                            <td>
-                                <span class="proof-info">Stage Almeria</span>
-                            </td>
                         </tr>
                         
                         <tr class="competence-item" data-category="systeme">
@@ -174,11 +138,6 @@
                             <td><span class="category-tag systeme">Système</span></td>
                             <td>AP 2 - LOGONET</td>
                             <td>Mise en place de RAID 5 pour tolérance aux pannes</td>
-                            <td>
-                                <a href="PPE - Logonet.docx" class="proof-link">
-                                    <i class="fas fa-file-word"></i> Documentation AP2
-                                </a>
-                            </td>
                         </tr>
                         
                         <tr class="competence-item" data-category="systeme">
@@ -186,9 +145,6 @@
                             <td><span class="category-tag systeme">Système</span></td>
                             <td>AP 4 - TOBAT</td>
                             <td>Installation, configuration, réplication pour haute disponibilité</td>
-                            <td>
-                                <span class="proof-info">En cours</span>
-                            </td>
                         </tr>
                         
                         <tr class="competence-item" data-category="systeme">
@@ -196,9 +152,6 @@
                             <td><span class="category-tag systeme">Système</span></td>
                             <td>AP 4 - TOBAT</td>
                             <td>Configuration de 2 serveurs DHCP Linux en répartition de charge</td>
-                            <td>
-                                <span class="proof-info">En cours</span>
-                            </td>
                         </tr>
                         
                         <tr class="competence-item" data-category="systeme">
@@ -206,9 +159,6 @@
                             <td><span class="category-tag systeme">Système</span></td>
                             <td>AP 4 - TOBAT</td>
                             <td>Mise en place de système de fichiers distribué</td>
-                            <td>
-                                <span class="proof-info">En cours</span>
-                            </td>
                         </tr>
                         
                         <tr class="competence-item" data-category="systeme">
@@ -216,9 +166,6 @@
                             <td><span class="category-tag systeme">Système</span></td>
                             <td>AP 4 - TOBAT</td>
                             <td>Serveur de déploiement d'images système</td>
-                            <td>
-                                <span class="proof-info">En cours</span>
-                            </td>
                         </tr>
                         
                         <!-- Compétences Sécurité -->
@@ -227,9 +174,6 @@
                             <td><span class="category-tag securite">Sécurité</span></td>
                             <td>Stage - Almeria</td>
                             <td>Configuration de règles, filtrage, VPN</td>
-                            <td>
-                                <span class="proof-info">Stage Almeria</span>
-                            </td>
                         </tr>
                         
                         <tr class="competence-item" data-category="securite">
@@ -237,11 +181,6 @@
                             <td><span class="category-tag securite">Sécurité</span></td>
                             <td>AP 3 - MDS49</td>
                             <td>ACL standards et étendues pour filtrage inter-VLAN</td>
-                            <td>
-                                <a href="Documentation_Technique_MDS49_PPE3.pdf" class="proof-link">
-                                    <i class="fas fa-file-pdf"></i> Documentation AP3
-                                </a>
-                            </td>
                         </tr>
                         
                         <tr class="competence-item" data-category="securite">
@@ -249,21 +188,13 @@
                             <td><span class="category-tag securite">Sécurité</span></td>
                             <td>AP 3 - MDS49</td>
                             <td>Configuration de WiFi d'entreprise avec authentification Radius</td>
-                            <td>
-                                <a href="Documentation_Technique_MDS49_PPE3.pdf" class="proof-link">
-                                    <i class="fas fa-file-pdf"></i> Documentation AP3
-                                </a>
-                            </td>
                         </tr>
                         
                         <tr class="competence-item" data-category="securite">
                             <td class="competence-name">Audit PingCastle</td>
                             <td><span class="category-tag securite">Sécurité</span></td>
-                            <td>AP, Stage</td>
+                            <td>AP, Stage Almeria</td>
                             <td>Audit de sécurité Active Directory</td>
-                            <td>
-                                <span class="proof-info">Stage Almeria</span>
-                            </td>
                         </tr>
                         
                         <tr class="competence-item" data-category="securite">
@@ -271,9 +202,6 @@
                             <td><span class="category-tag securite">Sécurité</span></td>
                             <td>AP 4 - TOBAT</td>
                             <td>Supervision CPU, mémoire, stockage + alertes par mail</td>
-                            <td>
-                                <span class="proof-info">En cours</span>
-                            </td>
                         </tr>
                         
                         <!-- Compétences Téléphonie -->
@@ -282,9 +210,6 @@
                             <td><span class="category-tag telephonie">Téléphonie</span></td>
                             <td>Stage - Almeria</td>
                             <td>Installation et configuration de softphones 3CX</td>
-                            <td>
-                                <span class="proof-info">Stage Almeria</span>
-                            </td>
                         </tr>
                         
                         <tr class="competence-item" data-category="telephonie">
@@ -292,9 +217,6 @@
                             <td><span class="category-tag telephonie">Téléphonie</span></td>
                             <td>Stage - Almeria</td>
                             <td>Gestion des utilisateurs, groupes, horaires, jours fériés</td>
-                            <td>
-                                <span class="proof-info">Stage Almeria</span>
-                            </td>
                         </tr>
                         
                         <!-- Compétences Transverses -->
@@ -303,16 +225,6 @@
                             <td><span class="category-tag transverse">Transverse</span></td>
                             <td>Tous les AP</td>
                             <td>Rédaction de guides, procédures, rapports techniques</td>
-                            <td>
-                                <div class="proof-links">
-                                    <a href="Documentationecogite.docx" class="proof-link">
-                                        <i class="fas fa-file-word"></i> AP 1-1
-                                    </a>
-                                    <a href="Documentation_Technique_MDS49_PPE3.pdf" class="proof-link">
-                                        <i class="fas fa-file-pdf"></i> AP 3
-                                    </a>
-                                </div>
-                            </td>
                         </tr>
                         
                         <tr class="competence-item" data-category="transverse">
@@ -320,9 +232,6 @@
                             <td><span class="category-tag transverse">Transverse</span></td>
                             <td>AP, Stages</td>
                             <td>Présentations, réunions, support utilisateurs</td>
-                            <td>
-                                <span class="proof-info">Évaluations stages</span>
-                            </td>
                         </tr>
                         
                         <tr class="competence-item" data-category="transverse">
@@ -330,9 +239,6 @@
                             <td><span class="category-tag transverse">Transverse</span></td>
                             <td>Tous projets</td>
                             <td>Gestion de projets, résolution de problèmes</td>
-                            <td>
-                                <span class="proof-info">Retours tuteurs</span>
-                            </td>
                         </tr>
                         
                         <tr class="competence-item" data-category="transverse">
@@ -340,19 +246,22 @@
                             <td><span class="category-tag transverse">Transverse</span></td>
                             <td>AP 4 - TOBAT</td>
                             <td>Automatisation de création de comptes Active Directory</td>
-                            <td>
-                                <span class="proof-info">En cours</span>
-                            </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
             
             <div class="table-footer">
-                <a href="https://1drv.ms/x/s!AoutP5a4P_DlhPNcx-9ixrm5bEDlkw?e=K8WRMZ" target="_blank" class="excel-link-large">
-                    <i class="fas fa-file-excel"></i> Accéder au tableau Excel complet sur OneDrive
-                </a>
-                <p class="table-note">Note : Les preuves "Stage Almeria" sont disponibles dans la section Stages du portfolio.</p>
+                <div class="footer-content">
+                    <div class="footer-text">
+                        <h3><i class="fas fa-info-circle"></i> Informations importantes</h3>
+                        <p>Toutes les preuves détaillées (documents techniques, captures d'écran, évaluations de stage, bilans de compétences) sont centralisées dans le tableau Excel.</p>
+                    </div>
+                    <a href="https://1drv.ms/x/s!AoutP5a4P_DlhPNcx-9ixrm5bEDlkw?e=K8WRMZ" target="_blank" class="excel-footer-link">
+                        <i class="fas fa-external-link-alt"></i>
+                        Ouvrir le tableau Excel complet
+                    </a>
+                </div>
             </div>
         </section>
     </main>

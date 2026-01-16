@@ -1,44 +1,333 @@
-/* Section principale */
-.tableau-section {
+/* Styles pour le tableau de synthèse */
+
+.tableau-intro {
     background-color: #f8f9fa;
-    border-left: 4px solid #3498db;
+    border-radius: 10px;
     padding: 2rem;
-    margin: 2rem auto;
-    max-width: 1200px;
-    border-radius: 6px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    margin-bottom: 2rem;
+    border-left: 4px solid #3498db;
 }
 
-.tableau-section h2 {
-    color: #2c3e50;
+.tableau-intro p {
+    margin-bottom: 1.5rem;
+    color: #555;
+    line-height: 1.6;
+}
+
+.competences-overview {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.overview-card {
+    background: white;
+    border-radius: 10px;
+    padding: 1.5rem;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    transition: transform 0.3s;
+}
+
+.overview-card:hover {
+    transform: translateY(-5px);
+}
+
+.overview-card i {
+    font-size: 2.5rem;
+    color: #3498db;
     margin-bottom: 1rem;
 }
 
-.tableau-section p {
-    margin-bottom: 1.5rem;
+.overview-card h3 {
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+}
+
+.progress-circle {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    position: relative;
+}
+
+.progress-circle span {
+    font-weight: bold;
+    color: #2c3e50;
+    font-size: 1.1rem;
+}
+
+.filters-section {
+    margin: 2rem 0;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e0e0e0;
+}
+
+.filters-section h3 {
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.filter-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.2rem;
+    border: 1px solid #ddd;
+    background-color: white;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 0.9rem;
     color: #555;
 }
 
-/* Conteneur iframe */
-.iframe-container {
-    overflow: hidden;
-    border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+.filter-btn:hover {
+    background-color: #f0f0f0;
+    transform: translateY(-2px);
 }
 
-.iframe-container iframe {
-    border: none;
+.filter-btn.active {
+    background-color: #3498db;
+    color: white;
+    border-color: #3498db;
+    box-shadow: 0 2px 5px rgba(52, 152, 219, 0.3);
+}
+
+.filter-btn i {
+    font-size: 0.9rem;
+}
+
+.legend {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e0e0e0;
+}
+
+.legend h3 {
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+.legend-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.legend-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+}
+
+.legend-dot.niveau-1 {
+    background-color: #e74c3c;
+}
+
+.legend-dot.niveau-2 {
+    background-color: #f39c12;
+}
+
+.legend-dot.niveau-3 {
+    background-color: #3498db;
+}
+
+.legend-dot.niveau-4 {
+    background-color: #2ecc71;
+}
+
+.competences-table-container {
+    background: white;
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+    margin-bottom: 2rem;
+}
+
+.table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.table-header h2 {
+    color: #2c3e50;
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.table-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.action-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.action-btn:hover {
+    background-color: #e9ecef;
+    border-color: #3498db;
+    color: #3498db;
+}
+
+.table-responsive {
+    overflow-x: auto;
+    margin-bottom: 1.5rem;
+}
+
+.competences-table {
     width: 100%;
-    height: 600px;
+    border-collapse: collapse;
+    min-width: 800px;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-    .tableau-section {
-        padding: 1rem;
-    }
-
-    .iframe-container iframe {
-        height: 400px;
-    }
+.competences-table th {
+    background-color: #2c3e50;
+    color: white;
+    padding: 1rem;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.9rem;
+    white-space: nowrap;
 }
+
+.competences-table td {
+    padding: 1rem;
+    border-bottom: 1px solid #eee;
+    vertical-align: middle;
+    font-size: 0.9rem;
+}
+
+.competences-table tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+.competence-name {
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.category-tag {
+    display: inline-block;
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: white;
+    min-width: 80px;
+    text-align: center;
+}
+
+.category-tag.reseau {
+    background-color: #3498db;
+}
+
+.category-tag.systeme {
+    background-color: #2ecc71;
+}
+
+.category-tag.securite {
+    background-color: #e74c3c;
+}
+
+.category-tag.telephonie {
+    background-color: #9b59b6;
+}
+
+.category-tag.transverse {
+    background-color: #f39c12;
+}
+
+.niveau-container {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.niveau-indicator {
+    flex: 1;
+    height: 8px;
+    background-color: #eee;
+    border-radius: 4px;
+    overflow: hidden;
+    min-width: 80px;
+}
+
+.niveau-bar {
+    height: 100%;
+    border-radius: 4px;
+}
+
+.niveau-bar.niveau-1 {
+    width: 25%;
+    background-color: #e74c3c;
+}
+
+.niveau-bar.niveau-2 {
+    width: 50%;
+    background-color: #f39c12;
+}
+
+.niveau-bar.niveau-3 {
+    width: 75%;
+    background-color: #3498db;
+}
+
+.niveau-bar.niveau-4 {
+    width: 100%;
+    background-color: #2ecc71;
+}
+
+.niveau-text {
+    font-weight: 600;
+    color: #2c3e50;
+    min-width: 70px;
+    font-size: 0.85rem;
+}
+
+.proof-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    color: #3498db;
+    text-decoration: none;
+    font-size

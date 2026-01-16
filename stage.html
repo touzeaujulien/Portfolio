@@ -6,6 +6,7 @@
     <title>Mes stages - Julien TOUZEAU</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="stage.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <header>
@@ -27,59 +28,20 @@
         
         <section class="stage-entreprise">
             <div class="entreprise-header">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Almerys_Logo.svg/1280px-Almerys_Logo.svg.png" alt="Logo Almerys" class="entreprise-logo">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Almerys_Logo.svg/1280px-Almerys_Logo.svg.png" alt="Logo Almeria" class="entreprise-logo">
                 <div class="entreprise-info">
-                    <h2>Almerys Solutions Informatique - Cholet</h2>
-                    <p class="entreprise-dates">Stage réalisé dans le cadre de mon BTS SIO</p>
+                    <h2>Almeria - Cholet</h2>
+                    <p class="entreprise-dates">Stage de BTS SIO - Année 2025</p>
                 </div>
             </div>
             
             <div class="entreprise-description">
                 <h3>Présentation de l'entreprise</h3>
-                <p>Almerys est un éditeur de logiciels et prestataire de services pour les professionnels de santé et les organismes d'assurance maladie.</p>
+                <p>Almeria est une entreprise spécialisée dans les solutions informatiques pour les professionnels, proposant des services de maintenance, d'infrastructure réseau et de support technique.</p>
                 
-                <h3>Activités réalisées (pourcentages)</h3>
-                <div class="activites-grid">
-                    <div class="activite-categorie">
-                        <h4>Support/Supervision</h4>
-                        <p>2,9%</p>
-                    </div>
-                    <div class="activite-categorie">
-                        <h4>Régie/Audit</h4>
-                        <p>21,7%</p>
-                    </div>
-                    <div class="activite-categorie">
-                        <h4>Serveur</h4>
-                        <p>21,7%</p>
-                    </div>
-                    <div class="activite-categorie">
-                        <h4>Pare-feu</h4>
-                        <p>14,5%</p>
-                    </div>
-                    <div class="activite-categorie">
-                        <h4>Téléphonie</h4>
-                        <p>11,6%</p>
-                    </div>
-                    <div class="activite-categorie">
-                        <h4>Switch</h4>
-                        <p>2,9%</p>
-                    </div>
-                    <div class="activite-categorie">
-                        <h4>NAS</h4>
-                        <p>7,2%</p>
-                    </div>
-                    <div class="activite-categorie">
-                        <h4>Bornes WiFi</h4>
-                        <p>4,3%</p>
-                    </div>
-                    <div class="activite-categorie">
-                        <h4>Installation</h4>
-                        <p>4,3%</p>
-                    </div>
-                    <div class="activite-categorie">
-                        <h4>Autres</h4>
-                        <p>8,7%</p>
-                    </div>
+                <h3>Activités réalisées durant le stage</h3>
+                <div class="chart-container">
+                    <canvas id="activitesChart"></canvas>
                 </div>
                 
                 <h3>Tâches principales</h3>
@@ -91,6 +53,9 @@
                     <li>Mise en place de solutions de téléphonie IP</li>
                     <li>Supervision des systèmes et réseaux</li>
                 </ul>
+                
+                <h3>Acquis professionnels</h3>
+                <p>Ce stage m'a permis de développer mes compétences en administration système et réseau dans un environnement professionnel réel. J'ai pu appliquer les connaissances théoriques acquises en BTS SIO et découvrir les spécificités du métier d'administrateur réseau en entreprise.</p>
             </div>
         </section>
         
@@ -99,32 +64,39 @@
                 <img src="https://upload.wikimedia.org/wikipedia/fr/thumb/6/6e/Acad%C3%A9mie_de_Nantes.svg/1200px-Acad%C3%A9mie_de_Nantes.svg.png" alt="Logo Éducation Nationale" class="entreprise-logo">
                 <div class="entreprise-info">
                     <h2>Établissements scolaires - Cholet et Beaupreau</h2>
-                    <p class="entreprise-dates">Stages réalisés dans le cadre de mon Bac Pro SN</p>
+                    <p class="entreprise-dates">Stage unique réparti sur deux établissements - Année 2026</p>
                 </div>
             </div>
             
             <div class="etablissements-grid">
                 <div class="etablissement-card">
                     <h3>Lycée Europe - Cholet</h3>
-                    <p><strong>Période :</strong> 2022-2023</p>
+                    <p><strong>Période :</strong> 2026 (2-3 jours par semaine)</p>
                     <ul>
                         <li>Installation et configuration de postes informatiques</li>
                         <li>Maintenance préventive et corrective</li>
-                        <li>Support aux utilisateurs</li>
+                        <li>Support aux utilisateurs (enseignants et administration)</li>
                         <li>Gestion du parc informatique</li>
+                        <li>Résolution d'incidents réseau</li>
                     </ul>
                 </div>
                 
                 <div class="etablissement-card">
                     <h3>Lycée Julien Gracq - Beaupreau</h3>
-                    <p><strong>Période :</strong> 2021-2022</p>
+                    <p><strong>Période :</strong> 2026 (1-2 jours par semaine)</p>
                     <ul>
                         <li>Maintenance du réseau pédagogique</li>
                         <li>Installation de logiciels éducatifs</li>
                         <li>Configuration d'imprimantes réseau</li>
                         <li>Support technique en salle informatique</li>
+                        <li>Assistance aux enseignants pour l'utilisation du matériel</li>
                     </ul>
                 </div>
+            </div>
+            
+            <div class="entreprise-description">
+                <h3>Acquis communs</h3>
+                <p>Ces expériences en milieu scolaire m'ont permis de développer mon autonomie, ma capacité d'adaptation et mes compétences en communication. J'ai appris à travailler avec des publics variés (élèves, enseignants, personnel administratif) et à gérer des priorités dans un environnement éducatif dynamique.</p>
             </div>
         </section>
     </main>
@@ -132,5 +104,65 @@
     <footer>
         <p>- 2025 Julien TOUZEAU -</p>
     </footer>
+
+    <script>
+        // Données pour le camembert
+        const activitesData = {
+            labels: [
+                'Support/Supervision',
+                'Régie/Audit', 
+                'Serveur',
+                'Pare-feu',
+                'Téléphonie',
+                'Switch',
+                'NAS',
+                'Bornes WiFi',
+                'Installation',
+                'Autres'
+            ],
+            datasets: [{
+                data: [2.9, 21.7, 21.7, 14.5, 11.6, 2.9, 7.2, 4.3, 4.3, 8.7],
+                backgroundColor: [
+                    '#3498db', '#2ecc71', '#e74c3c', '#f39c12', '#9b59b6',
+                    '#1abc9c', '#34495e', '#d35400', '#7f8c8d', '#27ae60'
+                ],
+                borderWidth: 2,
+                borderColor: '#ffffff'
+            }]
+        };
+
+        // Configuration du graphique
+        const config = {
+            type: 'pie',
+            data: activitesData,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'right',
+                        labels: {
+                            padding: 20,
+                            font: {
+                                size: 11
+                            }
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return `${context.label}: ${context.parsed}%`;
+                            }
+                        }
+                    }
+                }
+            }
+        };
+
+        // Création du graphique
+        window.onload = function() {
+            const ctx = document.getElementById('activitesChart').getContext('2d');
+            new Chart(ctx, config);
+        };
+    </script>
 </body>
 </html>

@@ -369,3 +369,11 @@
         font-size: 0.9rem;
     }
 }
+
+.category-tag.developpement {
+    background-color: #8b5cf6;
+}
+
+.category-tag.virtualisation {
+    background-color: #06b6d4;
+}

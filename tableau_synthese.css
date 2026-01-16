@@ -1,4 +1,4 @@
-/* Styles pour le tableau de synthèse */
+/* ===== TABLEAU DE SYNTÈSE - STYLES SIMPLIFIÉS ===== */
 
 .tableau-intro {
     background-color: #f8f9fa;
@@ -9,62 +9,42 @@
 }
 
 .tableau-intro p {
-    margin-bottom: 1.5rem;
     color: #555;
     line-height: 1.6;
+    margin-bottom: 1.5rem;
+    font-size: 1.05rem;
 }
 
-.competences-overview {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1.5rem;
-    margin: 2rem 0;
+.tableau-links {
+    margin: 1.5rem 0;
 }
 
-.overview-card {
-    background: white;
-    border-radius: 10px;
-    padding: 1.5rem;
-    text-align: center;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-    transition: transform 0.3s;
-}
-
-.overview-card:hover {
-    transform: translateY(-5px);
-}
-
-.overview-card i {
-    font-size: 2.5rem;
-    color: #3498db;
-    margin-bottom: 1rem;
-}
-
-.overview-card h3 {
-    color: #2c3e50;
-    margin-bottom: 1rem;
-    font-size: 1rem;
-}
-
-.progress-circle {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    display: flex;
+.excel-link {
+    display: inline-flex;
     align-items: center;
-    justify-content: center;
-    margin: 0 auto;
-    position: relative;
+    gap: 0.5rem;
+    background-color: #217346;
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
 }
 
-.progress-circle span {
-    font-weight: bold;
-    color: #2c3e50;
+.excel-link:hover {
+    background-color: #1a5c38;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(33, 115, 70, 0.2);
+}
+
+.excel-link i {
     font-size: 1.1rem;
 }
 
 .filters-section {
-    margin: 2rem 0;
+    margin-top: 2rem;
     padding-top: 1.5rem;
     border-top: 1px solid #e0e0e0;
 }
@@ -73,6 +53,7 @@
     color: #2c3e50;
     margin-bottom: 1rem;
     font-size: 1.1rem;
+    font-weight: 600;
 }
 
 .filters {
@@ -93,6 +74,7 @@
     transition: all 0.3s;
     font-size: 0.9rem;
     color: #555;
+    font-weight: 500;
 }
 
 .filter-btn:hover {
@@ -111,54 +93,7 @@
     font-size: 0.9rem;
 }
 
-.legend {
-    margin-top: 1.5rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid #e0e0e0;
-}
-
-.legend h3 {
-    color: #2c3e50;
-    margin-bottom: 1rem;
-    font-size: 1.1rem;
-}
-
-.legend-items {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.5rem;
-}
-
-.legend-item {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.9rem;
-    color: #555;
-}
-
-.legend-dot {
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-}
-
-.legend-dot.niveau-1 {
-    background-color: #e74c3c;
-}
-
-.legend-dot.niveau-2 {
-    background-color: #f39c12;
-}
-
-.legend-dot.niveau-3 {
-    background-color: #3498db;
-}
-
-.legend-dot.niveau-4 {
-    background-color: #2ecc71;
-}
-
+/* ===== CONTAINER DU TABLEAU ===== */
 .competences-table-container {
     background: white;
     border-radius: 10px;
@@ -182,42 +117,38 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    font-weight: 600;
 }
 
-.table-actions {
+.table-info {
     display: flex;
-    gap: 0.5rem;
+    gap: 1.5rem;
 }
 
-.action-btn {
+.info-item {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    padding: 0.5rem 1rem;
-    background-color: #f8f9fa;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all 0.3s;
+    color: #7f8c8d;
     font-size: 0.9rem;
-    color: #555;
 }
 
-.action-btn:hover {
-    background-color: #e9ecef;
-    border-color: #3498db;
-    color: #3498db;
+.info-item i {
+    color: #2ecc71;
 }
 
+/* ===== TABLEAU RESPONSIVE ===== */
 .table-responsive {
     overflow-x: auto;
     margin-bottom: 1.5rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
 }
 
 .competences-table {
     width: 100%;
     border-collapse: collapse;
-    min-width: 800px;
+    min-width: 900px;
 }
 
 .competences-table th {
@@ -228,13 +159,23 @@
     font-weight: 600;
     font-size: 0.9rem;
     white-space: nowrap;
+    border-right: 1px solid #3a506b;
+}
+
+.competences-table th:last-child {
+    border-right: none;
 }
 
 .competences-table td {
     padding: 1rem;
     border-bottom: 1px solid #eee;
-    vertical-align: middle;
+    vertical-align: top;
     font-size: 0.9rem;
+    border-right: 1px solid #f0f0f0;
+}
+
+.competences-table td:last-child {
+    border-right: none;
 }
 
 .competences-table tbody tr:hover {
@@ -244,8 +185,10 @@
 .competence-name {
     font-weight: 600;
     color: #2c3e50;
+    min-width: 150px;
 }
 
+/* ===== TAGS DE CATÉGORIES ===== */
 .category-tag {
     display: inline-block;
     padding: 0.3rem 0.8rem;
@@ -255,6 +198,7 @@
     color: white;
     min-width: 80px;
     text-align: center;
+    white-space: nowrap;
 }
 
 .category-tag.reseau {
@@ -277,57 +221,137 @@
     background-color: #f39c12;
 }
 
-.niveau-container {
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-}
-
-.niveau-indicator {
-    flex: 1;
-    height: 8px;
-    background-color: #eee;
-    border-radius: 4px;
-    overflow: hidden;
-    min-width: 80px;
-}
-
-.niveau-bar {
-    height: 100%;
-    border-radius: 4px;
-}
-
-.niveau-bar.niveau-1 {
-    width: 25%;
-    background-color: #e74c3c;
-}
-
-.niveau-bar.niveau-2 {
-    width: 50%;
-    background-color: #f39c12;
-}
-
-.niveau-bar.niveau-3 {
-    width: 75%;
-    background-color: #3498db;
-}
-
-.niveau-bar.niveau-4 {
-    width: 100%;
-    background-color: #2ecc71;
-}
-
-.niveau-text {
-    font-weight: 600;
-    color: #2c3e50;
-    min-width: 70px;
-    font-size: 0.85rem;
-}
-
+/* ===== PREUVES ===== */
 .proof-link {
     display: inline-flex;
     align-items: center;
     gap: 0.3rem;
     color: #3498db;
     text-decoration: none;
-    font-size
+    font-size: 0.85rem;
+    padding: 0.3rem 0.6rem;
+    border-radius: 4px;
+    background-color: #e8f4fc;
+    margin: 0.2rem;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+}
+
+.proof-link:hover {
+    background-color: #d6eaf8;
+    text-decoration: underline;
+}
+
+.proof-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+}
+
+.proof-info {
+    display: inline-block;
+    padding: 0.3rem 0.6rem;
+    border-radius: 4px;
+    background-color: #f8f9fa;
+    color: #7f8c8d;
+    font-size: 0.85rem;
+    border: 1px solid #e0e0e0;
+}
+
+/* ===== FOOTER DU TABLEAU ===== */
+.table-footer {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 2px solid #f0f0f0;
+    text-align: center;
+}
+
+.excel-link-large {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    background-color: #217346;
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    margin-bottom: 1.5rem;
+}
+
+.excel-link-large:hover {
+    background-color: #1a5c38;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(33, 115, 70, 0.2);
+}
+
+.excel-link-large i {
+    font-size: 1.2rem;
+}
+
+.table-note {
+    color: #7f8c8d;
+    font-size: 0.9rem;
+    font-style: italic;
+    margin-top: 1rem;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .tableau-intro {
+        padding: 1.5rem;
+    }
+    
+    .filters {
+        justify-content: center;
+    }
+    
+    .table-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    
+    .table-info {
+        width: 100%;
+        justify-content: flex-start;
+    }
+    
+    .competences-table-container {
+        padding: 1rem;
+    }
+    
+    .competences-table th,
+    .competences-table td {
+        padding: 0.8rem 0.6rem;
+        font-size: 0.85rem;
+    }
+    
+    .excel-link-large {
+        padding: 0.8rem 1.5rem;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .filters {
+        gap: 0.3rem;
+    }
+    
+    .filter-btn {
+        padding: 0.5rem 0.8rem;
+        font-size: 0.8rem;
+    }
+    
+    .excel-link {
+        padding: 0.7rem 1.2rem;
+        font-size: 0.9rem;
+    }
+    
+    .excel-link-large {
+        padding: 0.7rem 1.2rem;
+        font-size: 0.85rem;
+    }
+}

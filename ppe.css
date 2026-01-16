@@ -59,7 +59,7 @@ body {
 
 .ppe-hero h1 i {
     font-size: 2.5rem;
-    color: #64b5f6;
+    color: white; 
 }
 
 .hero-subtitle {
@@ -574,3 +574,36 @@ body {
     
     .hero-graphic {
         margin-top: 2rem
+
+    /* Enlever la ligne du dernier timeline item */
+.timeline-item:last-child .marker-line {
+    display: none;
+}
+
+/* Responsive pour la timeline */
+@media (max-width: 768px) {
+    .timeline::before {
+        left: 30px;
+    }
+    
+    .timeline-item {
+        flex-direction: row !important;
+        margin-left: 60px;
+    }
+    
+    .timeline-marker {
+        position: absolute;
+        left: -60px;
+        width: auto;
+    }
+    
+    .timeline-content {
+        width: 100%;
+        padding: 0;
+        text-align: left !important;
+    }
+    
+    .timeline-tech {
+        justify-content: flex-start !important;
+    }
+}

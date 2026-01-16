@@ -1,5 +1,5 @@
 .stage-entreprise {
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
     border: 1px solid #e0e0e0;
     border-radius: 8px;
     overflow: hidden;
@@ -11,12 +11,12 @@
     align-items: center;
     background-color: #2c3e50;
     color: white;
-    padding: 1.5rem;
-    gap: 2rem;
+    padding: 1rem;
+    gap: 1.5rem;
 }
 
 .entreprise-logo {
-    width: 120px;
+    width: 100px;
     height: 60px;
     object-fit: contain;
     background-color: white;
@@ -24,10 +24,16 @@
     border-radius: 5px;
 }
 
+/* Pour l'image des établissements qui est plus foncée */
+.stage-entreprise:nth-child(2) .entreprise-logo {
+    background-color: #f8f9fa;
+    padding: 12px;
+}
+
 .entreprise-info h2 {
     color: white;
-    margin-bottom: 0.5rem;
-    font-size: 1.8rem;
+    margin-bottom: 0.3rem;
+    font-size: 1.5rem;
 }
 
 .entreprise-dates {
@@ -35,18 +41,20 @@
     opacity: 0.9;
     color: #3498db;
     font-weight: 500;
+    font-size: 0.9rem;
 }
 
 .entreprise-description {
-    padding: 2rem;
+    padding: 1.5rem;
 }
 
 .entreprise-description h3 {
     color: #2c3e50;
-    margin-top: 1.5rem;
-    margin-bottom: 1rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 2px solid #3498db;
+    margin-top: 1.2rem;
+    margin-bottom: 0.8rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid #e0e0e0;
+    font-size: 1.2rem;
 }
 
 .entreprise-description h3:first-child {
@@ -54,62 +62,65 @@
 }
 
 .entreprise-description ul {
-    margin-left: 1.5rem;
-    margin-bottom: 1.5rem;
+    margin-left: 1.2rem;
+    margin-bottom: 1.2rem;
+    font-size: 0.95rem;
 }
 
 .entreprise-description li {
-    margin-bottom: 0.5rem;
-    padding-left: 0.5rem;
+    margin-bottom: 0.4rem;
+    padding-left: 0.3rem;
 }
 
 .chart-container {
-    max-width: 600px;
-    margin: 2rem auto;
+    max-width: 500px;
+    margin: 1rem auto;
     position: relative;
-    height: 400px;
+    height: 300px;
 }
 
 .etablissements-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    margin: 2rem 0;
-    padding: 0 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin: 1.5rem 0;
+    padding: 0 1.5rem;
 }
 
 .etablissement-card {
     background-color: #f8f9fa;
     border: 1px solid #e0e0e0;
     border-radius: 5px;
-    padding: 1.5rem;
+    padding: 1.2rem;
     transition: transform 0.3s, box-shadow 0.3s;
-    border-top: 4px solid #3498db;
+    border-top: 3px solid #3498db;
 }
 
 .etablissement-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transform: translateY(-3px);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
 }
 
 .etablissement-card h3 {
     color: #2c3e50;
-    margin-bottom: 1rem;
-    font-size: 1.3rem;
+    margin-bottom: 0.8rem;
+    font-size: 1.1rem;
 }
 
 .etablissement-card p {
-    margin-bottom: 1rem;
+    margin-bottom: 0.8rem;
     color: #7f8c8d;
+    font-size: 0.9rem;
 }
 
 .etablissement-card ul {
-    margin-left: 1.2rem;
-    margin-top: 1rem;
+    margin-left: 1rem;
+    margin-top: 0.8rem;
+    font-size: 0.9rem;
 }
 
 .etablissement-card li {
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.4rem;
     color: #555;
 }
 
@@ -118,23 +129,45 @@
         flex-direction: column;
         text-align: center;
         padding: 1rem;
+        gap: 1rem;
     }
     
     .entreprise-logo {
-        width: 100px;
-        height: 50px;
+        width: 90px;
+        height: 55px;
+    }
+    
+    .entreprise-info h2 {
+        font-size: 1.3rem;
     }
     
     .chart-container {
-        height: 300px;
+        height: 250px;
+        max-width: 90%;
     }
     
     .etablissements-grid {
         grid-template-columns: 1fr;
         padding: 0 1rem;
+        gap: 1rem;
     }
     
     .entreprise-description {
-        padding: 1.5rem;
+        padding: 1.2rem;
+    }
+    
+    .entreprise-description h3 {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .chart-container {
+        height: 220px;
+    }
+    
+    .entreprise-logo {
+        width: 80px;
+        height: 50px;
     }
 }

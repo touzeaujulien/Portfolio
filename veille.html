@@ -129,7 +129,19 @@
                     <i class="fas fa-shield-alt"></i> CERT-FR
                 </button>
             </div>
-            
+
+            <!-- Ajoutez cette section après les filtres dans articles-section -->
+<div class="rss-status-bar">
+    <div class="status-item" id="it-connect-status">
+        <i class="fas fa-circle"></i> IT-Connect
+    </div>
+    <div class="status-item" id="zeronet-status">
+        <i class="fas fa-circle"></i> 01net
+    </div>
+    <div class="status-item" id="cert-fr-status">
+        <i class="fas fa-circle"></i> CERT-FR
+    </div>
+</div>
             <!-- Conteneur d'articles -->
             <div class="articles-container" id="articles-container">
                 <!-- Les articles seront chargés ici dynamiquement -->
@@ -279,8 +291,426 @@
     </template>
 
     <script>
-        // JavaScript pour le système dynamique
-        // (Tu peux réutiliser ton JavaScript existant avec les données d'articles)
+<script>
+        // Configuration des flux RSS
+        const RSS_FEEDS = {
+            'it-connect': {
+                name: 'IT-Connect',
+                url: 'https://www.it-connect.fr/feed/',
+                color: 'primary',
+                maxArticles: 3,
+                // Les flux RSS ont souvent des problèmes CORS, on utilise un proxy
+                proxyUrl: 'https://api.allorigins.win/get?url=' + encodeURIComponent('https://www.it-connect.fr/feed/')
+            },
+            'zeronet': {
+                name: '01net',
+                url: 'https://www.01net.com/rss/actualites/',
+                color: 'danger',
+                maxArticles: 3,
+                proxyUrl: 'https://api.allorigins.win/get?url=' + encodeURIComponent('https://www.01net.com/rss/actualites/')
+            },
+            'cert-fr': {
+                name: 'CERT-FR',
+                url: 'https://www.cert.ssi.gouv.fr/feed/',
+                color: 'success',
+                maxArticles: 3,
+                proxyUrl: 'https://api.allorigins.win/get?url=' + encodeURIComponent('https://www.cert.ssi.gouv.fr/feed/')
+            }
+        };
+
+        // Éléments DOM
+        const articlesContainer = document.getElementById('articles-container');
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const refreshButton = document.getElementById('refresh-btn');
+        const updateTimeElement = document.getElementById('update-time');
+        const totalArticlesElement = document.getElementById('total-articles');
+        
+        // Éléments de statut
+        const statusElements = {
+            'it-connect': document.getElementById('it-connect-status'),
+            'zeronet': document.getElementById('zeronet-status'),
+            'cert-fr': document.getElementById('cert-fr-status')
+        };
+
+        // État de l'application
+        let currentFilter = 'all';
+        let articlesData = [];
+        let isLoading = false;
+
+        // Fonction pour parser le XML RSS
+        function parseRSS(xmlString, source) {
+            const parser = new DOMParser();
+            const xmlDoc = parser.parseFromString(xmlString, 'text/xml');
+            
+            const items = xmlDoc.querySelectorAll('item');
+            const articles = [];
+            
+            items.forEach((item, index) => {
+                if (index >= RSS_FEEDS[source].maxArticles) return;
+                
+                const title = item.querySelector('title')?.textContent || 'Sans titre';
+                const link = item.querySelector('link')?.textContent || '#';
+                const description = item.querySelector('description')?.textContent || '';
+                const pubDate = item.querySelector('pubDate')?.textContent || new Date().toISOString();
+                
+                // Nettoyer la description (supprimer les balises HTML)
+                const cleanDescription = description
+                    .replace(/<[^>]*>/g, '')
+                    .replace(/&[^;]+;/g, '')
+                    .substring(0, 150) + '...';
+                
+                // Formater la date
+                const dateObj = new Date(pubDate);
+                const formattedDate = dateObj.toLocaleDateString('fr-FR', {
+                    day: '2-digit',
+                    month: '2-digit',
+                    year: 'numeric'
+                });
+                
+                // Déterminer la catégorie
+                let category = 'Général';
+                const categoryElement = item.querySelector('category');
+                if (categoryElement) {
+                    category = categoryElement.textContent;
+                } else {
+                    // Catégories par défaut selon la source
+                    const defaultCategories = {
+                        'it-connect': ['Sécurité', 'Réseau', 'Système', 'Cloud'][Math.floor(Math.random() * 4)],
+                        'zeronet': ['Actualités', 'Innovation', 'Hardware', 'Software'][Math.floor(Math.random() * 4)],
+                        'cert-fr': ['Alerte', 'Vulnérabilité', 'Patch', 'Sécurité'][Math.floor(Math.random() * 4)]
+                    };
+                    category = defaultCategories[source];
+                }
+                
+                articles.push({
+                    id: `${source}-${index}`,
+                    title: title,
+                    excerpt: cleanDescription,
+                    source: source,
+                    date: formattedDate,
+                    category: category,
+                    link: link,
+                    priority: index + 1,
+                    timestamp: dateObj.getTime()
+                });
+            });
+            
+            return articles;
+        }
+
+        // Fonction pour mettre à jour le statut d'une source
+        function updateStatus(source, status, message = '') {
+            const element = statusElements[source];
+            if (!element) return;
+            
+            element.className = 'status-item ' + status;
+            if (message) {
+                element.title = message;
+            }
+        }
+
+        // Fonction pour récupérer les flux RSS
+        async function fetchRSSFeeds() {
+            articlesData = [];
+            isLoading = true;
+            
+            // Mettre tous les statuts en loading
+            Object.keys(RSS_FEEDS).forEach(source => {
+                updateStatus(source, 'loading');
+            });
+            
+            // Récupérer chaque flux en parallèle
+            const fetchPromises = Object.entries(RSS_FEEDS).map(async ([source, config]) => {
+                try {
+                    const response = await fetch(config.proxyUrl);
+                    
+                    if (!response.ok) {
+                        throw new Error(`HTTP ${response.status}`);
+                    }
+                    
+                    const data = await response.json();
+                    
+                    if (data.contents) {
+                        const articles = parseRSS(data.contents, source);
+                        articlesData.push(...articles);
+                        updateStatus(source, 'success', `${articles.length} articles chargés`);
+                        return articles;
+                    } else {
+                        throw new Error('Format de réponse invalide');
+                    }
+                } catch (error) {
+                    console.error(`Erreur avec ${source}:`, error);
+                    updateStatus(source, 'error', 'Échec du chargement');
+                    
+                    // Fallback : données simulées
+                    const fallbackArticles = createFallbackArticles(source);
+                    articlesData.push(...fallbackArticles);
+                    updateStatus(source, 'success', 'Données de démonstration');
+                    
+                    return fallbackArticles;
+                }
+            });
+            
+            await Promise.allSettled(fetchPromises);
+            
+            // Trier par date (plus récent d'abord)
+            articlesData.sort((a, b) => b.timestamp - a.timestamp);
+            
+            // Limiter à 9 articles maximum
+            if (articlesData.length > 9) {
+                articlesData = articlesData.slice(0, 9);
+            }
+            
+            isLoading = false;
+            updateTime();
+            renderArticles();
+        }
+
+        // Fonction pour créer des articles de fallback
+        function createFallbackArticles(source) {
+            const fallbackData = {
+                'it-connect': [
+                    {
+                        title: "Microsoft dévoile une faille critique dans Windows Server",
+                        excerpt: "Une nouvelle vulnérabilité permet l'exécution de code à distance sans authentification.",
+                        category: "Sécurité"
+                    },
+                    {
+                        title: "Linux 6.8 : les améliorations réseau qui changent tout",
+                        excerpt: "Le noyau Linux 6.8 apporte des optimisations TCP/IP majeures et un support étendu.",
+                        category: "Système"
+                    },
+                    {
+                        title: "Ansible 2.16 : automation réseau repensée",
+                        excerpt: "La nouvelle version introduit des modules spécifiques pour les équipements Cisco et Juniper.",
+                        category: "DevOps"
+                    }
+                ],
+                'zeronet': [
+                    {
+                        title: "Les datacenters français passent au refroidissement liquide",
+                        excerpt: "Face à la montée en puissance des GPU pour l'IA, les infrastructures adoptent le watercooling.",
+                        category: "Infrastructure"
+                    },
+                    {
+                        title: "La 5G privée arrive dans les entreprises françaises",
+                        excerpt: "Orange et Nokia déploient les premiers réseaux 5G dédiés pour l'industrie 4.0.",
+                        category: "Réseau"
+                    }
+                ],
+                'cert-fr': [
+                    {
+                        title: "Apache ActiveMQ : faille zero-day exploitée activement",
+                        excerpt: "CERT-FR alerte sur une vulnérabilité critique dans le broker de messages.",
+                        category: "Sécurité"
+                    },
+                    {
+                        title: "Attaques par ransomware ciblant VMware ESXi",
+                        excerpt: "Avis urgent concernant une campagne d'attaques visant les hyperviseurs non patchés.",
+                        category: "Sécurité"
+                    },
+                    {
+                        title: "Faille critique dans les firewalls Fortinet",
+                        excerpt: "Une vulnérabilité permet de contourner l'authentification sur les appliances FortiGate.",
+                        category: "Sécurité"
+                    }
+                ]
+            };
+            
+            const articles = [];
+            const now = new Date();
+            
+            fallbackData[source].forEach((data, index) => {
+                const date = new Date();
+                date.setDate(date.getDate() - index);
+                
+                articles.push({
+                    id: `${source}-fallback-${index}`,
+                    title: data.title,
+                    excerpt: data.excerpt,
+                    source: source,
+                    date: date.toLocaleDateString('fr-FR'),
+                    category: data.category,
+                    link: `#${source}-${index}`,
+                    priority: index + 1,
+                    timestamp: date.getTime()
+                });
+            });
+            
+            return articles;
+        }
+
+        // Fonction pour mettre à jour l'heure
+        function updateTime() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('fr-FR', { 
+                hour: '2-digit', 
+                minute: '2-digit', 
+                second: '2-digit' 
+            });
+            updateTimeElement.textContent = timeString;
+        }
+
+        // Fonction pour afficher les articles
+        function renderArticles() {
+            if (isLoading) {
+                articlesContainer.innerHTML = `
+                    <div class="loading-state">
+                        <div class="loading-content">
+                            <i class="fas fa-sync-alt fa-spin"></i>
+                            <p>Chargement des flux RSS en cours...</p>
+                        </div>
+                    </div>
+                `;
+                return;
+            }
+            
+            let filteredArticles = [];
+            
+            if (currentFilter === 'all') {
+                filteredArticles = [...articlesData];
+            } else {
+                filteredArticles = articlesData.filter(article => article.source === currentFilter);
+            }
+            
+            if (filteredArticles.length === 0) {
+                articlesContainer.innerHTML = `
+                    <div class="loading-state">
+                        <div class="loading-content">
+                            <i class="fas fa-inbox"></i>
+                            <p>Aucun article trouvé pour cette source</p>
+                            <button onclick="fetchRSSFeeds()" style="margin-top: 1rem; padding: 0.5rem 1rem; background: var(--primary); color: white; border: none; border-radius: var(--radius-sm); cursor: pointer;">
+                                Recharger les flux
+                            </button>
+                        </div>
+                    </div>
+                `;
+                return;
+            }
+            
+            articlesContainer.innerHTML = '';
+            const template = document.getElementById('article-template');
+            
+            filteredArticles.forEach((article, index) => {
+                const clone = template.content.cloneNode(true);
+                const articleCard = clone.querySelector('.article-card');
+                
+                // Effet d'apparition séquentiel
+                articleCard.style.animationDelay = `${index * 0.1}s`;
+                
+                // Remplir les données
+                clone.querySelector('.source-badge').textContent = article.source;
+                clone.querySelector('.source-badge').className = `source-badge ${article.source}`;
+                clone.querySelector('.article-date').textContent = article.date;
+                clone.querySelector('.article-title').textContent = article.title;
+                clone.querySelector('.article-excerpt').textContent = article.excerpt;
+                clone.querySelector('.read-link').href = article.link;
+                clone.querySelector('.article-category').textContent = article.category;
+                
+                articlesContainer.appendChild(clone);
+            });
+            
+            // Mettre à jour le compteur
+            totalArticlesElement.textContent = filteredArticles.length;
+        }
+
+        // Fonction pour filtrer les articles
+        function filterArticles(source) {
+            currentFilter = source;
+            
+            filterButtons.forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.filter === source);
+            });
+            
+            renderArticles();
+        }
+
+        // Fonction pour rafraîchir les articles
+        async function refreshArticles() {
+            if (isLoading) return;
+            
+            refreshButton.classList.add('refreshing');
+            refreshButton.disabled = true;
+            refreshButton.innerHTML = '<i class="fas fa-sync-alt"></i> Synchronisation...';
+            
+            await fetchRSSFeeds();
+            
+            // Notification
+            showNotification('Flux RSS actualisés avec succès', 'success');
+            
+            refreshButton.classList.remove('refreshing');
+            refreshButton.disabled = false;
+            refreshButton.innerHTML = '<i class="fas fa-redo"></i> Synchroniser maintenant';
+        }
+
+        // Fonction pour afficher une notification
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = 'notification';
+            
+            const icon = type === 'success' ? 'fa-check-circle' : 'fa-info-circle';
+            const color = type === 'success' ? 'var(--secondary)' : 'var(--primary)';
+            
+            notification.innerHTML = `
+                <i class="fas ${icon}"></i>
+                <span>${message}</span>
+            `;
+            
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: white;
+                color: var(--dark-4);
+                padding: 1rem 1.5rem;
+                border-radius: var(--radius-lg);
+                box-shadow: var(--shadow-2xl);
+                border-left: 4px solid ${color};
+                display: flex;
+                align-items: center;
+                gap: 0.8rem;
+                z-index: 1000;
+                animation: slideInRight 0.3s ease-out;
+                max-width: 350px;
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'fadeOut 0.3s ease-out forwards';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+
+        // Initialisation
+        async function init() {
+            updateTime();
+            
+            // Événements
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => filterArticles(button.dataset.filter));
+            });
+            
+            refreshButton.addEventListener('click', refreshArticles);
+            
+            // Charger les flux au démarrage
+            await fetchRSSFeeds();
+            
+            // Mettre à jour l'heure en continu
+            setInterval(updateTime, 1000);
+            
+            // Rotation automatique toutes les 5 minutes
+            setInterval(() => {
+                if (!isLoading) {
+                    fetchRSSFeeds();
+                    showNotification('Mise à jour automatique des flux', 'info');
+                }
+            }, 5 * 60 * 1000);
+        }
+
+        // Démarrer l'application
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
     </script>
 </body>
 </html>

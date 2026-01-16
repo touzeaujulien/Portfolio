@@ -28,7 +28,7 @@
         
         <section class="stage-entreprise">
             <div class="entreprise-header">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Almerys_Logo.svg/1280px-Almerys_Logo.svg.png" alt="Logo Almeria" class="entreprise-logo">
+                <img src="https://imgs.search.brave.com/ol9o4C6cwvjaXdzUGL_QZKqP0cqfuvB_yaJm--g1E0o/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly93d3cu/cGFnZXNqYXVuZXMu/ZnIvbWVkaWEvbmV3/ZGFtL3ByZXNldC1l/eHBvcnQtbGFyZ2Uv/YmYvNzgvNjAvMDAv/MDAvZjMvYjIvZWQv/NDQvOTQvNjA1OGJm/Nzg2MDAwMDBmM2Iy/ZWQ0NDk0LzYwNThi/Zjc4NjAwMDAwZjNi/MmVkNDQ5NS5wbmc" alt="Logo Almeria" class="entreprise-logo">
                 <div class="entreprise-info">
                     <h2>Almeria - Cholet</h2>
                     <p class="entreprise-dates">Stage de BTS SIO - Année 2025</p>
@@ -39,7 +39,7 @@
                 <h3>Présentation de l'entreprise</h3>
                 <p>Almeria est une entreprise spécialisée dans les solutions informatiques pour les professionnels, proposant des services de maintenance, d'infrastructure réseau et de support technique.</p>
                 
-                <h3>Activités réalisées durant le stage</h3>
+                <h3>Répartition des activités réalisées</h3>
                 <div class="chart-container">
                     <canvas id="activitesChart"></canvas>
                 </div>
@@ -53,15 +53,12 @@
                     <li>Mise en place de solutions de téléphonie IP</li>
                     <li>Supervision des systèmes et réseaux</li>
                 </ul>
-                
-                <h3>Acquis professionnels</h3>
-                <p>Ce stage m'a permis de développer mes compétences en administration système et réseau dans un environnement professionnel réel. J'ai pu appliquer les connaissances théoriques acquises en BTS SIO et découvrir les spécificités du métier d'administrateur réseau en entreprise.</p>
             </div>
         </section>
         
         <section class="stage-entreprise">
             <div class="entreprise-header">
-                <img src="https://upload.wikimedia.org/wikipedia/fr/thumb/6/6e/Acad%C3%A9mie_de_Nantes.svg/1200px-Acad%C3%A9mie_de_Nantes.svg.png" alt="Logo Éducation Nationale" class="entreprise-logo">
+                <img src="https://www.pagesjaunes.fr/media/newdam/preset-thumbnail-logo-desktop/6b/6c/30/00/00/39/00/04/57/67/66226b6c3000003900045767/66226b6c300000587004576a.png" alt="Logo Établissements scolaires" class="entreprise-logo">
                 <div class="entreprise-info">
                     <h2>Établissements scolaires - Cholet et Beaupreau</h2>
                     <p class="entreprise-dates">Stage unique réparti sur deux établissements - Année 2026</p>
@@ -93,11 +90,6 @@
                     </ul>
                 </div>
             </div>
-            
-            <div class="entreprise-description">
-                <h3>Acquis communs</h3>
-                <p>Ces expériences en milieu scolaire m'ont permis de développer mon autonomie, ma capacité d'adaptation et mes compétences en communication. J'ai appris à travailler avec des publics variés (élèves, enseignants, personnel administratif) et à gérer des priorités dans un environnement éducatif dynamique.</p>
-            </div>
         </section>
     </main>
 
@@ -126,7 +118,7 @@
                     '#3498db', '#2ecc71', '#e74c3c', '#f39c12', '#9b59b6',
                     '#1abc9c', '#34495e', '#d35400', '#7f8c8d', '#27ae60'
                 ],
-                borderWidth: 2,
+                borderWidth: 1,
                 borderColor: '#ffffff'
             }]
         };
@@ -137,14 +129,16 @@
             data: activitesData,
             options: {
                 responsive: true,
+                maintainAspectRatio: false,
                 plugins: {
                     legend: {
                         position: 'right',
                         labels: {
-                            padding: 20,
+                            padding: 10,
                             font: {
-                                size: 11
-                            }
+                                size: 10
+                            },
+                            boxWidth: 12
                         }
                     },
                     tooltip: {

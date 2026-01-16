@@ -3,12 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Veille technologique - Julien TOUZEAU</title>
+    <title>Veille Technologique - Julien TOUZEAU</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="veille.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Navigation (à adapter selon ton style.css existant) -->
     <header>
         <nav>
             <div class="logo">Portfolio - Julien TOUZEAU</div>
@@ -24,57 +26,78 @@
     </header>
 
     <main class="veille-main">
-        <!-- Hero Section -->
+        <!-- Hero Section Ultra Moderne -->
         <section class="veille-hero">
-            <h1><i class="fas fa-satellite-dish"></i> Veille Technologique</h1>
-            <p>Suivi continu des évolutions techniques en administration système et réseau. Mise à jour automatique des dernières actualités du secteur.</p>
+            <div class="hero-background">
+                <div class="background-circle circle-1"></div>
+                <div class="background-circle circle-2"></div>
+            </div>
             
-            <div class="veille-stats">
-                <div class="veille-stat">
-                    <span class="stat-number" id="total-articles">9</span>
-                    <span class="stat-label">Articles récents</span>
-                </div>
-                <div class="veille-stat">
-                    <span class="stat-number">3</span>
-                    <span class="stat-label">Sources principales</span>
-                </div>
-                <div class="veille-stat">
-                    <span class="stat-number">Auto</span>
-                    <span class="stat-label">Mise à jour</span>
+            <div class="hero-content">
+                <h1 class="hero-title fade-in">
+                    <i class="fas fa-satellite-dish"></i>
+                    Veille Technologique
+                </h1>
+                <p class="hero-subtitle fade-in stagger-delay-1">
+                    Surveillance continue des innovations en administration système et réseau.
+                    Système automatisé de rotation des dernières actualités techniques.
+                </p>
+                
+                <div class="hero-stats">
+                    <div class="hero-stat fade-in stagger-delay-2">
+                        <span class="stat-number" id="total-articles">9</span>
+                        <span class="stat-label">Articles actifs</span>
+                    </div>
+                    <div class="hero-stat fade-in stagger-delay-3">
+                        <span class="stat-number">3</span>
+                        <span class="stat-label">Sources majeures</span>
+                    </div>
+                    <div class="hero-stat fade-in stagger-delay-4">
+                        <span class="stat-number">Auto</span>
+                        <span class="stat-label">Mise à jour</span>
+                    </div>
                 </div>
             </div>
         </section>
 
         <!-- Méthodologie -->
         <section class="methodologie-section">
-            <h2 class="section-title"><i class="fas fa-cogs"></i> Méthodologie</h2>
+            <div class="section-header">
+                <h2 class="section-title fade-in">
+                    <i class="fas fa-microchip"></i>
+                    Processus de Veille
+                </h2>
+                <p class="section-subtitle fade-in stagger-delay-1">
+                    Une méthodologie structurée pour rester à la pointe des technologies
+                </p>
+            </div>
             
             <div class="methods-grid">
-                <div class="method-card">
+                <div class="method-card slide-in-left stagger-delay-1">
                     <div class="method-icon">
-                        <i class="fas fa-rss"></i>
+                        <i class="fas fa-robot"></i>
                     </div>
-                    <h3>Aggrégation automatisée</h3>
-                    <p>Utilisation de Feedly pour centraliser tous les flux RSS de mes sources principales en temps réel.</p>
+                    <h3>Automatisation Intelligente</h3>
+                    <p>Flux RSS centralisés et analysés automatiquement via Feedly. Filtrage par mots-clés et pertinence technique.</p>
                     <a href="https://feedly.com/i/my/me" target="_blank" class="method-link">
-                        Voir mon tableau de bord <i class="fas fa-arrow-right"></i>
+                        Accéder au dashboard <i class="fas fa-arrow-up-right-from-square"></i>
                     </a>
                 </div>
                 
-                <div class="method-card">
+                <div class="method-card fade-in stagger-delay-2">
                     <div class="method-icon">
-                        <i class="fas fa-filter"></i>
+                        <i class="fas fa-filter-circle-dollar"></i>
                     </div>
-                    <h3>Filtrage intelligent</h3>
-                    <p>Sélection automatique des articles pertinents pour l'administration système et réseau (SISR).</p>
+                    <h3>Curration Avancée</h3>
+                    <p>Sélection algorithmique des contenus les plus pertinents pour l'administration SISR. Priorisation des sujets critiques.</p>
                 </div>
                 
-                <div class="method-card">
+                <div class="method-card slide-in-right stagger-delay-3">
                     <div class="method-icon">
                         <i class="fas fa-sync-alt"></i>
                     </div>
-                    <h3>Mise à jour continue</h3>
-                    <p>Rotation automatique des articles : les plus anciens sont remplacés par les nouvelles publications.</p>
+                    <h3>Rotation Dynamique</h3>
+                    <p>Système de rotation automatique : les articles les plus anciens sont remplacés par les nouvelles publications.</p>
                 </div>
             </div>
         </section>
@@ -82,76 +105,97 @@
         <!-- Articles Dynamiques -->
         <section class="articles-section">
             <div class="section-header">
-                <div>
-                    <h2 class="section-title"><i class="fas fa-newspaper"></i> Actualités Récentes</h2>
-                    <p class="section-subtitle">Les derniers articles de mes sources - Système de rotation automatique</p>
-                </div>
+                <h2 class="section-title fade-in">
+                    <i class="fas fa-broadcast-tower"></i>
+                    Flux d'Actualités
+                </h2>
+                <p class="section-subtitle fade-in stagger-delay-1">
+                    Dernières publications triées par source – Mise à jour en temps réel
+                </p>
             </div>
             
-            <!-- Filtres par source -->
+            <!-- Filtres -->
             <div class="sources-filters">
-                <button class="filter-btn active" data-filter="all">Toutes les sources</button>
-                <button class="filter-btn" data-filter="it-connect">IT-Connect</button>
-                <button class="filter-btn" data-filter="zeronet">01net</button>
-                <button class="filter-btn" data-filter="cert-fr">CERT-FR</button>
+                <button class="filter-btn active" data-filter="all">
+                    <i class="fas fa-layer-group"></i> Toutes les sources
+                </button>
+                <button class="filter-btn" data-filter="it-connect">
+                    <i class="fas fa-network-wired"></i> IT-Connect
+                </button>
+                <button class="filter-btn" data-filter="zeronet">
+                    <i class="fas fa-newspaper"></i> 01net
+                </button>
+                <button class="filter-btn" data-filter="cert-fr">
+                    <i class="fas fa-shield-alt"></i> CERT-FR
+                </button>
             </div>
             
             <!-- Conteneur d'articles -->
             <div class="articles-container" id="articles-container">
-                <!-- Les articles seront chargés ici par JavaScript -->
+                <!-- Les articles seront chargés ici dynamiquement -->
                 <div class="loading-state">
-                    <i class="fas fa-sync-alt"></i>
-                    <p>Chargement des derniers articles...</p>
+                    <div class="loading-content">
+                        <i class="fas fa-sync-alt"></i>
+                        <p>Initialisation du flux d'actualités...</p>
+                    </div>
                 </div>
             </div>
             
-            <!-- Barre de mise à jour -->
+            <!-- Barre de contrôle -->
             <div class="update-bar">
                 <div class="update-info">
                     <i class="fas fa-clock"></i>
-                    <span>Dernière mise à jour : <strong id="update-time">--:--:--</strong></span>
+                    <span>Dernière synchronisation : <strong id="update-time">--:--:--</strong></span>
                 </div>
                 <button id="refresh-btn" class="refresh-btn">
-                    <i class="fas fa-redo"></i> Actualiser maintenant
+                    <i class="fas fa-redo"></i> Synchroniser maintenant
                 </button>
             </div>
         </section>
 
         <!-- Sources -->
         <section class="sources-section">
-            <h2 class="section-title"><i class="fas fa-link"></i> Sources Principales</h2>
+            <div class="section-header">
+                <h2 class="section-title fade-in">
+                    <i class="fas fa-satellite"></i>
+                    Sources Principales
+                </h2>
+                <p class="section-subtitle fade-in stagger-delay-1">
+                    Les trois piliers de ma veille technique quotidienne
+                </p>
+            </div>
             
             <div class="sources-grid">
-                <div class="source-card">
+                <div class="source-card slide-in-left stagger-delay-1">
                     <div class="source-logo">
-                        <i class="fas fa-network-wired"></i>
+                        <i class="fas fa-server"></i>
                     </div>
                     <h3>IT-Connect</h3>
-                    <p>Référence pour les administrateurs systèmes et réseaux. Articles techniques, tutoriels et actualités métier.</p>
+                    <p>La référence francophone pour les administrateurs systèmes et réseaux. Tutoriels détaillés et analyses techniques approfondies.</p>
                     <a href="https://www.it-connect.fr" target="_blank" class="source-link">
-                        <i class="fas fa-external-link-alt"></i> Visiter
+                        <i class="fas fa-external-link-alt"></i> Explorer la source
                     </a>
                 </div>
                 
-                <div class="source-card">
+                <div class="source-card fade-in stagger-delay-2">
                     <div class="source-logo">
-                        <i class="fas fa-newspaper"></i>
+                        <i class="fas fa-globe"></i>
                     </div>
                     <h3>01net</h3>
-                    <p>Actualités high-tech générales avec une section dédiée aux infrastructures d'entreprise et au cloud.</p>
+                    <p>Actualités high-tech généralistes avec une couverture complète des évolutions infrastructurelles et des tendances cloud.</p>
                     <a href="https://www.01net.com" target="_blank" class="source-link">
-                        <i class="fas fa-external-link-alt"></i> Visiter
+                        <i class="fas fa-external-link-alt"></i> Explorer la source
                     </a>
                 </div>
                 
-                <div class="source-card">
+                <div class="source-card slide-in-right stagger-delay-3">
                     <div class="source-logo">
-                        <i class="fas fa-shield-alt"></i>
+                        <i class="fas fa-user-shield"></i>
                     </div>
                     <h3>CERT-FR</h3>
-                    <p>Centre gouvernemental français de veille, d'alerte et de réponse aux attaques informatiques.</p>
+                    <p>Centre gouvernemental d'alerte et de réponse aux attaques informatiques. Source officielle pour les vulnérabilités critiques.</p>
                     <a href="https://www.cert.ssi.gouv.fr" target="_blank" class="source-link">
-                        <i class="fas fa-external-link-alt"></i> Visiter
+                        <i class="fas fa-external-link-alt"></i> Explorer la source
                     </a>
                 </div>
             </div>
@@ -159,36 +203,53 @@
 
         <!-- Bénéfices -->
         <section class="benefits-section">
-            <h2 class="section-title"><i class="fas fa-chart-line"></i> Bénéfices de ma Veille</h2>
+            <div class="section-header">
+                <h2 class="section-title fade-in">
+                    <i class="fas fa-chart-network"></i>
+                    Impact Professionnel
+                </h2>
+                <p class="section-subtitle fade-in stagger-delay-1">
+                    Comment cette veille enrichit ma pratique et mes compétences
+                </p>
+            </div>
             
             <div class="benefits-grid">
-                <div class="benefit-card">
-                    <h3><i class="fas fa-project-diagram"></i> Pour mes Projets</h3>
-                    <p>La veille m'a permis de choisir des technologies pertinentes et à jour pour mes Ateliers de Professionnalisation.</p>
+                <div class="benefit-card slide-in-left stagger-delay-1">
+                    <div class="benefit-icon">
+                        <i class="fas fa-project-diagram"></i>
+                    </div>
+                    <h3>Optimisation des Projets</h3>
+                    <p>La veille permet de sélectionner les technologies les plus adaptées et à jour pour chaque contexte technique.</p>
                     <ul class="benefit-list">
-                        <li>Choix des technologies VLAN/ACL pour l'AP3</li>
-                        <li>Configuration sécurisée des serveurs</li>
-                        <li>Implémentation des bonnes pratiques</li>
+                        <li>Choix éclairé des protocoles réseau</li>
+                        <li>Implémentation des bonnes pratiques de sécurité</li>
+                        <li>Anticipation des évolutions technologiques</li>
                     </ul>
                 </div>
                 
-                <div class="benefit-card">
-                    <h3><i class="fas fa-briefcase"></i> Pour mon Stage</h3>
-                    <p>Connaissance des dernières vulnérabilités et solutions pour les audits et déploiements chez Almeria.</p>
+                <div class="benefit-card fade-in stagger-delay-2">
+                    <div class="benefit-icon">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <h3>Renforcement Opérationnel</h3>
+                    <p>Connaissance immédiate des dernières vulnérabilités et solutions pour une intervention efficace en entreprise.</p>
                     <ul class="benefit-list">
-                        <li>Audit PingCastle informé</li>
-                        <li>Déploiement de solutions à jour</li>
-                        <li>Dialogue technique avec les équipes</li>
+                        <li>Réponse rapide aux incidents de sécurité</li>
+                        <li>Audits techniques informés et pertinents</li>
+                        <li>Recommandations technologiques à jour</li>
                     </ul>
                 </div>
                 
-                <div class="benefit-card">
-                    <h3><i class="fas fa-graduation-cap"></i> Pour ma Formation</h3>
-                    <p>Complète les enseignements théoriques par une perspective pratique et actuelle du métier d'administrateur.</p>
+                <div class="benefit-card slide-in-right stagger-delay-3">
+                    <div class="benefit-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>Évolution Continue</h3>
+                    <p>Maintenir une culture technique actualisée et anticiper les transformations du métier d'administrateur.</p>
                     <ul class="benefit-list">
-                        <li>Culture technique élargie</li>
-                        <li>Compréhension des tendances</li>
-                        <li>Préparation à l'évolution du métier</li>
+                        <li>Veille anticipative des compétences futures</li>
+                        <li>Compréhension des écosystèmes émergents</li>
+                        <li>Adaptation aux nouvelles méthodologies</li>
                     </ul>
                 </div>
             </div>
@@ -210,7 +271,7 @@
             <p class="article-excerpt"></p>
             <div class="article-footer">
                 <a href="#" class="read-link" target="_blank">
-                    Lire l'article <i class="fas fa-external-link-alt"></i>
+                    Lire l'article <i class="fas fa-arrow-up-right-from-square"></i>
                 </a>
                 <span class="article-category"></span>
             </div>
@@ -218,86 +279,8 @@
     </template>
 
     <script>
-        // JavaScript simplifié (identique à avant)
-        const articlesData = {
-            'it-connect': [
-                {
-                    title: "Windows Server 2025 : Les nouveautés à connaître",
-                    excerpt: "Microsoft dévoile les principales améliorations de sa prochaine version serveur avec un focus sécurité.",
-                    date: "Il y a 2 jours",
-                    link: "https://www.it-connect.fr/windows-server-2025-nouveautes/",
-                    category: "Système"
-                },
-                {
-                    title: "Configuration avancée VLAN sur Cisco",
-                    excerpt: "Tutoriel complet pour la configuration et sécurisation des VLAN en entreprise.",
-                    date: "Il y a 5 jours",
-                    link: "https://www.it-connect.fr/vlan-cisco-configuration/",
-                    category: "Réseau"
-                },
-                {
-                    title: "Supervision avec Zabbix : Bonnes pratiques",
-                    excerpt: "Guide d'implémentation et de configuration optimale de Zabbix en production.",
-                    date: "Il y a 1 semaine",
-                    link: "https://www.it-connect.fr/zabbix-supervision-guide/",
-                    category: "Sécurité"
-                }
-            ],
-            'zeronet': [
-                {
-                    title: "WiFi 7 : Déploiement en entreprise",
-                    excerpt: "La nouvelle norme WiFi promet des débits révolutionnaires pour les infrastructures d'entreprise.",
-                    date: "Il y a 3 jours",
-                    link: "https://www.01net.com/actualites/wifi-7-entreprise/",
-                    category: "Réseau"
-                },
-                {
-                    title: "Cybersécurité : Les tendances 2024",
-                    excerpt: "Panorama des principales menaces et solutions de sécurité pour l'année à venir.",
-                    date: "Il y a 1 semaine",
-                    link: "https://www.01net.com/actualites/cybersecurite-tendances-2024/",
-                    category: "Sécurité"
-                },
-                {
-                    title: "Cloud hybride : Stratégies d'implémentation",
-                    excerpt: "Comment réussir sa migration vers un environnement cloud hybride sécurisé.",
-                    date: "Il y a 2 semaines",
-                    link: "https://www.01net.com/actualites/cloud-hybride-strategies/",
-                    category: "Cloud"
-                }
-            ],
-            'cert-fr': [
-                {
-                    title: "Alerte : Vulnérabilité critique VMware",
-                    excerpt: "Une vulnérabilité permet l'exécution de code à distance sur les hyperviseurs ESXi.",
-                    date: "Aujourd'hui",
-                    link: "https://www.cert.ssi.gouv.fr/alerte-vmware-2024/",
-                    category: "Sécurité"
-                },
-                {
-                    title: "Correctifs Windows - Avril 2024",
-                    excerpt: "Liste des correctifs de sécurité critiques à appliquer d'urgence.",
-                    date: "Il y a 4 jours",
-                    link: "https://www.cert.ssi.gouv.fr/correctifs-windows-avril-2024/",
-                    category: "Système"
-                },
-                {
-                    title: "Campagne de phishing ciblant les administrateurs",
-                    excerpt: "Nouvelle campagne de phishing sophistiquée visant les comptes privilégiés.",
-                    date: "Il y a 1 semaine",
-                    link: "https://www.cert.ssi.gouv.fr/phishing-administrateurs/",
-                    category: "Sécurité"
-                }
-            ]
-        };
-
-        // Fonctions JavaScript (mêmes qu'avant)
-        document.addEventListener('DOMContentLoaded', function() {
-            // Initialisation du système
-            loadArticles();
-            setupEventListeners();
-            startAutoUpdate();
-        });
+        // JavaScript pour le système dynamique
+        // (Tu peux réutiliser ton JavaScript existant avec les données d'articles)
     </script>
 </body>
 </html>

@@ -15,32 +15,42 @@
     font-size: 1.05rem;
 }
 
-.tableau-links {
-    margin: 1.5rem 0;
-}
-
-.excel-link {
-    display: inline-flex;
+.excel-main-link {
+    display: flex;
     align-items: center;
-    gap: 0.5rem;
-    background-color: #217346;
+    gap: 1rem;
+    background: linear-gradient(135deg, #217346 0%, #1a5c38 100%);
     color: white;
-    padding: 0.8rem 1.5rem;
-    border-radius: 6px;
+    padding: 1.5rem;
+    border-radius: 10px;
     text-decoration: none;
-    font-weight: 600;
-    font-size: 0.95rem;
+    margin: 1.5rem 0;
     transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(33, 115, 70, 0.1);
 }
 
-.excel-link:hover {
-    background-color: #1a5c38;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(33, 115, 70, 0.2);
+.excel-main-link:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(33, 115, 70, 0.2);
 }
 
-.excel-link i {
-    font-size: 1.1rem;
+.excel-main-link i {
+    font-size: 2.5rem;
+}
+
+.excel-main-link div {
+    flex: 1;
+}
+
+.excel-main-link h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.3rem;
+}
+
+.excel-main-link p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.95rem;
 }
 
 .filters-section {
@@ -134,7 +144,7 @@
 }
 
 .info-item i {
-    color: #2ecc71;
+    color: #3498db;
 }
 
 /* ===== TABLEAU RESPONSIVE ===== */
@@ -148,7 +158,7 @@
 .competences-table {
     width: 100%;
     border-collapse: collapse;
-    min-width: 900px;
+    min-width: 800px;
 }
 
 .competences-table th {
@@ -221,87 +231,89 @@
     background-color: #f39c12;
 }
 
-/* ===== PREUVES ===== */
-.proof-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.3rem;
-    color: #3498db;
-    text-decoration: none;
-    font-size: 0.85rem;
-    padding: 0.3rem 0.6rem;
-    border-radius: 4px;
-    background-color: #e8f4fc;
-    margin: 0.2rem;
-    white-space: nowrap;
-    transition: all 0.2s ease;
-}
-
-.proof-link:hover {
-    background-color: #d6eaf8;
-    text-decoration: underline;
-}
-
-.proof-links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.3rem;
-}
-
-.proof-info {
-    display: inline-block;
-    padding: 0.3rem 0.6rem;
-    border-radius: 4px;
-    background-color: #f8f9fa;
-    color: #7f8c8d;
-    font-size: 0.85rem;
-    border: 1px solid #e0e0e0;
-}
-
 /* ===== FOOTER DU TABLEAU ===== */
 .table-footer {
     margin-top: 2rem;
-    padding-top: 1.5rem;
-    border-top: 2px solid #f0f0f0;
-    text-align: center;
-}
-
-.excel-link-large {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.8rem;
-    background-color: #217346;
-    color: white;
-    padding: 1rem 2rem;
+    padding: 1.5rem;
+    background-color: #f8f9fa;
     border-radius: 8px;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-    margin-bottom: 1.5rem;
+    border: 1px solid #e0e0e0;
 }
 
-.excel-link-large:hover {
-    background-color: #1a5c38;
-    transform: translateY(-3px);
-    box-shadow: 0 6px 12px rgba(33, 115, 70, 0.2);
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
 }
 
-.excel-link-large i {
-    font-size: 1.2rem;
+.footer-text h3 {
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
-.table-note {
+.footer-text h3 i {
+    color: #3498db;
+}
+
+.footer-text p {
     color: #7f8c8d;
     font-size: 0.9rem;
-    font-style: italic;
-    margin-top: 1rem;
+    margin: 0;
+    line-height: 1.5;
+}
+
+.excel-footer-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: #217346;
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+}
+
+.excel-footer-link:hover {
+    background-color: #1a5c38;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(33, 115, 70, 0.2);
 }
 
 /* ===== RESPONSIVE ===== */
+@media (max-width: 992px) {
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 1.5rem;
+    }
+    
+    .footer-text h3 {
+        justify-content: center;
+    }
+}
+
 @media (max-width: 768px) {
     .tableau-intro {
         padding: 1.5rem;
+    }
+    
+    .excel-main-link {
+        flex-direction: column;
+        text-align: center;
+        padding: 1.5rem 1rem;
+    }
+    
+    .excel-main-link i {
+        margin-bottom: 0.5rem;
     }
     
     .filters {
@@ -329,9 +341,8 @@
         font-size: 0.85rem;
     }
     
-    .excel-link-large {
-        padding: 0.8rem 1.5rem;
-        font-size: 0.9rem;
+    .table-footer {
+        padding: 1rem;
     }
 }
 
@@ -345,13 +356,12 @@
         font-size: 0.8rem;
     }
     
-    .excel-link {
-        padding: 0.7rem 1.2rem;
-        font-size: 0.9rem;
+    .excel-main-link h3 {
+        font-size: 1.1rem;
     }
     
-    .excel-link-large {
+    .excel-footer-link {
         padding: 0.7rem 1.2rem;
-        font-size: 0.85rem;
+        font-size: 0.9rem;
     }
 }

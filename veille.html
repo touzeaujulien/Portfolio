@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="veille.css">
 </head>
 <body class="veille-body">
-    <!-- Navigation spécifique à la veille -->
+    <!-- Navigation -->
     <header class="veille-header">
         <nav class="veille-nav">
             <div class="veille-logo">
@@ -52,7 +52,7 @@
                 
                 <div class="hero-stats">
                     <div class="hero-stat fade-in stagger-delay-2">
-                        <span class="stat-number" id="total-articles">9</span>
+                        <span class="stat-number" id="total-articles">0</span>
                         <span class="stat-label">Articles actifs</span>
                     </div>
                     <div class="hero-stat fade-in stagger-delay-3">
@@ -60,64 +60,22 @@
                         <span class="stat-label">Sources majeures</span>
                     </div>
                     <div class="hero-stat fade-in stagger-delay-4">
-                        <span class="stat-number">Auto</span>
+                        <span class="stat-number">5 min</span>
                         <span class="stat-label">Mise à jour</span>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Méthodologie -->
-        <section class="methodologie-section">
-            <div class="section-header">
-                <h2 class="section-title fade-in">
-                    <i class="fas fa-microchip"></i>
-                    Processus de Veille
-                </h2>
-                <p class="section-subtitle fade-in stagger-delay-1">
-                    Une méthodologie structurée pour rester à la pointe des technologies
-                </p>
-            </div>
-            
-            <div class="methods-grid">
-                <div class="method-card slide-in-left stagger-delay-1">
-                    <div class="method-icon">
-                        <i class="fas fa-robot"></i>
-                    </div>
-                    <h3>Automatisation Intelligente</h3>
-                    <p>Flux RSS centralisés et analysés automatiquement via Feedly. Filtrage par mots-clés et pertinence technique.</p>
-                    <a href="https://feedly.com/i/my/me" target="_blank" class="method-link">
-                        Accéder au dashboard <i class="fas fa-arrow-up-right-from-square"></i>
-                    </a>
-                </div>
-                
-                <div class="method-card fade-in stagger-delay-2">
-                    <div class="method-icon">
-                        <i class="fas fa-filter-circle-dollar"></i>
-                    </div>
-                    <h3>Curration Avancée</h3>
-                    <p>Sélection algorithmique des contenus les plus pertinents pour l'administration SISR. Priorisation des sujets critiques.</p>
-                </div>
-                
-                <div class="method-card slide-in-right stagger-delay-3">
-                    <div class="method-icon">
-                        <i class="fas fa-sync-alt"></i>
-                    </div>
-                    <h3>Rotation Dynamique</h3>
-                    <p>Système de rotation automatique : les articles les plus anciens sont remplacés par les nouvelles publications.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Articles Dynamiques -->
+        <!-- Flux RSS en temps réel -->
         <section class="articles-section">
             <div class="section-header">
                 <h2 class="section-title fade-in">
                     <i class="fas fa-broadcast-tower"></i>
-                    Flux d'Actualités
+                    Flux RSS en Direct
                 </h2>
                 <p class="section-subtitle fade-in stagger-delay-1">
-                    Dernières publications triées par source – Mise à jour en temps réel
+                    Derniers articles des 3 sources principales - Actualisation automatique
                 </p>
             </div>
             
@@ -150,20 +108,15 @@
                 </button>
             </div>
             
-            <!-- Bouton test (à enlever en production) -->
-            <div style="text-align: center; margin: 1rem 0 2rem;">
-                <button onclick="simulateNewRSSArticle()" class="test-button">
-                    <i class="fas fa-plus-circle"></i> Simuler nouvel article 01net
-                </button>
-            </div>
-            
             <!-- Conteneur d'articles -->
             <div class="articles-container" id="articles-container">
-                <!-- Les articles seront chargés ici dynamiquement -->
                 <div class="loading-state">
                     <div class="loading-content">
                         <i class="fas fa-sync-alt fa-spin"></i>
-                        <p>Chargement des flux RSS en cours...</p>
+                        <p>Connexion aux flux RSS...</p>
+                        <small style="display: block; margin-top: 1rem; color: #94a3b8;">
+                            <i class="fas fa-info-circle"></i> Chargement des derniers articles en temps réel
+                        </small>
                     </div>
                 </div>
             </div>
@@ -172,11 +125,16 @@
             <div class="update-bar">
                 <div class="update-info">
                     <i class="fas fa-clock"></i>
-                    <span>Dernière synchronisation : <strong id="update-time">--:--:--</strong></span>
+                    <span>Prochaine mise à jour : <strong id="next-update">5:00</strong></span>
                 </div>
                 <button id="refresh-btn" class="refresh-btn">
-                    <i class="fas fa-redo"></i> Synchroniser maintenant
+                    <i class="fas fa-redo"></i> Actualiser maintenant
                 </button>
+            </div>
+            
+            <!-- Info système -->
+            <div style="text-align: center; margin-top: 2rem; color: #64748b; font-size: 0.9rem;">
+                <p><i class="fas fa-sync-alt"></i> Système de rotation actif : Nouveaux articles remplacent automatiquement les plus anciens</p>
             </div>
         </section>
 
@@ -188,7 +146,7 @@
                     Sources Principales
                 </h2>
                 <p class="section-subtitle fade-in stagger-delay-1">
-                    Les trois piliers de ma veille technique quotidienne
+                    Flux RSS officiels suivis en temps réel
                 </p>
             </div>
             
@@ -198,9 +156,10 @@
                         <i class="fas fa-server"></i>
                     </div>
                     <h3>IT-Connect</h3>
-                    <p>La référence francophone pour les administrateurs systèmes et réseaux. Tutoriels détaillés et analyses techniques approfondies.</p>
+                    <p>Flux RSS officiel : <code>it-connect.fr/feed</code><br>
+                    Dernières actualités systèmes et réseaux en français.</p>
                     <a href="https://www.it-connect.fr" target="_blank" class="source-link">
-                        <i class="fas fa-external-link-alt"></i> Explorer la source
+                        <i class="fas fa-external-link-alt"></i> Voir le site
                     </a>
                 </div>
                 
@@ -209,9 +168,10 @@
                         <i class="fas fa-globe"></i>
                     </div>
                     <h3>01net</h3>
-                    <p>Actualités high-tech généralistes avec une couverture complète des évolutions infrastructurelles et des tendances cloud.</p>
+                    <p>Flux RSS officiel : <code>01net.com/rss/actualites</code><br>
+                    Actualités high-tech et innovations infrastructurelles.</p>
                     <a href="https://www.01net.com" target="_blank" class="source-link">
-                        <i class="fas fa-external-link-alt"></i> Explorer la source
+                        <i class="fas fa-external-link-alt"></i> Voir le site
                     </a>
                 </div>
                 
@@ -220,71 +180,60 @@
                         <i class="fas fa-user-shield"></i>
                     </div>
                     <h3>CERT-FR</h3>
-                    <p>Centre gouvernemental d'alerte et de réponse aux attaques informatiques. Source officielle pour les vulnérabilités critiques.</p>
+                    <p>Flux RSS officiel : <code>cert.ssi.gouv.fr/feed</code><br>
+                    Alertes de sécurité et vulnérabilités critiques.</p>
                     <a href="https://www.cert.ssi.gouv.fr" target="_blank" class="source-link">
-                        <i class="fas fa-external-link-alt"></i> Explorer la source
+                        <i class="fas fa-external-link-alt"></i> Voir le site
                     </a>
                 </div>
             </div>
         </section>
 
-        <!-- Bénéfices -->
-        <section class="benefits-section">
+        <!-- Explication système -->
+        <section class="methodologie-section">
             <div class="section-header">
                 <h2 class="section-title fade-in">
-                    <i class="fas fa-chart-network"></i>
-                    Impact Professionnel
+                    <i class="fas fa-cogs"></i>
+                    Comment ça fonctionne ?
                 </h2>
                 <p class="section-subtitle fade-in stagger-delay-1">
-                    Comment cette veille enrichit ma pratique et mes compétences
+                    Système automatisé de veille technologique
                 </p>
             </div>
             
-            <div class="benefits-grid">
-                <div class="benefit-card slide-in-left stagger-delay-1">
-                    <div class="benefit-icon">
-                        <i class="fas fa-project-diagram"></i>
+            <div class="methods-grid">
+                <div class="method-card slide-in-left stagger-delay-1">
+                    <div class="method-icon">
+                        <i class="fas fa-rss"></i>
                     </div>
-                    <h3>Optimisation des Projets</h3>
-                    <p>La veille permet de sélectionner les technologies les plus adaptées et à jour pour chaque contexte technique.</p>
-                    <ul class="benefit-list">
-                        <li>Choix éclairé des protocoles réseau</li>
-                        <li>Implémentation des bonnes pratiques de sécurité</li>
-                        <li>Anticipation des évolutions technologiques</li>
-                    </ul>
+                    <h3>Récupération RSS</h3>
+                    <p>Lecture automatique des flux RSS officiels des 3 sources toutes les 5 minutes.</p>
+                    <div class="method-link">
+                        En direct <i class="fas fa-bolt"></i>
+                    </div>
                 </div>
                 
-                <div class="benefit-card fade-in stagger-delay-2">
-                    <div class="benefit-icon">
-                        <i class="fas fa-briefcase"></i>
+                <div class="method-card fade-in stagger-delay-2">
+                    <div class="method-icon">
+                        <i class="fas fa-arrows-rotate"></i>
                     </div>
-                    <h3>Renforcement Opérationnel</h3>
-                    <p>Connaissance immédiate des dernières vulnérabilités et solutions pour une intervention efficace en entreprise.</p>
-                    <ul class="benefit-list">
-                        <li>Réponse rapide aux incidents de sécurité</li>
-                        <li>Audits techniques informés et pertinents</li>
-                        <li>Recommandations technologiques à jour</li>
-                    </ul>
+                    <h3>Rotation Automatique</h3>
+                    <p>Les 3 articles les plus récents par source. Les anciens sont automatiquement remplacés.</p>
                 </div>
                 
-                <div class="benefit-card slide-in-right stagger-delay-3">
-                    <div class="benefit-icon">
-                        <i class="fas fa-graduation-cap"></i>
+                <div class="method-card slide-in-right stagger-delay-3">
+                    <div class="method-icon">
+                        <i class="fas fa-bell"></i>
                     </div>
-                    <h3>Évolution Continue</h3>
-                    <p>Maintenir une culture technique actualisée et anticiper les transformations du métier d'administrateur.</p>
-                    <ul class="benefit-list">
-                        <li>Veille anticipative des compétences futures</li>
-                        <li>Compréhension des écosystèmes émergents</li>
-                        <li>Adaptation aux nouvelles méthodologies</li>
-                    </ul>
+                    <h3>Mise à jour en temps réel</h3>
+                    <p>Quand 01net publie un nouvel article, il apparaît ici automatiquement dans les 5 minutes.</p>
                 </div>
             </div>
         </section>
     </main>
 
     <footer class="veille-footer">
-        <p>- 2025 Julien TOUZEAU -</p>
+        <p>- 2025 Julien TOUZEAU - Système de veille technologique en temps réel</p>
     </footer>
 
     <!-- Template pour les articles -->

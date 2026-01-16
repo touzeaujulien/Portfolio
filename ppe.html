@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mes AP - Julien TOUZEAU</title>
+    <title>Mes Ateliers de Professionnalisation - Julien TOUZEAU</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="ppe.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
@@ -23,296 +24,405 @@
         </nav>
     </header>
 
-    <main>
-        <h1><i class="fas fa-project-diagram"></i> Mes Ateliers de Professionnalisation</h1>
-        
-        <section class="ppe-intro">
-            <h2>Présentation des AP</h2>
-            <p>Les Ateliers de Professionnalisation (AP) sont des projets concrets réalisés dans le cadre du BTS SIO SISR. Ils permettent de mettre en pratique les compétences techniques et organisationnelles acquises durant la formation.</p>
-        </section>
-        
-        <div class="ppe-grid">
-            <!-- AP 1-1 -->
-            <div class="ppe-card" data-ap="1-1">
-                <div class="ppe-card-header">
-                    <span class="ppe-badge">AP 1-1</span>
-                    <span class="ppe-date">2024</span>
-                </div>
-                <div class="ppe-card-body">
-                    <h3>Éco-gîte</h3>
-                    <h4>Site web de réservation de gîte écologique</h4>
-                    
-                    <div class="ppe-context">
-                        <h5><i class="fas fa-info-circle"></i> Contexte</h5>
-                        <p>Création d'un site web statique pour un éco-gîte permettant aux visiteurs de découvrir les hébergements, les activités écologiques et de prendre contact pour des réservations.</p>
+    <main class="ppe-main">
+        <!-- Hero Section -->
+        <section class="ppe-hero">
+            <div class="hero-content">
+                <h1><i class="fas fa-project-diagram"></i> Ateliers de Professionnalisation</h1>
+                <p class="hero-subtitle">Projets concrets réalisés dans le cadre du BTS SIO SISR</p>
+                <p class="hero-description">Découvrez mes projets d'infrastructure réseau et système, réalisés au cours de ma formation. Chaque AP représente une étape dans l'acquisition de compétences techniques et professionnelles.</p>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number">5</span>
+                        <span class="stat-label">Projets réalisés</span>
                     </div>
+                    <div class="stat">
+                        <span class="stat-number">2</span>
+                        <span class="stat-label">Années</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">23+</span>
+                        <span class="stat-label">Compétences</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-graphic">
+                <i class="fas fa-server"></i>
+                <i class="fas fa-network-wired"></i>
+                <i class="fas fa-shield-alt"></i>
+            </div>
+        </section>
+
+        <!-- Projects Grid -->
+        <section class="ppe-projects">
+            <h2 class="section-title"><i class="fas fa-code-branch"></i> Mes Projets</h2>
+            <p class="section-subtitle">Des sites web aux infrastructures complexes</p>
+            
+            <div class="projects-grid">
+                <!-- AP 1-1 -->
+                <article class="project-card" data-ap="1-1">
+                    <div class="project-header">
+                        <div class="project-badge">AP 1-1</div>
+                        <div class="project-year">2024</div>
+                    </div>
+                    <div class="project-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h3 class="project-title">Éco-gîte</h3>
+                    <p class="project-subtitle">Site web de réservation écologique</p>
                     
-                    <div class="ppe-technologies">
-                        <h5><i class="fas fa-code"></i> Technologies</h5>
-                        <div class="tech-tags">
-                            <span class="tech-tag">HTML5</span>
-                            <span class="tech-tag">CSS3</span>
-                            <span class="tech-tag">Responsive Design</span>
-                            <span class="tech-tag">Google Maps API</span>
+                    <div class="project-content">
+                        <div class="project-section">
+                            <h4><i class="fas fa-info-circle"></i> Contexte</h4>
+                            <p>Création d'un site web statique pour un éco-gîte permettant aux visiteurs de découvrir les hébergements, les activités écologiques et de prendre contact pour des réservations.</p>
+                        </div>
+                        
+                        <div class="project-section">
+                            <h4><i class="fas fa-tools"></i> Technologies utilisées</h4>
+                            <div class="tech-stack">
+                                <span class="tech-item">HTML5</span>
+                                <span class="tech-item">CSS3</span>
+                                <span class="tech-item">Responsive</span>
+                                <span class="tech-item">Google Maps API</span>
+                            </div>
+                        </div>
+                        
+                        <div class="project-section">
+                            <h4><i class="fas fa-tasks"></i> Tâches réalisées</h4>
+                            <ul class="tasks-list">
+                                <li>Page d'accueil avec présentation</li>
+                                <li>Page mentions légales</li>
+                                <li>HTML/CSS global (Navbar, Footer)</li>
+                                <li>Intégration de cartes interactives</li>
+                            </ul>
                         </div>
                     </div>
                     
-                    <div class="ppe-taches">
-                        <h5><i class="fas fa-tasks"></i> Tâches réalisées</h5>
-                        <ul>
-                            <li>Page d'accueil avec présentation</li>
-                            <li>Page mentions légales</li>
-                            <li>HTML/CSS global (Navbar, Footer)</li>
-                            <li>Intégration de cartes interactives</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="ppe-links">
-                        <a href="Documentationecogite.docx" download class="ppe-btn">
+                    <div class="project-links">
+                        <a href="Documentationecogite.docx" class="btn-download">
                             <i class="fas fa-download"></i> Documentation
                         </a>
-                        <a href="https://touzeaujulien.github.io/ecogite/Accueil.html" target="_blank" class="ppe-btn secondary">
+                        <a href="https://touzeaujulien.github.io/ecogite/Accueil.html" target="_blank" class="btn-view">
                             <i class="fas fa-external-link-alt"></i> Voir le site
                         </a>
                     </div>
-                </div>
-            </div>
-            
-            <!-- AP 1-2 -->
-            <div class="ppe-card" data-ap="1-2">
-                <div class="ppe-card-header">
-                    <span class="ppe-badge">AP 1-2</span>
-                    <span class="ppe-date">2024</span>
-                </div>
-                <div class="ppe-card-body">
-                    <h3>MEDOCLABS</h3>
-                    <h4>Infrastructure réseau complète</h4>
-                    
-                    <div class="ppe-context">
-                        <h5><i class="fas fa-info-circle"></i> Contexte</h5>
-                        <p>Mise en place d'une infrastructure complète pour l'entreprise MEDOCLABS comprenant un environnement Windows Server avec Active Directory, un serveur web sous Debian, un serveur DNS et une station cliente Windows.</p>
+                </article>
+
+                <!-- AP 1-2 -->
+                <article class="project-card" data-ap="1-2">
+                    <div class="project-header">
+                        <div class="project-badge">AP 1-2</div>
+                        <div class="project-year">2024</div>
                     </div>
+                    <div class="project-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h3 class="project-title">MEDOCLABS</h3>
+                    <p class="project-subtitle">Infrastructure réseau complète</p>
                     
-                    <div class="ppe-technologies">
-                        <h5><i class="fas fa-code"></i> Technologies</h5>
-                        <div class="tech-tags">
-                            <span class="tech-tag">Windows Server 2019</span>
-                            <span class="tech-tag">Active Directory</span>
-                            <span class="tech-tag">Debian</span>
-                            <span class="tech-tag">Apache</span>
-                            <span class="tech-tag">Bind9 (DNS)</span>
+                    <div class="project-content">
+                        <div class="project-section">
+                            <h4><i class="fas fa-info-circle"></i> Contexte</h4>
+                            <p>Mise en place d'une infrastructure complète pour l'entreprise MEDOCLABS comprenant un environnement Windows Server avec Active Directory, un serveur web sous Debian, un serveur DNS et une station cliente Windows.</p>
+                        </div>
+                        
+                        <div class="project-section">
+                            <h4><i class="fas fa-tools"></i> Technologies utilisées</h4>
+                            <div class="tech-stack">
+                                <span class="tech-item">Windows Server 2019</span>
+                                <span class="tech-item">Active Directory</span>
+                                <span class="tech-item">Debian</span>
+                                <span class="tech-item">Apache</span>
+                                <span class="tech-item">Bind9 (DNS)</span>
+                            </div>
+                        </div>
+                        
+                        <div class="project-section">
+                            <h4><i class="fas fa-tasks"></i> Tâches réalisées</h4>
+                            <ul class="tasks-list">
+                                <li>Mise en place du serveur web sous Debian</li>
+                                <li>Configuration du service DNS</li>
+                                <li>Création de l'arborescence Active Directory</li>
+                                <li>Gestion des utilisateurs et GPO</li>
+                            </ul>
                         </div>
                     </div>
                     
-                    <div class="ppe-taches">
-                        <h5><i class="fas fa-tasks"></i> Tâches réalisées</h5>
-                        <ul>
-                            <li>Mise en place du serveur web sous Debian</li>
-                            <li>Configuration du service DNS</li>
-                            <li>Création de l'arborescence Active Directory</li>
-                            <li>Gestion des utilisateurs et GPO</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="ppe-links">
-                        <a href="PPE1-2.pdf" download class="ppe-btn">
+                    <div class="project-links">
+                        <a href="PPE1-2.pdf" class="btn-download">
                             <i class="fas fa-download"></i> Documentation
                         </a>
                     </div>
-                </div>
-            </div>
-            
-            <!-- AP 2 -->
-            <div class="ppe-card" data-ap="2">
-                <div class="ppe-card-header">
-                    <span class="ppe-badge">AP 2</span>
-                    <span class="ppe-date">2025</span>
-                </div>
-                <div class="ppe-card-body">
-                    <h3>LOGONET</h3>
-                    <h4>Infrastructure réseau avec haute disponibilité</h4>
-                    
-                    <div class="ppe-context">
-                        <h5><i class="fas fa-info-circle"></i> Contexte</h5>
-                        <p>Conception et configuration d'une infrastructure réseau complète pour LOGONET avec focus sur la haute disponibilité, la sécurité des données et la gestion centralisée des utilisateurs.</p>
+                </article>
+
+                <!-- AP 2 -->
+                <article class="project-card" data-ap="2">
+                    <div class="project-header">
+                        <div class="project-badge">AP 2</div>
+                        <div class="project-year">2025</div>
                     </div>
+                    <div class="project-icon">
+                        <i class="fas fa-sitemap"></i>
+                    </div>
+                    <h3 class="project-title">LOGONET</h3>
+                    <p class="project-subtitle">Infrastructure avec haute disponibilité</p>
                     
-                    <div class="ppe-technologies">
-                        <h5><i class="fas fa-code"></i> Technologies</h5>
-                        <div class="tech-tags">
-                            <span class="tech-tag">Windows Server 2019</span>
-                            <span class="tech-tag">Active Directory & GPO</span>
-                            <span class="tech-tag">RAID 5</span>
-                            <span class="tech-tag">Sauvegarde automatisée</span>
-                            <span class="tech-tag">Debian</span>
-                            <span class="tech-tag">DHCP & DNS</span>
+                    <div class="project-content">
+                        <div class="project-section">
+                            <h4><i class="fas fa-info-circle"></i> Contexte</h4>
+                            <p>Conception et configuration d'une infrastructure réseau complète pour LOGONET avec focus sur la haute disponibilité, la sécurité des données et la gestion centralisée des utilisateurs.</p>
+                        </div>
+                        
+                        <div class="project-section">
+                            <h4><i class="fas fa-tools"></i> Technologies utilisées</h4>
+                            <div class="tech-stack">
+                                <span class="tech-item">Windows Server 2019</span>
+                                <span class="tech-item">Active Directory & GPO</span>
+                                <span class="tech-item">RAID 5</span>
+                                <span class="tech-item">Sauvegarde automatisée</span>
+                                <span class="tech-item">Debian</span>
+                                <span class="tech-item">DHCP & DNS</span>
+                            </div>
+                        </div>
+                        
+                        <div class="project-section">
+                            <h4><i class="fas fa-tasks"></i> Tâches réalisées</h4>
+                            <ul class="tasks-list">
+                                <li>Installation et configuration d'Active Directory</li>
+                                <li>Création des UO, groupes et utilisateurs</li>
+                                <li>Mise en place des GPO pour les répertoires</li>
+                                <li>Configuration d'une sauvegarde automatisée</li>
+                                <li>Implémentation d'un système RAID 5</li>
+                                <li>Création de plans de test</li>
+                            </ul>
                         </div>
                     </div>
                     
-                    <div class="ppe-taches">
-                        <h5><i class="fas fa-tasks"></i> Tâches réalisées</h5>
-                        <ul>
-                            <li>Installation et configuration d'Active Directory</li>
-                            <li>Création des UO, groupes et utilisateurs</li>
-                            <li>Mise en place des GPO pour les répertoires</li>
-                            <li>Configuration d'une sauvegarde automatisée</li>
-                            <li>Implémentation d'un système RAID 5</li>
-                            <li>Création de plans de test</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="ppe-links">
-                        <a href="PPE - Logonet.docx" download class="ppe-btn">
+                    <div class="project-links">
+                        <a href="PPE - Logonet.docx" class="btn-download">
                             <i class="fas fa-download"></i> Documentation
                         </a>
                     </div>
-                </div>
-            </div>
-            
-            <!-- AP 3 -->
-            <div class="ppe-card" data-ap="3">
-                <div class="ppe-card-header">
-                    <span class="ppe-badge">AP 3</span>
-                    <span class="ppe-date">2025</span>
-                </div>
-                <div class="ppe-card-body">
-                    <h3>MDS49</h3>
-                    <h4>Architecture réseau sécurisée multi-sites</h4>
-                    
-                    <div class="ppe-context">
-                        <h5><i class="fas fa-info-circle"></i> Contexte</h5>
-                        <p>Déploiement d'une maquette complète pour la Maison Départementale des Sports 49 avec une architecture réseau sécurisée, segmentée par VLAN et intégrant des services avancés de supervision et de filtrage.</p>
+                </article>
+
+                <!-- AP 3 -->
+                <article class="project-card" data-ap="3">
+                    <div class="project-header">
+                        <div class="project-badge">AP 3</div>
+                        <div class="project-year">2025</div>
                     </div>
+                    <div class="project-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="project-title">MDS49</h3>
+                    <p class="project-subtitle">Architecture réseau sécurisée</p>
                     
-                    <div class="ppe-technologies">
-                        <h5><i class="fas fa-code"></i> Technologies</h5>
-                        <div class="tech-tags">
-                            <span class="tech-tag">Cisco Packet Tracer</span>
-                            <span class="tech-tag">VLAN & Routage Inter-VLAN</span>
-                            <span class="tech-tag">OSPF</span>
-                            <span class="tech-tag">ACL Standards/Étendues</span>
-                            <span class="tech-tag">NAT/PAT</span>
-                            <span class="tech-tag">WiFi Sécurisé (WPA2 + Radius)</span>
-                            <span class="tech-tag">Zabbix (Supervision)</span>
+                    <div class="project-content">
+                        <div class="project-section">
+                            <h4><i class="fas fa-info-circle"></i> Contexte</h4>
+                            <p>Déploiement d'une maquette complète pour la Maison Départementale des Sports 49 avec une architecture réseau sécurisée, segmentée par VLAN et intégrant des services avancés de supervision et de filtrage.</p>
+                        </div>
+                        
+                        <div class="project-section">
+                            <h4><i class="fas fa-tools"></i> Technologies utilisées</h4>
+                            <div class="tech-stack">
+                                <span class="tech-item">Cisco Packet Tracer</span>
+                                <span class="tech-item">VLAN & Routage Inter-VLAN</span>
+                                <span class="tech-item">OSPF</span>
+                                <span class="tech-item">ACL Standards/Étendues</span>
+                                <span class="tech-item">NAT/PAT</span>
+                                <span class="tech-item">WiFi Sécurisé</span>
+                                <span class="tech-item">Zabbix</span>
+                            </div>
+                        </div>
+                        
+                        <div class="project-section">
+                            <h4><i class="fas fa-tasks"></i> Tâches réalisées</h4>
+                            <ul class="tasks-list">
+                                <li>Configuration des routeurs Cisco</li>
+                                <li>Mise en place des ACL de filtrage inter-VLAN</li>
+                                <li>Configuration du switch avec VLAN</li>
+                                <li>Installation et configuration WiFi</li>
+                                <li>Déploiement du serveur DHCP</li>
+                                <li>Configuration du NAT/PAT</li>
+                                <li>Supervision réseau avec Zabbix</li>
+                            </ul>
                         </div>
                     </div>
                     
-                    <div class="ppe-taches">
-                        <h5><i class="fas fa-tasks"></i> Tâches réalisées</h5>
-                        <ul>
-                            <li>Configuration des routeurs Cisco (RDC et MDS49)</li>
-                            <li>Mise en place des ACL de filtrage inter-VLAN</li>
-                            <li>Configuration du switch avec VLAN (10, 20, 30, 100)</li>
-                            <li>Installation et configuration de la borne WiFi Cisco</li>
-                            <li>Déploiement du serveur DHCP avec réservations</li>
-                            <li>Configuration du NAT/PAT pour l'accès web externe</li>
-                            <li>Création des plans de test (VLAN, DHCP, NAT, Web)</li>
-                            <li>Supervision réseau avec Zabbix</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="ppe-links">
-                        <a href="Documentation_Technique_MDS49_PPE3.pdf" download class="ppe-btn">
+                    <div class="project-links">
+                        <a href="Documentation_Technique_MDS49_PPE3.pdf" class="btn-download">
                             <i class="fas fa-download"></i> Documentation
                         </a>
                     </div>
-                </div>
-            </div>
-            
-            <!-- AP 4 -->
-            <div class="ppe-card" data-ap="4">
-                <div class="ppe-card-header">
-                    <span class="ppe-badge">AP 4</span>
-                    <span class="ppe-date">2025</span>
-                </div>
-                <div class="ppe-card-body">
-                    <h3>TOBAT - OXAM</h3>
-                    <h4>Infrastructure système complète avec haute disponibilité</h4>
-                    
-                    <div class="ppe-context">
-                        <h5><i class="fas fa-info-circle"></i> Contexte</h5>
-                        <p>Déploiement d'une infrastructure complète pour l'entreprise TOBAT mandatée par OXAM, avec focus sur la redondance, la haute disponibilité et la supervision avancée.</p>
+                </article>
+
+                <!-- AP 4 -->
+                <article class="project-card" data-ap="4">
+                    <div class="project-header">
+                        <div class="project-badge">AP 4</div>
+                        <div class="project-year">2025</div>
                     </div>
-                    
-                    <div class="ppe-image">
-                        <img src="https://chatgpt.com/backend-api/estuary/content?id=file_000000003084722f973d633bdf8314bd&ts=491268&p=fs&cid=1&sig=4afbc4498e9541b819f87bd273343f62b2415642d523afa9802e4772685c3e0b&v=0" alt="Infrastructure TOBAT - OXAM">
+                    <div class="project-icon">
+                        <i class="fas fa-chart-network"></i>
                     </div>
+                    <h3 class="project-title">TOBAT - OXAM</h3>
+                    <p class="project-subtitle">Infrastructure complète avec supervision</p>
                     
-                    <div class="ppe-technologies">
-                        <h5><i class="fas fa-code"></i> Technologies</h5>
-                        <div class="tech-tags">
-                            <span class="tech-tag">Windows Server 2022</span>
-                            <span class="tech-tag">DHCP Linux (répartition de charge)</span>
-                            <span class="tech-tag">DFS (Distributed File System)</span>
-                            <span class="tech-tag">Zabbix</span>
-                            <span class="tech-tag">FOG Project</span>
-                            <span class="tech-tag">PowerShell Scripting</span>
-                            <span class="tech-tag">Windows 11</span>
-                            <span class="tech-tag">LibreOffice</span>
-                            <span class="tech-tag">Firefox</span>
+                    <div class="project-content">
+                        <div class="project-section">
+                            <h4><i class="fas fa-info-circle"></i> Contexte</h4>
+                            <p>Déploiement d'une infrastructure complète pour l'entreprise TOBAT mandatée par OXAM, avec focus sur la redondance, la haute disponibilité et la supervision avancée.</p>
+                        </div>
+                        
+                        <div class="project-image">
+                            <img src="https://chatgpt.com/backend-api/estuary/content?id=file_000000003084722f973d633bdf8314bd&ts=491268&p=fs&cid=1&sig=4afbc4498e9541b819f87bd273343f62b2415642d523afa9802e4772685c3e0b&v=0" alt="Infrastructure TOBAT - OXAM">
+                        </div>
+                        
+                        <div class="project-section">
+                            <h4><i class="fas fa-tools"></i> Technologies utilisées</h4>
+                            <div class="tech-stack">
+                                <span class="tech-item">Windows Server 2022</span>
+                                <span class="tech-item">DHCP Linux</span>
+                                <span class="tech-item">DFS</span>
+                                <span class="tech-item">Zabbix</span>
+                                <span class="tech-item">FOG Project</span>
+                                <span class="tech-item">PowerShell</span>
+                                <span class="tech-item">Windows 11</span>
+                            </div>
+                        </div>
+                        
+                        <div class="project-section">
+                            <h4><i class="fas fa-tasks"></i> Tâches réalisées</h4>
+                            <ul class="tasks-list">
+                                <li>Configuration de 2 serveurs DHCP sous Linux</li>
+                                <li>Installation de Windows Server 2022 avec réplica</li>
+                                <li>Mise en place du DFS</li>
+                                <li>Déploiement de Zabbix avec alertes</li>
+                                <li>Supervision CPU, mémoire, stockage</li>
+                                <li>Installation du serveur FOG</li>
+                                <li>Création de script PowerShell AD</li>
+                                <li>Configuration client Windows 11</li>
+                            </ul>
                         </div>
                     </div>
                     
-                    <div class="ppe-taches">
-                        <h5><i class="fas fa-tasks"></i> Tâches réalisées</h5>
-                        <ul>
-                            <li>Configuration de 2 serveurs DHCP sous Linux avec répartition de charge</li>
-                            <li>Installation de Windows Server 2022 avec réplica pour redondance</li>
-                            <li>Mise en place du DFS (Distributed File System)</li>
-                            <li>Déploiement de Zabbix avec alertes par mail pour états critiques</li>
-                            <li>Supervision CPU, mémoire, stockage des serveurs Windows et DHCP</li>
-                            <li>Installation et configuration du serveur FOG pour déploiement d'images</li>
-                            <li>Création de script PowerShell d'automatisation de création de comptes AD</li>
-                            <li>Configuration client Windows 11 avec antivirus, Firefox et LibreOffice</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="ppe-links">
-                        <a href="#" class="ppe-btn" id="download-oxam">
-                            <i class="fas fa-download"></i> Documentation (à venir)
+                    <div class="project-links">
+                        <a href="#" class="btn-download coming-soon" id="download-oxam">
+                            <i class="fas fa-clock"></i> Documentation (à venir)
                         </a>
                     </div>
-                </div>
+                </article>
             </div>
-        </div>
-        
-        <section class="ppe-timeline">
-            <h2><i class="fas fa-chart-line"></i> Évolution des compétences</h2>
-            <div class="timeline-container">
+        </section>
+
+        <!-- Evolution Timeline -->
+        <section class="evolution-section">
+            <div class="section-header">
+                <h2><i class="fas fa-chart-line"></i> Évolution des compétences</h2>
+                <p>Progression technique à travers les différents projets</p>
+            </div>
+            
+            <div class="timeline">
                 <div class="timeline-item">
-                    <div class="timeline-dot"></div>
+                    <div class="timeline-marker">
+                        <div class="marker-dot"></div>
+                        <div class="marker-line"></div>
+                    </div>
                     <div class="timeline-content">
+                        <div class="timeline-date">2024</div>
                         <h3>AP 1-1 : Développement Web</h3>
                         <p>Compétences front-end : HTML, CSS, intégration API</p>
+                        <div class="timeline-tech">
+                            <span class="tech-tag">HTML5</span>
+                            <span class="tech-tag">CSS3</span>
+                            <span class="tech-tag">Responsive</span>
+                        </div>
                     </div>
                 </div>
+                
                 <div class="timeline-item">
-                    <div class="timeline-dot"></div>
+                    <div class="timeline-marker">
+                        <div class="marker-dot"></div>
+                        <div class="marker-line"></div>
+                    </div>
                     <div class="timeline-content">
+                        <div class="timeline-date">2024</div>
                         <h3>AP 1-2 : Administration Système</h3>
                         <p>Serveurs Windows et Linux, services réseau de base</p>
+                        <div class="timeline-tech">
+                            <span class="tech-tag">Windows Server</span>
+                            <span class="tech-tag">Active Directory</span>
+                            <span class="tech-tag">Debian</span>
+                        </div>
                     </div>
                 </div>
+                
                 <div class="timeline-item">
-                    <div class="timeline-dot"></div>
+                    <div class="timeline-marker">
+                        <div class="marker-dot"></div>
+                        <div class="marker-line"></div>
+                    </div>
                     <div class="timeline-content">
+                        <div class="timeline-date">2025</div>
                         <h3>AP 2 : Infrastructure Avancée</h3>
                         <p>Haute disponibilité, sécurité, sauvegarde, RAID</p>
+                        <div class="timeline-tech">
+                            <span class="tech-tag">RAID 5</span>
+                            <span class="tech-tag">Sauvegarde</span>
+                            <span class="tech-tag">GPO</span>
+                        </div>
                     </div>
                 </div>
+                
                 <div class="timeline-item">
-                    <div class="timeline-dot"></div>
+                    <div class="timeline-marker">
+                        <div class="marker-dot"></div>
+                        <div class="marker-line"></div>
+                    </div>
                     <div class="timeline-content">
+                        <div class="timeline-date">2025</div>
                         <h3>AP 3 : Architecture Sécurisée</h3>
                         <p>Réseaux complexes, VLAN, ACL, supervision, WiFi sécurisé</p>
+                        <div class="timeline-tech">
+                            <span class="tech-tag">VLAN</span>
+                            <span class="tech-tag">ACL</span>
+                            <span class="tech-tag">Zabbix</span>
+                        </div>
                     </div>
                 </div>
+                
                 <div class="timeline-item">
-                    <div class="timeline-dot"></div>
+                    <div class="timeline-marker">
+                        <div class="marker-dot"></div>
+                        <div class="marker-line"></div>
+                    </div>
                     <div class="timeline-content">
+                        <div class="timeline-date">2025</div>
                         <h3>AP 4 : Infrastructure Entreprise</h3>
                         <p>Haute disponibilité, redondance, supervision avancée, automatisation</p>
+                        <div class="timeline-tech">
+                            <span class="tech-tag">Windows Server 2022</span>
+                            <span class="tech-tag">Zabbix</span>
+                            <span class="tech-tag">PowerShell</span>
+                        </div>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Summary Section -->
+        <section class="summary-section">
+            <div class="summary-card">
+                <div class="summary-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <div class="summary-content">
+                    <h3>Acquis pédagogiques</h3>
+                    <p>Ces Ateliers de Professionnalisation m'ont permis de développer des compétences techniques concrètes et de comprendre les enjeux réels de l'administration système et réseau en entreprise.</p>
+                    <a href="tableau_synthese.html" class="btn-summary">
+                        <i class="fas fa-list-alt"></i> Voir le tableau de compétences
+                    </a>
                 </div>
             </div>
         </section>

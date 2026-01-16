@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tableau de synthèse - Julien TOUZEAU</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="tableau_synthese.css">
+    <link rel="stylesheet" href="tableau.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
@@ -24,40 +24,15 @@
     </header>
 
     <main>
-        <h1><i class="fas fa-chart-bar"></i> Tableau de synthèse des compétences BTS SIO</h1>
+        <h1><i class="fas fa-table"></i> Tableau de synthèse des compétences BTS SIO</h1>
         
         <section class="tableau-intro">
-            <p>Ce tableau présente l'ensemble des compétences acquises durant mon BTS SIO option SISR. Chaque compétence est évaluée selon mon niveau de maîtrise et associée aux projets et stages correspondants.</p>
+            <p>Ce tableau présente l'ensemble des compétences acquises durant mon BTS SIO option SISR. Chaque compétence est associée aux projets et stages correspondants avec les preuves disponibles.</p>
             
-            <div class="competences-overview">
-                <div class="overview-card">
-                    <i class="fas fa-network-wired"></i>
-                    <h3>Compétences Réseau</h3>
-                    <div class="progress-circle" data-value="85">
-                        <span>85%</span>
-                    </div>
-                </div>
-                <div class="overview-card">
-                    <i class="fas fa-server"></i>
-                    <h3>Compétences Système</h3>
-                    <div class="progress-circle" data-value="80">
-                        <span>80%</span>
-                    </div>
-                </div>
-                <div class="overview-card">
-                    <i class="fas fa-shield-alt"></i>
-                    <h3>Compétences Sécurité</h3>
-                    <div class="progress-circle" data-value="75">
-                        <span>75%</span>
-                    </div>
-                </div>
-                <div class="overview-card">
-                    <i class="fas fa-phone-alt"></i>
-                    <h3>Compétences Téléphonie</h3>
-                    <div class="progress-circle" data-value="70">
-                        <span>70%</span>
-                    </div>
-                </div>
+            <div class="tableau-links">
+                <a href="https://1drv.ms/x/s!AoutP5a4P_DlhPNcx-9ixrm5bEDlkw?e=K8WRMZ" target="_blank" class="excel-link">
+                    <i class="fas fa-file-excel"></i> Voir le tableau Excel complet
+                </a>
             </div>
             
             <div class="filters-section">
@@ -83,40 +58,13 @@
                     </button>
                 </div>
             </div>
-            
-            <div class="legend">
-                <h3>Légende des niveaux :</h3>
-                <div class="legend-items">
-                    <div class="legend-item">
-                        <span class="legend-dot niveau-1"></span>
-                        <span>Novice (25%)</span>
-                    </div>
-                    <div class="legend-item">
-                        <span class="legend-dot niveau-2"></span>
-                        <span>Intermédiaire (50%)</span>
-                    </div>
-                    <div class="legend-item">
-                        <span class="legend-dot niveau-3"></span>
-                        <span>Avancé (75%)</span>
-                    </div>
-                    <div class="legend-item">
-                        <span class="legend-dot niveau-4"></span>
-                        <span>Expert (100%)</span>
-                    </div>
-                </div>
-            </div>
         </section>
         
         <section class="competences-table-container">
             <div class="table-header">
-                <h2><i class="fas fa-table"></i> Tableau détaillé des compétences</h2>
-                <div class="table-actions">
-                    <button class="action-btn" id="export-btn">
-                        <i class="fas fa-file-export"></i> Exporter
-                    </button>
-                    <button class="action-btn" id="print-btn">
-                        <i class="fas fa-print"></i> Imprimer
-                    </button>
+                <h2><i class="fas fa-list-alt"></i> Compétences acquises</h2>
+                <div class="table-info">
+                    <span class="info-item"><i class="fas fa-check-circle"></i> 23 compétences répertoriées</span>
                 </div>
             </div>
             
@@ -126,8 +74,7 @@
                         <tr>
                             <th>Compétence</th>
                             <th>Catégorie</th>
-                            <th>Niveau</th>
-                            <th>AP/Stage</th>
+                            <th>Contexte</th>
                             <th>Description</th>
                             <th>Preuve</th>
                         </tr>
@@ -137,19 +84,11 @@
                         <tr class="competence-item" data-category="reseau">
                             <td class="competence-name">Configuration VLAN</td>
                             <td><span class="category-tag reseau">Réseau</span></td>
-                            <td>
-                                <div class="niveau-container">
-                                    <div class="niveau-indicator">
-                                        <div class="niveau-bar niveau-4"></div>
-                                    </div>
-                                    <span class="niveau-text">Expert</span>
-                                </div>
-                            </td>
                             <td>AP 3 - MDS49</td>
                             <td>Configuration de VLAN (10, 20, 30, 100) avec routage inter-VLAN et ACL</td>
                             <td>
                                 <a href="Documentation_Technique_MDS49_PPE3.pdf" class="proof-link">
-                                    <i class="fas fa-file-pdf"></i> Documentation
+                                    <i class="fas fa-file-pdf"></i> Documentation AP3
                                 </a>
                             </td>
                         </tr>
@@ -157,19 +96,11 @@
                         <tr class="competence-item" data-category="reseau">
                             <td class="competence-name">Routage OSPF</td>
                             <td><span class="category-tag reseau">Réseau</span></td>
-                            <td>
-                                <div class="niveau-container">
-                                    <div class="niveau-indicator">
-                                        <div class="niveau-bar niveau-3"></div>
-                                    </div>
-                                    <span class="niveau-text">Avancé</span>
-                                </div>
-                            </td>
                             <td>AP 3 - MDS49</td>
                             <td>Configuration du protocole OSPF entre routeurs Cisco</td>
                             <td>
                                 <a href="Documentation_Technique_MDS49_PPE3.pdf" class="proof-link">
-                                    <i class="fas fa-file-pdf"></i> Documentation
+                                    <i class="fas fa-file-pdf"></i> Documentation AP3
                                 </a>
                             </td>
                         </tr>
@@ -177,19 +108,11 @@
                         <tr class="competence-item" data-category="reseau">
                             <td class="competence-name">Configuration Switch</td>
                             <td><span class="category-tag reseau">Réseau</span></td>
-                            <td>
-                                <div class="niveau-container">
-                                    <div class="niveau-indicator">
-                                        <div class="niveau-bar niveau-4"></div>
-                                    </div>
-                                    <span class="niveau-text">Expert</span>
-                                </div>
-                            </td>
                             <td>AP 3 - MDS49</td>
                             <td>Configuration avancée de switchs Cisco avec gestion des ports</td>
                             <td>
                                 <a href="Documentation_Technique_MDS49_PPE3.pdf" class="proof-link">
-                                    <i class="fas fa-file-pdf"></i> Documentation
+                                    <i class="fas fa-file-pdf"></i> Documentation AP3
                                 </a>
                             </td>
                         </tr>
@@ -197,19 +120,11 @@
                         <tr class="competence-item" data-category="reseau">
                             <td class="competence-name">NAT/PAT</td>
                             <td><span class="category-tag reseau">Réseau</span></td>
-                            <td>
-                                <div class="niveau-container">
-                                    <div class="niveau-indicator">
-                                        <div class="niveau-bar niveau-3"></div>
-                                    </div>
-                                    <span class="niveau-text">Avancé</span>
-                                </div>
-                            </td>
                             <td>AP 3 - MDS49</td>
                             <td>Configuration de NAT/PAT pour l'accès web externe</td>
                             <td>
                                 <a href="Documentation_Technique_MDS49_PPE3.pdf" class="proof-link">
-                                    <i class="fas fa-file-pdf"></i> Documentation
+                                    <i class="fas fa-file-pdf"></i> Documentation AP3
                                 </a>
                             </td>
                         </tr>
@@ -218,14 +133,6 @@
                         <tr class="competence-item" data-category="systeme">
                             <td class="competence-name">Windows Server 2019</td>
                             <td><span class="category-tag systeme">Système</span></td>
-                            <td>
-                                <div class="niveau-container">
-                                    <div class="niveau-indicator">
-                                        <div class="niveau-bar niveau-4"></div>
-                                    </div>
-                                    <span class="niveau-text">Expert</span>
-                                </div>
-                            </td>
                             <td>AP 1-2, AP 2, AP 3</td>
                             <td>Installation, configuration AD, GPO, DHCP, DNS, gestion des utilisateurs</td>
                             <td>
@@ -243,19 +150,11 @@
                         <tr class="competence-item" data-category="systeme">
                             <td class="competence-name">Debian Server</td>
                             <td><span class="category-tag systeme">Système</span></td>
-                            <td>
-                                <div class="niveau-container">
-                                    <div class="niveau-indicator">
-                                        <div class="niveau-bar niveau-3"></div>
-                                    </div>
-                                    <span class="niveau-text">Avancé</span>
-                                </div>
-                            </td>
                             <td>AP 1-2, AP 2, AP 3</td>
                             <td>Serveur web Apache, DNS Bind9, configuration réseau</td>
                             <td>
                                 <a href="PPE1-2.pdf" class="proof-link">
-                                    <i class="fas fa-file-pdf"></i> Documentation
+                                    <i class="fas fa-file-pdf"></i> Documentation AP1-2
                                 </a>
                             </td>
                         </tr>
@@ -263,14 +162,6 @@
                         <tr class="competence-item" data-category="systeme">
                             <td class="competence-name">Virtualisation (ESX, Hyper-V)</td>
                             <td><span class="category-tag systeme">Système</span></td>
-                            <td>
-                                <div class="niveau-container">
-                                    <div class="niveau-indicator">
-                                        <div class="niveau-bar niveau-3"></div>
-                                    </div>
-                                    <span class="niveau-text">Avancé</span>
-                                </div>
-                            </td>
                             <td>AP 1-2, AP 2, Stage</td>
                             <td>Déploiement et gestion de machines virtuelles</td>
                             <td>
@@ -281,19 +172,11 @@
                         <tr class="competence-item" data-category="systeme">
                             <td class="competence-name">Système RAID 5</td>
                             <td><span class="category-tag systeme">Système</span></td>
-                            <td>
-                                <div class="niveau-container">
-                                    <div class="niveau-indicator">
-                                        <div class="niveau-bar niveau-3"></div>
-                                    </div>
-                                    <span class="niveau-text">Avancé</span>
-                                </div>
-                            </td>
                             <td>AP 2 - LOGONET</td>
                             <td>Mise en place de RAID 5 pour tolérance aux pannes</td>
                             <td>
                                 <a href="PPE - Logonet.docx" class="proof-link">
-                                    <i class="fas fa-file-word"></i> Documentation
+                                    <i class="fas fa-file-word"></i> Documentation AP2
                                 </a>
                             </td>
                         </tr>
@@ -301,14 +184,6 @@
                         <tr class="competence-item" data-category="systeme">
                             <td class="competence-name">Windows Server 2022</td>
                             <td><span class="category-tag systeme">Système</span></td>
-                            <td>
-                                <div class="niveau-container">
-                                    <div class="niveau-indicator">
-                                        <div class="niveau-bar niveau-4"></div>
-                                    </div>
-                                    <span class="niveau-text">Expert</span>
-                                </div>
-                            </td>
                             <td>AP 4 - TOBAT</td>
                             <td>Installation, configuration, réplication pour haute disponibilité</td>
                             <td>
@@ -319,14 +194,6 @@
                         <tr class="competence-item" data-category="systeme">
                             <td class="competence-name">DHCP Linux avec répartition de charge</td>
                             <td><span class="category-tag systeme">Système</span></td>
-                            <td>
-                                <div class="niveau-container">
-                                    <div class="niveau-indicator">
-                                        <div class="niveau-bar niveau-4"></div>
-                                    </div>
-                                    <span class="niveau-text">Expert</span>
-                                </div>
-                            </td>
                             <td>AP 4 - TOBAT</td>
                             <td>Configuration de 2 serveurs DHCP Linux en répartition de charge</td>
                             <td>
@@ -337,14 +204,6 @@
                         <tr class="competence-item" data-category="systeme">
                             <td class="competence-name">DFS (Distributed File System)</td>
                             <td><span class="category-tag systeme">Système</span></td>
-                            <td>
-                                <div class="niveau-container">
-                                    <div class="niveau-indicator">
-                                        <div class="niveau-bar niveau-3"></div>
-                                    </div>
-                                    <span class="niveau-text">Avancé</span>
-                                </div>
-                            </td>
                             <td>AP 4 - TOBAT</td>
                             <td>Mise en place de système de fichiers distribué</td>
                             <td>
@@ -355,14 +214,6 @@
                         <tr class="competence-item" data-category="systeme">
                             <td class="competence-name">FOG Project</td>
                             <td><span class="category-tag systeme">Système</span></td>
-                            <td>
-                                <div class="niveau-container">
-                                    <div class="niveau-indicator">
-                                        <div class="niveau-bar niveau-3"></div>
-                                    </div>
-                                    <span class="niveau-text">Avancé</span>
-                                </div>
-                            </td>
                             <td>AP 4 - TOBAT</td>
                             <td>Serveur de déploiement d'images système</td>
                             <td>
@@ -374,14 +225,6 @@
                         <tr class="competence-item" data-category="securite">
                             <td class="competence-name">Pare-feu Watchguard</td>
                             <td><span class="category-tag securite">Sécurité</span></td>
-                            <td>
-                                <div class="niveau-container">
-                                    <div class="niveau-indicator">
-                                        <div class="niveau-bar niveau-4"></div>
-                                    </div>
-                                    <span class="niveau-text">Expert</span>
-                                </div>
-                            </td>
                             <td>Stage - Almeria</td>
                             <td>Configuration de règles, filtrage, VPN</td>
                             <td>
@@ -392,19 +235,11 @@
                         <tr class="competence-item" data-category="securite">
                             <td class="competence-name">ACL Cisco</td>
                             <td><span class="category-tag securite">Sécurité</span></td>
-                            <td>
-                                <div class="niveau-container">
-                                    <div class="niveau-indicator">
-                                        <div class="niveau-bar niveau-3"></div>
-                                    </div>
-                                    <span class="niveau-text">Avancé</span>
-                                </div>
-                            </td>
                             <td>AP 3 - MDS49</td>
                             <td>ACL standards et étendues pour filtrage inter-VLAN</td>
                             <td>
                                 <a href="Documentation_Technique_MDS49_PPE3.pdf" class="proof-link">
-                                    <i class="fas fa-file-pdf"></i> Documentation
+                                    <i class="fas fa-file-pdf"></i> Documentation AP3
                                 </a>
                             </td>
                         </tr>
@@ -412,19 +247,11 @@
                         <tr class="competence-item" data-category="securite">
                             <td class="competence-name">WiFi Sécurisé (WPA2 + Radius)</td>
                             <td><span class="category-tag securite">Sécurité</span></td>
-                            <td>
-                                <div class="niveau-container">
-                                    <div class="niveau-indicator">
-                                        <div class="niveau-bar niveau-3"></div>
-                                    </div>
-                                    <span class="niveau-text">Avancé</span>
-                                </div>
-                            </td>
                             <td>AP 3 - MDS49</td>
                             <td>Configuration de WiFi d'entreprise avec authentification Radius</td>
                             <td>
                                 <a href="Documentation_Technique_MDS49_PPE3.pdf" class="proof-link">
-                                    <i class="fas fa-file-pdf"></i> Documentation
+                                    <i class="fas fa-file-pdf"></i> Documentation AP3
                                 </a>
                             </td>
                         </tr>
@@ -432,14 +259,6 @@
                         <tr class="competence-item" data-category="securite">
                             <td class="competence-name">Audit PingCastle</td>
                             <td><span class="category-tag securite">Sécurité</span></td>
-                            <td>
-                                <div class="niveau-container">
-                                    <div class="niveau-indicator">
-                                        <div class="niveau-bar niveau-3"></div>
-                                    </div>
-                                    <span class="niveau-text">Avancé</span>
-                                </div>
-                            </td>
                             <td>AP, Stage</td>
                             <td>Audit de sécurité Active Directory</td>
                             <td>
@@ -450,14 +269,6 @@
                         <tr class="competence-item" data-category="securite">
                             <td class="competence-name">Zabbix avancé</td>
                             <td><span class="category-tag securite">Sécurité</span></td>
-                            <td>
-                                <div class="niveau-container">
-                                    <div class="niveau-indicator">
-                                        <div class="niveau-bar niveau-3"></div>
-                                    </div>
-                                    <span class="niveau-text">Avancé</span>
-                                </div>
-                            </td>
                             <td>AP 4 - TOBAT</td>
                             <td>Supervision CPU, mémoire, stockage + alertes par mail</td>
                             <td>
@@ -469,14 +280,6 @@
                         <tr class="competence-item" data-category="telephonie">
                             <td class="competence-name">3CX Softphone</td>
                             <td><span class="category-tag telephonie">Téléphonie</span></td>
-                            <td>
-                                <div class="niveau-container">
-                                    <div class="niveau-indicator">
-                                        <div class="niveau-bar niveau-3"></div>
-                                    </div>
-                                    <span class="niveau-text">Avancé</span>
-                                </div>
-                            </td>
                             <td>Stage - Almeria</td>
                             <td>Installation et configuration de softphones 3CX</td>
                             <td>
@@ -487,14 +290,6 @@
                         <tr class="competence-item" data-category="telephonie">
                             <td class="competence-name">Administration 3CX</td>
                             <td><span class="category-tag telephonie">Téléphonie</span></td>
-                            <td>
-                                <div class="niveau-container">
-                                    <div class="niveau-indicator">
-                                        <div class="niveau-bar niveau-3"></div>
-                                    </div>
-                                    <span class="niveau-text">Avancé</span>
-                                </div>
-                            </td>
                             <td>Stage - Almeria</td>
                             <td>Gestion des utilisateurs, groupes, horaires, jours fériés</td>
                             <td>
@@ -506,14 +301,6 @@
                         <tr class="competence-item" data-category="transverse">
                             <td class="competence-name">Rédaction de documentation technique</td>
                             <td><span class="category-tag transverse">Transverse</span></td>
-                            <td>
-                                <div class="niveau-container">
-                                    <div class="niveau-indicator">
-                                        <div class="niveau-bar niveau-4"></div>
-                                    </div>
-                                    <span class="niveau-text">Expert</span>
-                                </div>
-                            </td>
                             <td>Tous les AP</td>
                             <td>Rédaction de guides, procédures, rapports techniques</td>
                             <td>
@@ -531,14 +318,6 @@
                         <tr class="competence-item" data-category="transverse">
                             <td class="competence-name">Communication professionnelle</td>
                             <td><span class="category-tag transverse">Transverse</span></td>
-                            <td>
-                                <div class="niveau-container">
-                                    <div class="niveau-indicator">
-                                        <div class="niveau-bar niveau-4"></div>
-                                    </div>
-                                    <span class="niveau-text">Expert</span>
-                                </div>
-                            </td>
                             <td>AP, Stages</td>
                             <td>Présentations, réunions, support utilisateurs</td>
                             <td>
@@ -549,14 +328,6 @@
                         <tr class="competence-item" data-category="transverse">
                             <td class="competence-name">Autonomie et prise d'initiative</td>
                             <td><span class="category-tag transverse">Transverse</span></td>
-                            <td>
-                                <div class="niveau-container">
-                                    <div class="niveau-indicator">
-                                        <div class="niveau-bar niveau-4"></div>
-                                    </div>
-                                    <span class="niveau-text">Expert</span>
-                                </div>
-                            </td>
                             <td>Tous projets</td>
                             <td>Gestion de projets, résolution de problèmes</td>
                             <td>
@@ -567,14 +338,6 @@
                         <tr class="competence-item" data-category="transverse">
                             <td class="competence-name">Script PowerShell AD</td>
                             <td><span class="category-tag transverse">Transverse</span></td>
-                            <td>
-                                <div class="niveau-container">
-                                    <div class="niveau-indicator">
-                                        <div class="niveau-bar niveau-3"></div>
-                                    </div>
-                                    <span class="niveau-text">Avancé</span>
-                                </div>
-                            </td>
                             <td>AP 4 - TOBAT</td>
                             <td>Automatisation de création de comptes Active Directory</td>
                             <td>
@@ -585,9 +348,11 @@
                 </table>
             </div>
             
-            <div class="table-summary">
-                <p><strong>Total des compétences :</strong> 23 compétences répertoriées</p>
-                <p><strong>Niveau moyen :</strong> Avancé (78%)</p>
+            <div class="table-footer">
+                <a href="https://1drv.ms/x/s!AoutP5a4P_DlhPNcx-9ixrm5bEDlkw?e=K8WRMZ" target="_blank" class="excel-link-large">
+                    <i class="fas fa-file-excel"></i> Accéder au tableau Excel complet sur OneDrive
+                </a>
+                <p class="table-note">Note : Les preuves "Stage Almeria" sont disponibles dans la section Stages du portfolio.</p>
             </div>
         </section>
     </main>
@@ -625,22 +390,6 @@
                     }
                 });
             });
-        });
-        
-        // Bouton d'export
-        document.getElementById('export-btn').addEventListener('click', function() {
-            alert('Fonctionnalité d\'export à implémenter (PDF/CSV)');
-        });
-        
-        // Bouton d'impression
-        document.getElementById('print-btn').addEventListener('click', function() {
-            window.print();
-        });
-        
-        // Initialiser les cercles de progression
-        document.querySelectorAll('.progress-circle').forEach(circle => {
-            const value = circle.getAttribute('data-value');
-            circle.style.background = `conic-gradient(#3498db ${value}%, #eee ${value}% 100%)`;
         });
     </script>
 </body>

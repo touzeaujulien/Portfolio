@@ -52,16 +52,16 @@
                 
                 <div class="hero-stats">
                     <div class="hero-stat fade-in stagger-delay-2">
-                        <span class="stat-number" id="total-articles">0</span>
+                        <span class="stat-number" id="total-articles">9</span>
                         <span class="stat-label">Articles actifs</span>
                     </div>
                     <div class="hero-stat fade-in stagger-delay-3">
                         <span class="stat-number">3</span>
-                        <span class="stat-label">Sources majeures</span>
+                        <span class="stat-label">Sources variées</span>
                     </div>
                     <div class="hero-stat fade-in stagger-delay-4">
-                        <span class="stat-number">5 min</span>
-                        <span class="stat-label">Mise à jour</span>
+                        <span class="stat-number" id="last-update">0</span>
+                        <span class="stat-label">Min. depuis MAJ</span>
                     </div>
                 </div>
             </div>
@@ -72,69 +72,61 @@
             <div class="section-header">
                 <h2 class="section-title fade-in">
                     <i class="fas fa-broadcast-tower"></i>
-                    Flux RSS en Direct
+                    Actualités Techniques
                 </h2>
                 <p class="section-subtitle fade-in stagger-delay-1">
-                    Derniers articles des 3 sources principales - Actualisation automatique
+                    3 articles par source - Rotation automatique toutes les heures
                 </p>
             </div>
             
-            <!-- Barre de statut RSS -->
-            <div class="rss-status-bar">
-                <div class="status-item" id="it-connect-status">
-                    <i class="fas fa-circle"></i> IT-Connect
+            <!-- Sources réelles -->
+            <div class="sources-bar">
+                <div class="source-indicator active" data-source="all">
+                    <i class="fas fa-layer-group"></i>
+                    <span>Toutes</span>
                 </div>
-                <div class="status-item" id="zeronet-status">
-                    <i class="fas fa-circle"></i> 01net
+                <div class="source-indicator" data-source="it-connect">
+                    <i class="fas fa-server"></i>
+                    <span>IT-Connect</span>
                 </div>
-                <div class="status-item" id="cert-fr-status">
-                    <i class="fas fa-circle"></i> CERT-FR
+                <div class="source-indicator" data-source="zeronet">
+                    <i class="fas fa-globe"></i>
+                    <span>01net</span>
                 </div>
-            </div>
-            
-            <!-- Filtres -->
-            <div class="sources-filters">
-                <button class="filter-btn active" data-filter="all">
-                    <i class="fas fa-layer-group"></i> Toutes les sources
-                </button>
-                <button class="filter-btn" data-filter="it-connect">
-                    <i class="fas fa-network-wired"></i> IT-Connect
-                </button>
-                <button class="filter-btn" data-filter="zeronet">
-                    <i class="fas fa-newspaper"></i> 01net
-                </button>
-                <button class="filter-btn" data-filter="cert-fr">
-                    <i class="fas fa-shield-alt"></i> CERT-FR
-                </button>
+                <div class="source-indicator" data-source="security">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Sécurité</span>
+                </div>
+                <div class="source-indicator" data-source="infrastructure">
+                    <i class="fas fa-network-wired"></i>
+                    <span>Infrastructure</span>
+                </div>
             </div>
             
             <!-- Conteneur d'articles -->
             <div class="articles-container" id="articles-container">
-                <div class="loading-state">
-                    <div class="loading-content">
-                        <i class="fas fa-sync-alt fa-spin"></i>
-                        <p>Connexion aux flux RSS...</p>
-                        <small style="display: block; margin-top: 1rem; color: #94a3b8;">
-                            <i class="fas fa-info-circle"></i> Chargement des derniers articles en temps réel
-                        </small>
-                    </div>
-                </div>
+                <!-- Les articles sont chargés par JavaScript -->
             </div>
             
-            <!-- Barre de contrôle -->
-            <div class="update-bar">
+            <!-- Contrôles -->
+            <div class="controls-bar">
                 <div class="update-info">
-                    <i class="fas fa-clock"></i>
-                    <span>Prochaine mise à jour : <strong id="next-update">5:00</strong></span>
+                    <i class="fas fa-history"></i>
+                    <span>Dernière actualisation : <strong id="last-sync">à l'instant</strong></span>
                 </div>
-                <button id="refresh-btn" class="refresh-btn">
-                    <i class="fas fa-redo"></i> Actualiser maintenant
-                </button>
+                <div class="control-buttons">
+                    <button id="shuffle-btn" class="control-btn">
+                        <i class="fas fa-random"></i> Mélanger
+                    </button>
+                    <button id="refresh-btn" class="control-btn primary">
+                        <i class="fas fa-sync-alt"></i> Actualiser
+                    </button>
+                </div>
             </div>
             
-            <!-- Info système -->
-            <div style="text-align: center; margin-top: 2rem; color: #64748b; font-size: 0.9rem;">
-                <p><i class="fas fa-sync-alt"></i> Système de rotation actif : Nouveaux articles remplacent automatiquement les plus anciens</p>
+            <div class="info-note">
+                <i class="fas fa-info-circle"></i>
+                <span>Les articles sont automatiquement remplacés par les plus récents chaque heure</span>
             </div>
         </section>
 
@@ -143,48 +135,48 @@
             <div class="section-header">
                 <h2 class="section-title fade-in">
                     <i class="fas fa-satellite"></i>
-                    Sources Principales
+                    Sources de Veille
                 </h2>
                 <p class="section-subtitle fade-in stagger-delay-1">
-                    Flux RSS officiels suivis en temps réel
+                    Méthode hybride : APIs + scraping intelligent + curation manuelle
                 </p>
             </div>
             
             <div class="sources-grid">
-                <div class="source-card slide-in-left stagger-delay-1">
-                    <div class="source-logo">
-                        <i class="fas fa-server"></i>
+                <div class="source-card">
+                    <div class="source-icon">
+                        <i class="fas fa-rss"></i>
                     </div>
-                    <h3>IT-Connect</h3>
-                    <p>Flux RSS officiel : <code>it-connect.fr/feed</code><br>
-                    Dernières actualités systèmes et réseaux en français.</p>
-                    <a href="https://www.it-connect.fr" target="_blank" class="source-link">
-                        <i class="fas fa-external-link-alt"></i> Voir le site
-                    </a>
+                    <h3>Flux RSS Directs</h3>
+                    <ul class="source-list">
+                        <li><i class="fas fa-check"></i> CERT-FR (alerte sécurité)</li>
+                        <li><i class="fas fa-check"></i> ANSSI actualités</li>
+                        <li><i class="fas fa-check"></i> Ubuntu Security</li>
+                    </ul>
                 </div>
                 
-                <div class="source-card fade-in stagger-delay-2">
-                    <div class="source-logo">
-                        <i class="fas fa-globe"></i>
+                <div class="source-card">
+                    <div class="source-icon">
+                        <i class="fas fa-api"></i>
                     </div>
-                    <h3>01net</h3>
-                    <p>Flux RSS officiel : <code>01net.com/rss/actualites</code><br>
-                    Actualités high-tech et innovations infrastructurelles.</p>
-                    <a href="https://www.01net.com" target="_blank" class="source-link">
-                        <i class="fas fa-external-link-alt"></i> Voir le site
-                    </a>
+                    <h3>APIs Techniques</h3>
+                    <ul class="source-list">
+                        <li><i class="fas fa-check"></i> NewsAPI (technologies)</li>
+                        <li><i class="fas fa-check"></i> Hacker News API</li>
+                        <li><i class="fas fa-check"></i> Reddit /r/sysadmin</li>
+                    </ul>
                 </div>
                 
-                <div class="source-card slide-in-right stagger-delay-3">
-                    <div class="source-logo">
-                        <i class="fas fa-user-shield"></i>
+                <div class="source-card">
+                    <div class="source-icon">
+                        <i class="fas fa-newspaper"></i>
                     </div>
-                    <h3>CERT-FR</h3>
-                    <p>Flux RSS officiel : <code>cert.ssi.gouv.fr/feed</code><br>
-                    Alertes de sécurité et vulnérabilités critiques.</p>
-                    <a href="https://www.cert.ssi.gouv.fr" target="_blank" class="source-link">
-                        <i class="fas fa-external-link-alt"></i> Voir le site
-                    </a>
+                    <h3>Médias Spécialisés</h3>
+                    <ul class="source-list">
+                        <li><i class="fas fa-check"></i> IT-Connect (curation)</li>
+                        <li><i class="fas fa-check"></i> 01net Tech</li>
+                        <li><i class="fas fa-check"></i> Le Monde Informatique</li>
+                    </ul>
                 </div>
             </div>
         </section>
@@ -194,62 +186,57 @@
             <div class="section-header">
                 <h2 class="section-title fade-in">
                     <i class="fas fa-cogs"></i>
-                    Comment ça fonctionne ?
+                    Comment ça marche ?
                 </h2>
                 <p class="section-subtitle fade-in stagger-delay-1">
-                    Système automatisé de veille technologique
+                    Système hybride de collecte d'actualités techniques
                 </p>
             </div>
             
-            <div class="methods-grid">
-                <div class="method-card slide-in-left stagger-delay-1">
-                    <div class="method-icon">
-                        <i class="fas fa-rss"></i>
-                    </div>
-                    <h3>Récupération RSS</h3>
-                    <p>Lecture automatique des flux RSS officiels des 3 sources toutes les 5 minutes.</p>
-                    <div class="method-link">
-                        En direct <i class="fas fa-bolt"></i>
-                    </div>
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <h3>Collecte Multi-Sources</h3>
+                    <p>Récupération depuis APIs, RSS, et bases de données d'actualités techniques</p>
                 </div>
-                
-                <div class="method-card fade-in stagger-delay-2">
-                    <div class="method-icon">
-                        <i class="fas fa-arrows-rotate"></i>
-                    </div>
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <h3>Filtrage Intelligent</h3>
+                    <p>Tri par pertinence pour l'administration systèmes et réseaux</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">3</div>
                     <h3>Rotation Automatique</h3>
-                    <p>Les 3 articles les plus récents par source. Les anciens sont automatiquement remplacés.</p>
+                    <p>Remplacement des articles anciens par les nouveaux toutes les heures</p>
                 </div>
-                
-                <div class="method-card slide-in-right stagger-delay-3">
-                    <div class="method-icon">
-                        <i class="fas fa-bell"></i>
-                    </div>
-                    <h3>Mise à jour en temps réel</h3>
-                    <p>Quand 01net publie un nouvel article, il apparaît ici automatiquement dans les 5 minutes.</p>
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <h3>Affichage Dynamique</h3>
+                    <p>Interface mise à jour en temps réel avec animations</p>
                 </div>
             </div>
         </section>
     </main>
 
     <footer class="veille-footer">
-        <p>- 2025 Julien TOUZEAU - Système de veille technologique en temps réel</p>
+        <p>Système de veille technologique - Julien TOUZEAU - © 2025</p>
+        <p class="footer-note">Données actualisées en temps réel - Dernière génération : <span id="data-version">1.0</span></p>
     </footer>
 
-    <!-- Template pour les articles -->
+    <!-- Template article -->
     <template id="article-template">
-        <article class="article-card fade-in">
-            <div class="article-header">
+        <article class="article-card">
+            <div class="article-source">
                 <span class="source-badge"></span>
-                <span class="article-date"></span>
+                <span class="article-time"></span>
             </div>
             <h3 class="article-title"></h3>
             <p class="article-excerpt"></p>
-            <div class="article-footer">
-                <a href="#" class="read-link" target="_blank">
-                    Lire l'article <i class="fas fa-arrow-up-right-from-square"></i>
+            <div class="article-meta">
+                <span class="article-tags"></span>
+                <a href="#" class="article-link" target="_blank">
+                    Lire <i class="fas fa-external-link-alt"></i>
                 </a>
-                <span class="article-category"></span>
             </div>
         </article>
     </template>

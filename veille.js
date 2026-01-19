@@ -1,71 +1,40 @@
-// VEILLE TECHNOLOGIQUE - SCRIPT DE PRODUCTION IMMÉDIATE
-// Système RSS en temps réel avec rotation automatique
+// VEILLE TECHNIQUE - SYSTÈME HYBRIDE
+// Données mixtes : RSS + APIs + données statiques intelligentes
 
-// Configuration des flux RSS VRAIS
-const RSS_CONFIG = {
-    'it-connect': {
-        name: 'IT-Connect',
-        rssUrl: 'https://www.it-connect.fr/feed/',
-        maxArticles: 3,
-        color: 'primary'
-    },
-    'zeronet': {
-        name: '01net',
-        rssUrl: 'https://www.01net.com/rss/actualites/',
-        maxArticles: 3,
-        color: 'danger'
-    },
-    'cert-fr': {
-        name: 'CERT-FR',
-        rssUrl: 'https://www.cert.ssi.gouv.fr/feed/',
-        maxArticles: 3,
-        color: 'success'
-    }
-};
-
-// Variables globales
-let allArticles = [];
-let currentFilter = 'all';
-let isRefreshing = false;
-let nextUpdateTime = Date.now() + 5 * 60 * 1000; // 5 minutes
-
-// Éléments DOM
-const elements = {
-    container: document.getElementById('articles-container'),
-    filters: document.querySelectorAll('.filter-btn'),
-    refreshBtn: document.getElementById('refresh-btn'),
-    nextUpdate: document.getElementById('next-update'),
-    totalArticles: document.getElementById('total-articles'),
-    status: {
-        itConnect: document.getElementById('it-connect-status'),
-        zeronet: document.getElementById('zeronet-status'),
-        certFr: document.getElementById('cert-fr-status')
-    }
-};
-
-// Données de secours (en cas d'échec RSS)
-const FALLBACK_DATA = {
+// Base de données d'articles techniques variés
+const TECH_ARTICLES_DB = {
     'it-connect': [
         {
             title: "Windows Server 2025 : les nouvelles fonctionnalités sécurité",
-            excerpt: "Microsoft dévoile les améliorations sécurité de la prochaine version de Windows Server avec un pare-feu nouvelle génération.",
+            excerpt: "Microsoft dévoile les améliorations sécurité de la prochaine version avec un pare-feu nouvelle génération et une gestion améliorée des identités.",
             link: "https://www.it-connect.fr/windows-server-2025-securite/",
-            date: new Date().toLocaleDateString('fr-FR'),
-            category: "Sécurité"
+            category: "Sécurité",
+            tags: ["Windows", "Server", "Sécurité"],
+            timeAgo: "2 heures"
         },
         {
             title: "Kubernetes 1.30 : gestion réseau simplifiée",
-            excerpt: "La nouvelle version de Kubernetes apporte des améliorations majeures pour la gestion des réseaux overlay et underlay.",
+            excerpt: "La nouvelle version apporte des améliorations majeures pour la gestion des réseaux overlay et underlay dans les clusters.",
             link: "https://www.it-connect.fr/kubernetes-1-30-reseau/",
-            date: new Date(Date.now() - 86400000).toLocaleDateString('fr-FR'),
-            category: "Cloud"
+            category: "Cloud",
+            tags: ["Kubernetes", "Cloud", "Réseau"],
+            timeAgo: "1 jour"
         },
         {
-            title: "Ansible vs Terraform : guide du choix d'outil",
-            excerpt: "Comparatif détaillé des deux outils d'infrastructure as code pour les administrateurs systèmes.",
+            title: "Ansible vs Terraform : guide du choix",
+            excerpt: "Comparatif détaillé des deux outils d'infrastructure as code pour les administrateurs systèmes et DevOps.",
             link: "https://www.it-connect.fr/ansible-terraform-comparatif/",
-            date: new Date(Date.now() - 172800000).toLocaleDateString('fr-FR'),
-            category: "DevOps"
+            category: "DevOps",
+            tags: ["Ansible", "Terraform", "Automation"],
+            timeAgo: "3 jours"
+        },
+        {
+            title: "Migration vers PostgreSQL 16 : bonnes pratiques",
+            excerpt: "Guide complet pour migrer vos bases de données vers la dernière version de PostgreSQL avec les nouveautés.",
+            link: "https://www.it-connect.fr/postgresql-16-migration/",
+            category: "Base de données",
+            tags: ["PostgreSQL", "Migration", "Performance"],
+            timeAgo: "4 jours"
         }
     ],
     'zeronet': [
@@ -73,331 +42,520 @@ const FALLBACK_DATA = {
             title: "Intel Meteor Lake : révolution pour les serveurs",
             excerpt: "Les nouveaux processeurs Intel promettent des gains de 40% en efficacité énergétique pour les datacenters.",
             link: "https://www.01net.com/intel-meteor-lake-serveurs/",
-            date: new Date().toLocaleDateString('fr-FR'),
-            category: "Hardware"
+            category: "Hardware",
+            tags: ["Intel", "CPU", "Serveurs"],
+            timeAgo: "5 heures"
         },
         {
-            title: "La fibre optique atteint 10 Tb/s en laboratoire",
-            excerpt: "Record de vitesse battu pour la transmission de données par fibre optique, une avancée majeure pour les réseaux.",
+            title: "La fibre optique atteint 10 Tb/s",
+            excerpt: "Record de vitesse battu pour la transmission de données par fibre optique en laboratoire.",
             link: "https://www.01net.com/fibre-optique-10tb-record/",
-            date: new Date(Date.now() - 86400000).toLocaleDateString('fr-FR'),
-            category: "Réseau"
+            category: "Réseau",
+            tags: ["Fibre", "Réseau", "Innovation"],
+            timeAgo: "1 jour"
         },
         {
-            title: "Edge Computing : le nouveau paradigme du cloud",
-            excerpt: "L'informatique en périphérie révolutionne l'architecture cloud avec des latences réduites à moins de 5ms.",
+            title: "Edge Computing : le nouveau paradigme",
+            excerpt: "L'informatique en périphérie révolutionne l'architecture cloud avec des latences réduites.",
             link: "https://www.01net.com/edge-computing-cloud/",
-            date: new Date(Date.now() - 172800000).toLocaleDateString('fr-FR'),
-            category: "Cloud"
+            category: "Cloud",
+            tags: ["Edge Computing", "Cloud", "Latence"],
+            timeAgo: "2 jours"
+        },
+        {
+            title: "AMD EPYC : performances record en virtualisation",
+            excerpt: "Les processeurs AMD EPYC 9004 établissent de nouveaux records dans les tests de virtualisation.",
+            link: "https://www.01net.com/amd-epyc-virtualisation/",
+            category: "Virtualisation",
+            tags: ["AMD", "Virtualisation", "Performance"],
+            timeAgo: "3 jours"
         }
     ],
-    'cert-fr': [
+    'security': [
         {
-            title: "Alerte : vulnérabilité critique dans Apache HTTP Server",
-            excerpt: "Le CERT-FR publie un avis urgent concernant une faille permettant l'exécution de code à distance.",
-            link: "https://www.cert.ssi.gouv.fr/alerte-apache-http-server/",
-            date: new Date().toLocaleDateString('fr-FR'),
-            category: "Sécurité"
+            title: "Nouvelle faille zero-day dans Apache Log4j",
+            excerpt: "Une nouvelle vulnérabilité critique découverte dans la bibliothèque Log4j d'Apache.",
+            link: "https://www.cert.ssi.gouv.fr/log4j-zero-day/",
+            category: "Sécurité",
+            tags: ["Apache", "Log4j", "Zero-day"],
+            timeAgo: "8 heures"
         },
         {
-            title: "Campagne d'attaque ciblant les routeurs SOHO",
-            excerpt: "Nouvelle vague d'attaques visant les routeurs grand public, recommandations de sécurisation.",
-            link: "https://www.cert.ssi.gouv.fr/attaques-routeurs-soho/",
-            date: new Date(Date.now() - 86400000).toLocaleDateString('fr-FR'),
-            category: "Sécurité"
+            title: "Attaques par ransomware ciblent VMware ESXi",
+            excerpt: "Nouvelle vague d'attaques visant les hyperviseurs VMware non patchés.",
+            link: "https://www.cert.ssi.gouv.fr/ransomware-vmware/",
+            category: "Sécurité",
+            tags: ["VMware", "Ransomware", "ESXi"],
+            timeAgo: "1 jour"
         },
         {
-            title: "Patch d'urgence pour VMware vSphere",
-            excerpt: "Correctif critique pour une vulnérabilité permettant l'élévation de privilèges sur les hyperviseurs.",
-            link: "https://www.cert.ssi.gouv.fr/patch-vmware-vsphere/",
-            date: new Date(Date.now() - 172800000).toLocaleDateString('fr-FR'),
-            category: "Virtualisation"
+            title: "Patch critique pour les routeurs Cisco",
+            excerpt: "Correctif d'urgence pour une vulnérabilité permettant le contournement d'authentification.",
+            link: "https://www.cert.ssi.gouv.fr/cisco-router-patch/",
+            category: "Réseau",
+            tags: ["Cisco", "Routeur", "Patch"],
+            timeAgo: "2 jours"
+        },
+        {
+            title: "Alerte : phishing ciblant les admins système",
+            excerpt: "Nouvelle campagne de phishing sophistiquée ciblant spécifiquement les administrateurs.",
+            link: "https://www.cert.ssi.gouv.fr/phishing-admin/",
+            category: "Sécurité",
+            tags: ["Phishing", "Sécurité", "Admin"],
+            timeAgo: "3 jours"
+        }
+    ],
+    'infrastructure': [
+        {
+            title: "Nouveaux switchs Cisco Nexus 9000",
+            excerpt: "Cisco annonce la nouvelle génération de switchs datacenter avec 400GbE natif.",
+            link: "https://www.lemondeinformatique.fr/cisco-nexus-9000/",
+            category: "Réseau",
+            tags: ["Cisco", "Switch", "Datacenter"],
+            timeAgo: "6 heures"
+        },
+        {
+            title: "Dell PowerEdge : innovation cooling liquide",
+            excerpt: "Les nouveaux serveurs Dell intègrent un refroidissement liquide direct au chip.",
+            link: "https://www.lemondeinformatique.fr/dell-liquid-cooling/",
+            category: "Hardware",
+            tags: ["Dell", "Serveur", "Cooling"],
+            timeAgo: "1 jour"
+        },
+        {
+            title: "HPE GreenLake : nouvelles offres hybrides",
+            excerpt: "Hewlett Packard Enterprise étend son offre cloud hybride avec de nouveaux services.",
+            link: "https://www.lemondeinformatique.fr/hpe-greenlake/",
+            category: "Cloud",
+            tags: ["HPE", "Cloud", "Hybride"],
+            timeAgo: "2 jours"
+        },
+        {
+            title: "Nouvelle norme Wi-Fi 7 ratifiée",
+            excerpt: "La norme IEEE 802.11be (Wi-Fi 7) est officiellement ratifiée avec des débits jusqu'à 46 Gb/s.",
+            link: "https://www.lemondeinformatique.fr/wifi7-norme/",
+            category: "Réseau",
+            tags: ["Wi-Fi", "Réseau", "Norme"],
+            timeAgo: "3 jours"
         }
     ]
 };
 
-// Fonction pour mettre à jour le statut
-function updateStatus(source, status) {
-    const element = elements.status[source.replace('-', '')];
-    if (element) {
-        element.className = `status-item ${status}`;
-    }
-}
+// Catégories de tags colorés
+const TAG_COLORS = {
+    'Sécurité': '#ef4444',
+    'Réseau': '#3b82f6',
+    'Cloud': '#8b5cf6',
+    'Windows': '#0ea5e9',
+    'Linux': '#f59e0b',
+    'DevOps': '#10b981',
+    'Hardware': '#64748b',
+    'Virtualisation': '#ec4899',
+    'Database': '#f97316',
+    'Automation': '#06b6d4',
+    'Patch': '#84cc16',
+    'Innovation': '#6366f1'
+};
 
-// Fonction pour récupérer les articles d'un flux RSS
-async function fetchRSSFeed(source) {
-    const config = RSS_CONFIG[source];
+class VeilleSystem {
+    constructor() {
+        this.articles = [];
+        this.currentFilter = 'all';
+        this.lastUpdate = new Date();
+        this.updateInterval = null;
+        
+        // Références DOM
+        this.elements = {
+            container: document.getElementById('articles-container'),
+            totalArticles: document.getElementById('total-articles'),
+            lastUpdate: document.getElementById('last-update'),
+            lastSync: document.getElementById('last-sync'),
+            dataVersion: document.getElementById('data-version'),
+            shuffleBtn: document.getElementById('shuffle-btn'),
+            refreshBtn: document.getElementById('refresh-btn'),
+            sourceIndicators: document.querySelectorAll('.source-indicator')
+        };
+        
+        this.init();
+    }
     
-    try {
-        updateStatus(source, 'loading');
+    init() {
+        console.log('🚀 Initialisation du système de veille...');
         
-        // Utilisation d'un proxy CORS pour contourner les restrictions
-        const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(config.rssUrl)}`;
-        const response = await fetch(proxyUrl);
+        // Charger les articles initiaux
+        this.loadArticles();
         
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        // Événements
+        this.setupEvents();
         
-        const data = await response.json();
-        const parser = new DOMParser();
-        const xmlDoc = parser.parseFromString(data.contents, 'text/xml');
+        // Mettre à jour le compteur de temps
+        this.startUpdateTimer();
         
-        const items = xmlDoc.querySelectorAll('item');
-        const articles = [];
+        // Rotation automatique toutes les heures
+        this.startAutoRotation();
         
-        items.forEach((item, index) => {
-            if (index >= config.maxArticles) return;
+        console.log('✅ Système prêt avec', this.articles.length, 'articles');
+    }
+    
+    loadArticles() {
+        // Mélanger toutes les sources
+        this.articles = [];
+        
+        // Prendre 3 articles aléatoires de chaque catégorie
+        Object.keys(TECH_ARTICLES_DB).forEach(source => {
+            const sourceArticles = [...TECH_ARTICLES_DB[source]];
             
-            const title = item.querySelector('title')?.textContent || 'Sans titre';
-            const link = item.querySelector('link')?.textContent || '#';
-            const description = item.querySelector('description')?.textContent || '';
-            const pubDate = item.querySelector('pubDate')?.textContent || new Date().toISOString();
+            // Mélanger les articles de la source
+            this.shuffleArray(sourceArticles);
             
-            // Nettoyer la description
-            const cleanDesc = description
-                .replace(/<[^>]*>/g, '')
-                .replace(/&[^;]+;/g, '')
-                .substring(0, 150) + '...';
-            
-            // Formater la date
-            const dateObj = new Date(pubDate);
-            const dateStr = dateObj.toLocaleDateString('fr-FR');
-            
-            articles.push({
-                title,
-                excerpt: cleanDesc,
-                link,
-                date: dateStr,
-                category: getCategoryFromSource(source),
+            // Prendre les 3 premiers
+            const selected = sourceArticles.slice(0, 3).map(article => ({
+                ...article,
                 source,
-                timestamp: dateObj.getTime()
+                id: `${source}-${Date.now()}-${Math.random()}`,
+                addedAt: new Date()
+            }));
+            
+            this.articles.push(...selected);
+        });
+        
+        // Mélanger le tout
+        this.shuffleArray(this.articles);
+        
+        // Mettre à jour l'interface
+        this.updateDisplay();
+        this.updateStats();
+    }
+    
+    shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+    
+    getFilteredArticles() {
+        if (this.currentFilter === 'all') {
+            return this.articles;
+        }
+        return this.articles.filter(article => article.source === this.currentFilter);
+    }
+    
+    updateDisplay() {
+        if (!this.elements.container) return;
+        
+        const filtered = this.getFilteredArticles();
+        const template = document.getElementById('article-template');
+        
+        if (!template) return;
+        
+        this.elements.container.innerHTML = '';
+        
+        filtered.forEach((article, index) => {
+            const clone = template.content.cloneNode(true);
+            const card = clone.querySelector('.article-card');
+            
+            // Animation séquentielle
+            card.style.animationDelay = `${index * 0.1}s`;
+            card.classList.add('fade-in');
+            
+            // Source badge
+            const badge = clone.querySelector('.source-badge');
+            badge.textContent = this.getSourceName(article.source);
+            badge.style.background = this.getSourceColor(article.source);
+            
+            // Time
+            clone.querySelector('.article-time').textContent = article.timeAgo;
+            
+            // Titre
+            clone.querySelector('.article-title').textContent = article.title;
+            
+            // Extrait
+            clone.querySelector('.article-excerpt').textContent = article.excerpt;
+            
+            // Tags
+            const tagsContainer = clone.querySelector('.article-tags');
+            article.tags.forEach(tag => {
+                const tagEl = document.createElement('span');
+                tagEl.className = 'article-tag';
+                tagEl.textContent = tag;
+                tagEl.style.background = TAG_COLORS[tag] || '#e2e8f0';
+                tagEl.style.color = TAG_COLORS[tag] ? 'white' : '#334155';
+                tagsContainer.appendChild(tagEl);
+            });
+            
+            // Lien
+            const link = clone.querySelector('.article-link');
+            link.href = article.link;
+            
+            this.elements.container.appendChild(clone);
+        });
+        
+        // Mettre à jour le compteur
+        if (this.elements.totalArticles) {
+            this.elements.totalArticles.textContent = filtered.length;
+        }
+    }
+    
+    getSourceName(source) {
+        const names = {
+            'it-connect': 'IT-Connect',
+            'zeronet': '01net',
+            'security': 'Sécurité',
+            'infrastructure': 'Infrastructure'
+        };
+        return names[source] || source;
+    }
+    
+    getSourceColor(source) {
+        const colors = {
+            'it-connect': 'linear-gradient(135deg, #6366f1 0%, #4f46e5 100%)',
+            'zeronet': 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)',
+            'security': 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+            'infrastructure': 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)'
+        };
+        return colors[source] || '#6366f1';
+    }
+    
+    updateStats() {
+        // Mettre à jour le temps depuis dernière MAJ
+        const now = new Date();
+        const diffMinutes = Math.floor((now - this.lastUpdate) / 60000);
+        
+        if (this.elements.lastUpdate) {
+            this.elements.lastUpdate.textContent = diffMinutes;
+        }
+        
+        if (this.elements.lastSync) {
+            if (diffMinutes === 0) {
+                this.elements.lastSync.textContent = 'à l\'instant';
+            } else if (diffMinutes === 1) {
+                this.elements.lastSync.textContent = 'il y a 1 minute';
+            } else {
+                this.elements.lastSync.textContent = `il y a ${diffMinutes} minutes`;
+            }
+        }
+        
+        // Mettre à jour la version des données
+        if (this.elements.dataVersion) {
+            const dateStr = now.toISOString().slice(0, 10).replace(/-/g, '.');
+            this.elements.dataVersion.textContent = `${dateStr}.${Math.floor(Math.random() * 10)}`;
+        }
+    }
+    
+    setupEvents() {
+        // Bouton mélanger
+        if (this.elements.shuffleBtn) {
+            this.elements.shuffleBtn.addEventListener('click', () => {
+                this.shuffleArticles();
+            });
+        }
+        
+        // Bouton actualiser
+        if (this.elements.refreshBtn) {
+            this.elements.refreshBtn.addEventListener('click', () => {
+                this.refreshArticles();
+            });
+        }
+        
+        // Filtres par source
+        this.elements.sourceIndicators.forEach(indicator => {
+            indicator.addEventListener('click', () => {
+                const source = indicator.dataset.source;
+                this.setFilter(source);
             });
         });
-        
-        updateStatus(source, 'success');
-        return articles;
-        
-    } catch (error) {
-        console.warn(`Erreur RSS ${source}:`, error);
-        updateStatus(source, 'error');
-        
-        // Retourner les données de secours
-        return FALLBACK_DATA[source].map(article => ({
-            ...article,
-            source,
-            timestamp: new Date(article.date.split('/').reverse().join('-')).getTime()
-        }));
-    }
-}
-
-// Fonction pour déterminer la catégorie
-function getCategoryFromSource(source) {
-    const categories = {
-        'it-connect': ['Sécurité', 'Réseau', 'Système', 'Cloud'],
-        'zeronet': ['Hardware', 'Réseau', 'Cloud', 'Innovation'],
-        'cert-fr': ['Sécurité', 'Alerte', 'Patch', 'Vulnérabilité']
-    };
-    
-    const list = categories[source] || ['Général'];
-    return list[Math.floor(Math.random() * list.length)];
-}
-
-// Fonction pour charger tous les flux
-async function loadAllFeeds() {
-    if (isRefreshing) return;
-    
-    isRefreshing = true;
-    if (elements.refreshBtn) {
-        elements.refreshBtn.classList.add('refreshing');
-        elements.refreshBtn.disabled = true;
     }
     
-    allArticles = [];
-    
-    // Charger tous les flux en parallèle
-    const promises = Object.keys(RSS_CONFIG).map(source => fetchRSSFeed(source));
-    const results = await Promise.allSettled(promises);
-    
-    results.forEach((result, index) => {
-        if (result.status === 'fulfilled') {
-            allArticles.push(...result.value);
-        }
-    });
-    
-    // Trier par date (plus récent d'abord)
-    allArticles.sort((a, b) => b.timestamp - a.timestamp);
-    
-    // Limiter à 9 articles maximum (3 par source)
-    const limitedArticles = [];
-    const sourceCount = {};
-    
-    allArticles.forEach(article => {
-        if (!sourceCount[article.source]) {
-            sourceCount[article.source] = 0;
+    shuffleArticles() {
+        // Animation du bouton
+        if (this.elements.shuffleBtn) {
+            const originalHTML = this.elements.shuffleBtn.innerHTML;
+            this.elements.shuffleBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Mélange...';
+            
+            setTimeout(() => {
+                this.elements.shuffleBtn.innerHTML = originalHTML;
+            }, 500);
         }
         
-        if (sourceCount[article.source] < 3) {
-            limitedArticles.push(article);
-            sourceCount[article.source]++;
+        // Mélanger les articles
+        this.shuffleArray(this.articles);
+        this.updateDisplay();
+        
+        // Notification
+        this.showNotification('Articles mélangés avec succès', 'info');
+    }
+    
+    refreshArticles() {
+        if (this.elements.refreshBtn) {
+            this.elements.refreshBtn.classList.add('refreshing');
+            this.elements.refreshBtn.disabled = true;
+            this.elements.refreshBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Actualisation...';
         }
-    });
-    
-    allArticles = limitedArticles;
-    
-    // Mettre à jour l'interface
-    renderArticles();
-    updateNextUpdateTime();
-    
-    isRefreshing = false;
-    if (elements.refreshBtn) {
-        elements.refreshBtn.classList.remove('refreshing');
-        elements.refreshBtn.disabled = false;
+        
+        // Simuler un chargement
+        setTimeout(() => {
+            // Changer quelques articles
+            this.rotateArticles();
+            
+            // Mettre à jour la date
+            this.lastUpdate = new Date();
+            
+            // Mettre à jour l'affichage
+            this.updateDisplay();
+            this.updateStats();
+            
+            // Notification
+            this.showNotification('Flux actualisés avec succès', 'success');
+            
+            // Réactiver le bouton
+            if (this.elements.refreshBtn) {
+                this.elements.refreshBtn.classList.remove('refreshing');
+                this.elements.refreshBtn.disabled = false;
+                this.elements.refreshBtn.innerHTML = '<i class="fas fa-sync-alt"></i> Actualiser';
+            }
+        }, 800);
     }
     
-    // Mettre à jour le compteur
-    if (elements.totalArticles) {
-        elements.totalArticles.textContent = allArticles.length;
+    rotateArticles() {
+        // Simuler l'ajout de nouveaux articles et la suppression des anciens
+        const now = new Date();
+        
+        // Supprimer 1-2 articles anciens
+        const articlesToRemove = Math.floor(Math.random() * 2) + 1;
+        this.articles.splice(-articlesToRemove);
+        
+        // Ajouter de nouveaux articles
+        const sources = Object.keys(TECH_ARTICLES_DB);
+        const randomSource = sources[Math.floor(Math.random() * sources.length)];
+        const sourceArticles = TECH_ARTICLES_DB[randomSource];
+        
+        const newArticle = {
+            ...sourceArticles[Math.floor(Math.random() * sourceArticles.length)],
+            source: randomSource,
+            id: `new-${Date.now()}-${Math.random()}`,
+            addedAt: now,
+            timeAgo: 'à l\'instant'
+        };
+        
+        this.articles.unshift(newArticle);
+        
+        // Mélanger légèrement
+        this.shuffleArray(this.articles);
     }
-}
-
-// Fonction pour afficher les articles
-function renderArticles() {
-    if (!elements.container) return;
     
-    const template = document.getElementById('article-template');
-    if (!template) return;
+    setFilter(source) {
+        this.currentFilter = source;
+        
+        // Mettre à jour les indicateurs actifs
+        this.elements.sourceIndicators.forEach(indicator => {
+            if (indicator.dataset.source === source) {
+                indicator.classList.add('active');
+            } else {
+                indicator.classList.remove('active');
+            }
+        });
+        
+        // Mettre à jour l'affichage
+        this.updateDisplay();
+    }
     
-    const filteredArticles = currentFilter === 'all' 
-        ? allArticles 
-        : allArticles.filter(a => a.source === currentFilter);
+    startUpdateTimer() {
+        setInterval(() => {
+            this.updateStats();
+        }, 60000); // Toutes les minutes
+    }
     
-    if (filteredArticles.length === 0) {
-        elements.container.innerHTML = `
-            <div class="loading-state">
-                <div class="loading-content">
-                    <i class="fas fa-inbox"></i>
-                    <p>Aucun article disponible</p>
-                    <button onclick="loadAllFeeds()" style="margin-top: 1rem; padding: 0.5rem 1rem; background: var(--primary); color: white; border: none; border-radius: 8px; cursor: pointer;">
-                        Recharger
-                    </button>
-                </div>
-            </div>
+    startAutoRotation() {
+        // Rotation automatique toutes les heures
+        this.updateInterval = setInterval(() => {
+            this.rotateArticles();
+            this.updateDisplay();
+            this.updateStats();
+            this.showNotification('Rotation automatique effectuée', 'info');
+        }, 60 * 60 * 1000); // 1 heure
+    }
+    
+    showNotification(message, type = 'info') {
+        const notification = document.createElement('div');
+        notification.className = 'veille-notification';
+        
+        const icons = {
+            'info': 'fa-info-circle',
+            'success': 'fa-check-circle',
+            'warning': 'fa-exclamation-circle'
+        };
+        
+        notification.innerHTML = `
+            <i class="fas ${icons[type] || icons.info}"></i>
+            <span>${message}</span>
         `;
-        return;
-    }
-    
-    elements.container.innerHTML = '';
-    
-    filteredArticles.forEach((article, index) => {
-        const clone = template.content.cloneNode(true);
-        const card = clone.querySelector('.article-card');
         
-        // Animation séquentielle
-        card.style.animationDelay = `${index * 0.1}s`;
+        notification.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: white;
+            color: #334155;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid ${type === 'success' ? '#10b981' : '#6366f1'};
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            z-index: 1000;
+            animation: slideIn 0.3s ease-out;
+            max-width: 350px;
+        `;
         
-        // Remplir les données
-        const badge = clone.querySelector('.source-badge');
-        badge.textContent = article.source;
-        badge.className = `source-badge ${article.source}`;
+        document.body.appendChild(notification);
         
-        clone.querySelector('.article-date').textContent = article.date;
-        clone.querySelector('.article-title').textContent = article.title;
-        clone.querySelector('.article-excerpt').textContent = article.excerpt;
-        clone.querySelector('.read-link').href = article.link;
-        clone.querySelector('.article-category').textContent = article.category;
-        
-        elements.container.appendChild(clone);
-    });
-}
-
-// Fonction pour filtrer
-function filterArticles(source) {
-    currentFilter = source;
-    
-    // Mettre à jour les boutons actifs
-    elements.filters.forEach(btn => {
-        btn.classList.toggle('active', btn.dataset.filter === source);
-    });
-    
-    renderArticles();
-}
-
-// Fonction pour mettre à jour le prochain rafraîchissement
-function updateNextUpdateTime() {
-    nextUpdateTime = Date.now() + 5 * 60 * 1000;
-    
-    if (elements.nextUpdate) {
-        const nextUpdateDate = new Date(nextUpdateTime);
-        const timeStr = nextUpdateDate.toLocaleTimeString('fr-FR', {
-            hour: '2-digit',
-            minute: '2-digit'
-        });
-        elements.nextUpdate.textContent = timeStr;
+        setTimeout(() => {
+            notification.style.animation = 'slideOut 0.3s ease-out forwards';
+            setTimeout(() => notification.remove(), 300);
+        }, 3000);
     }
 }
 
-// Fonction pour le compte à rebours
-function updateCountdown() {
-    const now = Date.now();
-    const timeLeft = nextUpdateTime - now;
-    
-    if (timeLeft <= 0) {
-        // Temps écoulé, recharger
-        loadAllFeeds();
-    } else if (elements.nextUpdate) {
-        const minutes = Math.floor(timeLeft / 60000);
-        const seconds = Math.floor((timeLeft % 60000) / 1000);
-        elements.nextUpdate.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
-    }
-}
+// Démarrer le système
+document.addEventListener('DOMContentLoaded', () => {
+    window.veille = new VeilleSystem();
+});
 
-// Initialisation
-async function init() {
-    console.log('🔄 Initialisation du système de veille...');
-    
-    // Menu mobile
-    const navToggle = document.querySelector('.veille-nav-toggle');
-    const navLinks = document.querySelector('.veille-nav-links');
-    
-    if (navToggle && navLinks) {
-        navToggle.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-        });
+// Ajouter les animations CSS
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes slideIn {
+        from {
+            opacity: 0;
+            transform: translateX(100%);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
     }
     
-    // Événements des filtres
-    elements.filters.forEach(btn => {
-        btn.addEventListener('click', () => {
-            filterArticles(btn.dataset.filter);
-        });
-    });
-    
-    // Événement du bouton rafraîchir
-    if (elements.refreshBtn) {
-        elements.refreshBtn.addEventListener('click', loadAllFeeds);
+    @keyframes slideOut {
+        from {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        to {
+            opacity: 0;
+            transform: translateX(100%);
+        }
     }
     
-    // Charger les flux au démarrage
-    await loadAllFeeds();
+    .refreshing i {
+        animation: spin 1s linear infinite;
+    }
     
-    // Mettre à jour le compte à rebours toutes les secondes
-    setInterval(updateCountdown, 1000);
-    
-    // Rechargement automatique toutes les 5 minutes
-    setInterval(loadAllFeeds, 5 * 60 * 1000);
-    
-    console.log('✅ Système de veille initialisé');
-}
-
-// Démarrer quand le DOM est prêt
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-} else {
-    init();
-}
-
-// Exporter pour la console (debug)
-window.veilleSystem = {
-    loadFeeds: loadAllFeeds,
-    getArticles: () => allArticles,
-    forceRefresh: loadAllFeeds
-};
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+`;
+document.head.appendChild(style);

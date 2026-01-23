@@ -204,8 +204,8 @@
     text-transform: uppercase;
 }
 
-/* ARTICLES SECTION */
-.articles-section, .sources-section, .info-section {
+/* METHODOLOGIE */
+.methodologie-section, .articles-section, .sources-section {
     max-width: 1200px;
     margin: 0 auto 6rem;
     padding: 0 2rem;
@@ -230,7 +230,75 @@
     margin: 0 auto;
 }
 
-/* FILTERS */
+.methodologie-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.methodologie-card {
+    background: var(--gradient-card);
+    border-radius: var(--radius-xl);
+    padding: 2.5rem 2rem;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--light-3);
+    transition: var(--transition);
+}
+
+.methodologie-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-xl);
+}
+
+.methodologie-icon {
+    width: 70px;
+    height: 70px;
+    background: var(--gradient-primary);
+    border-radius: var(--radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    color: var(--white);
+    font-size: 1.8rem;
+}
+
+.methodologie-card h3 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--dark-4);
+    margin-bottom: 1rem;
+}
+
+.methodologie-card p {
+    color: var(--dark-2);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+}
+
+.methodologie-card ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.methodologie-card li {
+    position: relative;
+    padding-left: 1.5rem;
+    margin-bottom: 0.8rem;
+    color: var(--dark-3);
+    font-size: 0.95rem;
+}
+
+.methodologie-card li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--primary);
+    font-weight: bold;
+}
+
+/* FILTRES */
 .sources-filters {
     display: flex;
     justify-content: center;
@@ -534,55 +602,6 @@
     text-decoration: underline;
 }
 
-/* INFO SECTION */
-.info-card {
-    background: var(--gradient-card);
-    border-radius: var(--radius-xl);
-    padding: 3rem;
-    box-shadow: var(--shadow-lg);
-    border: 1px solid var(--light-3);
-}
-
-.info-card h3 {
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: var(--dark-4);
-    margin-bottom: 2rem;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
-.info-steps {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 2rem;
-}
-
-.info-step {
-    text-align: center;
-}
-
-.step-number {
-    width: 50px;
-    height: 50px;
-    background: var(--gradient-primary);
-    color: var(--white);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin: 0 auto 1rem;
-}
-
-.info-step p {
-    color: var(--dark-2);
-    font-size: 0.95rem;
-    line-height: 1.6;
-}
-
 /* FOOTER */
 .veille-footer {
     margin-top: 4rem;
@@ -611,6 +630,16 @@
     to { opacity: 1; transform: translateY(0); }
 }
 
+@keyframes slideInLeft {
+    from { opacity: 0; transform: translateX(-30px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInRight {
+    from { opacity: 0; transform: translateX(30px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
@@ -620,10 +649,22 @@
     animation: fadeIn 0.6s ease-out forwards;
 }
 
+.slide-in-left {
+    animation: slideInLeft 0.6s ease-out forwards;
+}
+
+.slide-in-right {
+    animation: slideInRight 0.6s ease-out forwards;
+}
+
 .stagger-delay-1 { animation-delay: 0.1s; opacity: 0; }
 .stagger-delay-2 { animation-delay: 0.2s; opacity: 0; }
 .stagger-delay-3 { animation-delay: 0.3s; opacity: 0; }
 .stagger-delay-4 { animation-delay: 0.4s; opacity: 0; }
+
+.fa-spin {
+    animation: spin 1s linear infinite;
+}
 
 /* RESPONSIVE */
 @media (max-width: 768px) {
@@ -661,11 +702,7 @@
         gap: 1.5rem;
     }
     
-    .articles-container {
-        grid-template-columns: 1fr;
-    }
-    
-    .sources-grid, .info-steps {
+    .methodologie-content, .articles-container, .sources-grid {
         grid-template-columns: 1fr;
     }
     
@@ -695,7 +732,7 @@
         font-size: 1.8rem;
     }
     
-    .articles-section, .sources-section, .info-section {
+    .methodologie-section, .articles-section, .sources-section {
         padding: 0 1rem;
     }
 }

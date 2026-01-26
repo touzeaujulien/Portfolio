@@ -1,22 +1,45 @@
-// VEILLE TECHNOLOGIQUE - ACTUALITÉS DU JOUR
+// VEILLE TECHNOLOGIQUE - VRAIS FLUX RSS DU JOUR
 // Système avec rotation automatique
 
-class VeilleTechnologique {
+class VeilleRSS {
     constructor() {
         this.articles = [];
         this.currentFilter = 'all';
         this.lastUpdate = new Date();
         this.nextRotation = Date.now() + 60 * 60 * 1000;
         this.isLoading = false;
-        
-        // Données des articles du jour
         this.today = new Date().toLocaleDateString('fr-FR');
+        
+        // Configuration des flux RSS officiels
+        this.sources = {
+            'it-connect': {
+                name: 'IT-Connect',
+                website: 'https://www.it-connect.fr',
+                color: '#6366f1',
+                rssUrl: 'https://www.it-connect.fr/feed/',
+                proxyUrl: 'https://api.allorigins.win/get?url=' + encodeURIComponent('https://www.it-connect.fr/feed/')
+            },
+            'zeronet': {
+                name: '01net',
+                website: 'https://www.01net.com',
+                color: '#ef4444',
+                rssUrl: 'https://www.01net.com/rss/actualites/',
+                proxyUrl: 'https://api.allorigins.win/get?url=' + encodeURIComponent('https://www.01net.com/rss/actualites/')
+            },
+            'cert-fr': {
+                name: 'CERT-FR',
+                website: 'https://www.cert.ssi.gouv.fr',
+                color: '#10b981',
+                rssUrl: 'https://www.cert.ssi.gouv.fr/feed/',
+                proxyUrl: 'https://api.allorigins.win/get?url=' + encodeURIComponent('https://www.cert.ssi.gouv.fr/feed/')
+            }
+        };
         
         this.init();
     }
     
     async init() {
-        console.log('🚀 Initialisation système de veille...');
+        console.log('🚀 Initialisation système de veille RSS...');
         
         // Initialiser le DOM
         this.elements = {
@@ -30,8 +53,8 @@ class VeilleTechnologique {
             rotateBtn: document.getElementById('rotate-now')
         };
         
-        // Charger les articles du jour
-        this.loadTodaysArticles();
+        // Charger les vrais flux RSS
+        await this.loadRealRSSFeeds();
         
         // Configurer les événements
         this.setupEvents();
@@ -39,138 +62,292 @@ class VeilleTechnologique {
         // Démarrer les timers
         this.startTimers();
         
-        console.log('✅ Système prêt avec', this.articles.length, 'articles');
+        console.log('✅ Système RSS prêt avec', this.articles.length, 'articles réels');
     }
     
-    loadTodaysArticles() {
-        // Articles du jour - Données récentes
-        this.articles = [
-            // IT-CONNECT - Articles techniques
-            {
-                id: 'itc-' + Date.now(),
-                title: "Windows Server 2025 : Nouveautés sécurité et déploiement",
-                excerpt: "Microsoft annonce les premières mises à jour critiques pour Windows Server 2025 avec un focus sur la sécurité des identités et la protection contre les attaques Zero Trust.",
-                link: "https://www.it-connect.fr/windows-server-2025-securite",
-                source: 'it-connect',
-                date: this.today,
-                timeAgo: "Aujourd'hui",
-                category: "Sécurité",
-                addedAt: new Date()
-            },
-            {
-                id: 'itc-' + (Date.now() + 1),
-                title: "Kubernetes 1.31 : Gestion avancée des réseaux overlay",
-                excerpt: "La dernière version introduit des améliorations majeures pour la gestion des réseaux dans les clusters cloud, avec un support natif pour les réseaux overlay multi-cloud.",
-                link: "https://www.it-connect.fr/kubernetes-1-31-reseau",
-                source: 'it-connect',
-                date: this.today,
-                timeAgo: "Aujourd'hui",
-                category: "Cloud",
-                addedAt: new Date()
-            },
-            {
-                id: 'itc-' + (Date.now() + 2),
-                title: "Guide Ansible : Automatisation infrastructure 2026",
-                excerpt: "Tutoriel complet sur les dernières fonctionnalités d'Ansible pour l'automatisation des déploiements et la gestion de configuration à grande échelle.",
-                link: "https://www.it-connect.fr/ansible-guide-2026",
-                source: 'it-connect',
-                date: this.today,
-                timeAgo: "Aujourd'hui",
-                category: "DevOps",
-                addedAt: new Date()
-            },
+    async loadRealRSSFeeds() {
+        if (this.isLoading) return;
+        
+        this.isLoading = true;
+        this.showLoading();
+        
+        try {
+            // Charger les flux RSS réels
+            const rssArticles = await this.fetchAllRSSFeeds();
             
-            // 01NET - Actualités high-tech
-            {
-                id: '01n-' + Date.now(),
-                title: "Intel Lunar Lake : Performances record annoncées",
-                excerpt: "Intel dévoile les benchmarks des premiers serveurs équipés des processeurs Lunar Lake, promettant des gains de 40% en efficacité énergétique.",
-                link: "https://www.01net.com/intel-lunar-lake-serveurs",
-                source: 'zeronet',
-                date: this.today,
-                timeAgo: "Aujourd'hui",
-                category: "Hardware",
-                addedAt: new Date()
-            },
-            {
-                id: '01n-' + (Date.now() + 1),
-                title: "5G Advanced : Tests réels confirmés à 10 Gb/s",
-                excerpt: "Les opérateurs français confirment les performances de la 5G Advanced avec des débits records ouvrant la voie à de nouvelles applications industrielles.",
-                link: "https://www.01net.com/5g-advanced-tests",
-                source: 'zeronet',
-                date: this.today,
-                timeAgo: "Aujourd'hui",
-                category: "Réseau",
-                addedAt: new Date()
-            },
-            {
-                id: '01n-' + (Date.now() + 2),
-                title: "Wi-Fi 7 : Déploiement massif dans les entreprises",
-                excerpt: "Étude révélant que 65% des grandes entreprises françaises déploient activement le Wi-Fi 7 pour leurs infrastructures réseau en 2026.",
-                link: "https://www.01net.com/wifi7-entreprise",
-                source: 'zeronet',
-                date: this.today,
-                timeAgo: "Aujourd'hui",
-                category: "Réseau",
-                addedAt: new Date()
-            },
-            
-            // CERT-FR - Alertes sécurité du jour
-            {
-                id: 'cert-' + Date.now(),
-                title: "Multiples vulnérabilités critiques dans Apache HTTP Server",
-                excerpt: "Le CERT-FR publie un avis urgent concernant plusieurs vulnérabilités permettant l'exécution de code à distance. Correctifs immédiats requis.",
-                link: "https://www.cert.ssi.gouv.fr/avis/CERTFR-2026-AVI-001",
-                source: 'cert-fr',
-                date: this.today,
-                timeAgo: "Aujourd'hui",
-                category: "Sécurité",
-                addedAt: new Date()
-            },
-            {
-                id: 'cert-' + (Date.now() + 1),
-                title: "Campagne d'attaques ciblant les solutions VPN d'entreprise",
-                excerpt: "Nouvelle vague d'attaques sophistiquées exploitant des failles dans les solutions VPN. Recommandations de sécurisation publiées.",
-                link: "https://www.cert.ssi.gouv.fr/cti/CERTFR-2026-CTI-001",
-                source: 'cert-fr',
-                date: this.today,
-                timeAgo: "Aujourd'hui",
-                category: "Sécurité",
-                addedAt: new Date()
-            },
-            {
-                id: 'cert-' + (Date.now() + 2),
-                title: "Vulnérabilité critique dans VMware vSphere nécessitant un patch urgent",
-                excerpt: "Correctif d'urgence publié pour une faille permettant l'élévation de privilèges sur les hyperviseurs VMware. Mise à jour immédiate recommandée.",
-                link: "https://www.cert.ssi.gouv.fr/alerte/CERTFR-2026-ALE-001",
-                source: 'cert-fr',
-                date: this.today,
-                timeAgo: "Aujourd'hui",
-                category: "Virtualisation",
-                addedAt: new Date()
+            if (rssArticles.length > 0) {
+                this.articles = rssArticles;
+                console.log(`📰 ${rssArticles.length} articles RSS réels chargés`);
+                
+                // Filtrer pour ne garder que les articles récents (7 derniers jours)
+                this.filterRecentArticles();
+                
+                // Si pas assez d'articles récents, compléter avec des articles simulés
+                if (this.articles.length < 6) {
+                    console.log('⚠️ Peu d\'articles récents, ajout de données de démonstration');
+                    this.addDemoArticles();
+                }
+                
+            } else {
+                // Fallback si aucun flux RSS ne fonctionne
+                console.log('⚠️ Aucun flux RSS disponible, mode démonstration');
+                this.articles = this.getFallbackArticles();
+                this.showNotification('Mode démonstration activé', 'warning');
             }
-        ];
+            
+            // Appliquer la rotation
+            this.applyRotation();
+            
+            // Mettre à jour
+            this.lastUpdate = new Date();
+            this.updateDisplay();
+            this.updateStats();
+            
+            if (rssArticles.length > 0) {
+                this.showNotification('Flux RSS chargés avec succès', 'success');
+            }
+            
+        } catch (error) {
+            console.error('Erreur chargement RSS:', error);
+            this.articles = this.getFallbackArticles();
+            this.updateDisplay();
+            this.showNotification('Erreur de connexion aux flux', 'warning');
+        }
         
-        // Mélanger les articles
-        this.shuffleArticles();
-        
-        // Mettre à jour l'affichage
-        this.updateDisplay();
-        this.updateStats();
-        
-        this.showNotification('Articles du jour chargés', 'success');
+        this.isLoading = false;
     }
     
-    shuffleArticles() {
-        // Mélanger aléatoirement les articles
-        for (let i = this.articles.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [this.articles[i], this.articles[j]] = [this.articles[j], this.articles[i]];
+    async fetchAllRSSFeeds() {
+        const articles = [];
+        
+        // Pour chaque source, essayer de récupérer le flux RSS
+        for (const [sourceId, source] of Object.entries(this.sources)) {
+            try {
+                console.log(`📡 Tentative ${source.name}...`);
+                
+                const response = await fetch(source.proxyUrl, {
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    }
+                });
+                
+                if (!response.ok) {
+                    console.warn(`❌ ${source.name} non disponible:`, response.status);
+                    continue;
+                }
+                
+                const data = await response.json();
+                
+                if (data.contents) {
+                    const parsedArticles = this.parseRSSContent(data.contents, sourceId);
+                    articles.push(...parsedArticles);
+                    console.log(`✅ ${source.name}: ${parsedArticles.length} articles`);
+                }
+                
+            } catch (error) {
+                console.warn(`Erreur ${source.name}:`, error.message);
+            }
+        }
+        
+        return articles;
+    }
+    
+    parseRSSContent(xmlContent, sourceId) {
+        try {
+            const parser = new DOMParser();
+            const xmlDoc = parser.parseFromString(xmlContent, 'text/xml');
+            const items = xmlDoc.querySelectorAll('item');
+            const articles = [];
+            
+            items.forEach((item, index) => {
+                if (index >= 5) return; // Limite à 5 articles par source
+                
+                const title = item.querySelector('title')?.textContent || 'Sans titre';
+                const link = item.querySelector('link')?.textContent || this.sources[sourceId].website;
+                const description = item.querySelector('description')?.textContent || '';
+                const pubDate = item.querySelector('pubDate')?.textContent || item.querySelector('dc\\:date')?.textContent;
+                
+                // Nettoyer la description
+                const cleanDesc = this.cleanDescription(description);
+                
+                // Vérifier si l'article est récent (7 derniers jours)
+                const articleDate = pubDate ? new Date(pubDate) : new Date();
+                const isRecent = this.isArticleRecent(articleDate);
+                
+                if (isRecent) {
+                    articles.push({
+                        id: `${sourceId}-${Date.now()}-${index}`,
+                        title: title,
+                        excerpt: cleanDesc,
+                        link: link,
+                        source: sourceId,
+                        date: articleDate.toLocaleDateString('fr-FR'),
+                        timeAgo: this.getTimeAgo(articleDate),
+                        category: this.getCategory(sourceId),
+                        addedAt: new Date(),
+                        isRealRSS: true,
+                        pubDate: articleDate
+                    });
+                }
+            });
+            
+            return articles;
+            
+        } catch (error) {
+            console.error('Erreur parsing RSS:', error);
+            return [];
         }
     }
     
+    cleanDescription(text) {
+        if (!text) return 'Description non disponible';
+        
+        return text
+            .replace(/<[^>]*>/g, '')
+            .replace(/&[^;]+;/g, ' ')
+            .replace(/\s+/g, ' ')
+            .trim()
+            .substring(0, 180)
+            .trim() + '...';
+    }
+    
+    isArticleRecent(date) {
+        const now = new Date();
+        const sevenDaysAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+        return date >= sevenDaysAgo;
+    }
+    
+    getTimeAgo(date) {
+        const now = new Date();
+        const diffMs = now - date;
+        const diffMinutes = Math.floor(diffMs / (1000 * 60));
+        const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
+        const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+        
+        if (diffMinutes < 60) {
+            return diffMinutes <= 1 ? 'À l\'instant' : `Il y a ${diffMinutes} min`;
+        } else if (diffHours < 24) {
+            return diffHours === 1 ? 'Il y a 1 heure' : `Il y a ${diffHours} heures`;
+        } else {
+            return diffDays === 1 ? 'Hier' : `Il y a ${diffDays} jours`;
+        }
+    }
+    
+    getCategory(sourceId) {
+        const categories = {
+            'it-connect': 'Technique',
+            'zeronet': 'High-Tech',
+            'cert-fr': 'Sécurité'
+        };
+        return categories[sourceId] || 'Actualité';
+    }
+    
+    filterRecentArticles() {
+        // Garder seulement les articles des 7 derniers jours
+        const oneWeekAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
+        this.articles = this.articles.filter(article => 
+            article.pubDate && article.pubDate >= oneWeekAgo
+        );
+        
+        console.log(`📊 Après filtrage: ${this.articles.length} articles récents`);
+    }
+    
+    addDemoArticles() {
+        // Ajouter des articles de démonstration pour compléter
+        const demoArticles = this.getFallbackArticles();
+        const needed = 9 - this.articles.length;
+        
+        if (needed > 0) {
+            const selected = demoArticles.slice(0, needed);
+            this.articles.push(...selected);
+            console.log(`➕ ${selected.length} articles de démonstration ajoutés`);
+        }
+    }
+    
+    getFallbackArticles() {
+        // Articles de démonstration réalistes (seulement si RSS échoue)
+        const today = new Date();
+        const yesterday = new Date(today.getTime() - 24 * 60 * 60 * 1000);
+        
+        return [
+            {
+                id: 'itc-demo-1',
+                title: "Windows Server 2025 : Guide de migration et nouvelles fonctionnalités",
+                excerpt: "Découvrez les améliorations de sécurité et les nouvelles fonctionnalités de Windows Server 2025 pour une migration réussie.",
+                link: "https://www.it-connect.fr/windows-server-2025",
+                source: 'it-connect',
+                date: today.toLocaleDateString('fr-FR'),
+                timeAgo: "Aujourd'hui",
+                category: "Sécurité",
+                addedAt: today,
+                isRealRSS: false
+            },
+            {
+                id: 'itc-demo-2',
+                title: "Kubernetes 1.31 : Optimisation des performances réseau",
+                excerpt: "Nouvelle version avec des améliorations significatives pour la gestion des réseaux overlay dans les environnements cloud hybrides.",
+                link: "https://www.it-connect.fr/kubernetes-1-31",
+                source: 'it-connect',
+                date: yesterday.toLocaleDateString('fr-FR'),
+                timeAgo: "Hier",
+                category: "Cloud",
+                addedAt: yesterday,
+                isRealRSS: false
+            },
+            {
+                id: '01n-demo-1',
+                title: "Intel Lunar Lake : Performances et efficacité énergétique",
+                excerpt: "Analyse des premiers benchmarks des processeurs Intel Lunar Lake pour les serveurs d'entreprise.",
+                link: "https://www.01net.com/intel-lunar-lake",
+                source: 'zeronet',
+                date: today.toLocaleDateString('fr-FR'),
+                timeAgo: "Aujourd'hui",
+                category: "Hardware",
+                addedAt: today,
+                isRealRSS: false
+            },
+            {
+                id: '01n-demo-2',
+                title: "5G Advanced : Déploiement et applications industrielles",
+                excerpt: "État des lieux du déploiement de la 5G Advanced et ses applications concrètes dans l'industrie.",
+                link: "https://www.01net.com/5g-advanced",
+                source: 'zeronet',
+                date: yesterday.toLocaleDateString('fr-FR'),
+                timeAgo: "Hier",
+                category: "Réseau",
+                addedAt: yesterday,
+                isRealRSS: false
+            },
+            {
+                id: 'cert-demo-1',
+                title: "Multiples vulnérabilités dans Apache HTTP Server nécessitant des correctifs urgents",
+                excerpt: "Le CERT-FR publie un avis concernant plusieurs vulnérabilités critiques nécessitant une mise à jour immédiate.",
+                link: "https://www.cert.ssi.gouv.fr/avis-apache",
+                source: 'cert-fr',
+                date: today.toLocaleDateString('fr-FR'),
+                timeAgo: "Aujourd'hui",
+                category: "Sécurité",
+                addedAt: today,
+                isRealRSS: false
+            },
+            {
+                id: 'cert-demo-2',
+                title: "Campagne d'attaques ciblant les solutions VPN : Recommandations de sécurisation",
+                excerpt: "Nouvelle vague d'attaques exploitant des failles dans les VPN. Mesures de protection recommandées.",
+                link: "https://www.cert.ssi.gouv.fr/vpn-securite",
+                source: 'cert-fr',
+                date: yesterday.toLocaleDateString('fr-FR'),
+                timeAgo: "Hier",
+                category: "Sécurité",
+                addedAt: yesterday,
+                isRealRSS: false
+            }
+        ];
+    }
+    
     applyRotation() {
-        // Garder 3 articles max par source (les plus récents)
+        // Garder max 3 articles par source (les plus récents)
         const sourceCount = {};
         const rotated = [];
         
@@ -199,9 +376,9 @@ class VeilleTechnologique {
             <div class="loading-state">
                 <div class="loading-content">
                     <i class="fas fa-sync-alt fa-spin"></i>
-                    <p>Chargement des actualités du jour...</p>
+                    <p>Connexion aux flux RSS en cours...</p>
                     <small style="color: #94a3b8; margin-top: 1rem; display: block;">
-                        <i class="fas fa-calendar-day"></i> Articles du ${this.today}
+                        <i class="fas fa-wifi"></i> Récupération des articles du jour
                     </small>
                 </div>
             </div>
@@ -219,7 +396,11 @@ class VeilleTechnologique {
                 <div class="loading-state">
                     <div class="loading-content">
                         <i class="fas fa-inbox"></i>
-                        <p>Aucun article disponible</p>
+                        <p>Aucun article disponible pour le moment</p>
+                        <button onclick="window.veille.loadRealRSSFeeds()" 
+                                style="margin-top: 1rem; padding: 0.5rem 1rem; background: #6366f1; color: white; border: none; border-radius: 8px; cursor: pointer;">
+                            Recharger les flux
+                        </button>
                     </div>
                 </div>
             `;
@@ -236,13 +417,18 @@ class VeilleTechnologique {
             card.style.animationDelay = `${index * 0.1}s`;
             card.classList.add('fade-in');
             
-            // Source badge avec couleur spécifique
+            // Source badge
             const badge = clone.querySelector('.source-badge');
-            badge.textContent = this.getSourceName(article.source);
-            badge.style.background = this.getSourceColor(article.source);
+            badge.textContent = this.sources[article.source]?.name || article.source;
+            badge.style.background = this.sources[article.source]?.color || '#6366f1';
+            
+            // Indicateur RSS réel
+            if (article.isRealRSS) {
+                badge.innerHTML += ' <i class="fas fa-rss" style="margin-left: 5px; font-size: 0.7em;"></i>';
+            }
             
             // Date
-            clone.querySelector('.article-date').textContent = article.timeAgo;
+            clone.querySelector('.article-date').textContent = article.timeAgo || article.date;
             
             // Titre
             clone.querySelector('.article-title').textContent = article.title;
@@ -267,24 +453,6 @@ class VeilleTechnologique {
         }
     }
     
-    getSourceName(source) {
-        const names = {
-            'it-connect': 'IT-Connect',
-            'zeronet': '01net',
-            'cert-fr': 'CERT-FR'
-        };
-        return names[source] || source;
-    }
-    
-    getSourceColor(source) {
-        const colors = {
-            'it-connect': 'linear-gradient(135deg, #6366f1, #4f46e5)',
-            'zeronet': 'linear-gradient(135deg, #ef4444, #dc2626)',
-            'cert-fr': 'linear-gradient(135deg, #10b981, #059669)'
-        };
-        return colors[source] || '#6366f1';
-    }
-    
     getFilteredArticles() {
         if (this.currentFilter === 'all') {
             return this.articles;
@@ -307,12 +475,11 @@ class VeilleTechnologique {
             }
         }
         
-        // Dernière connexion
+        // Dernière connexion RSS
         if (this.elements.rssLastConnect) {
             const timeStr = this.lastUpdate.toLocaleTimeString('fr-FR', {
                 hour: '2-digit',
-                minute: '2-digit',
-                second: '2-digit'
+                minute: '2-digit'
             });
             this.elements.rssLastConnect.textContent = timeStr;
         }
@@ -332,7 +499,7 @@ class VeilleTechnologique {
                 this.elements.nextTimer.textContent = '60:00';
                 
                 if (!this.isLoading) {
-                    this.rotateArticles();
+                    this.performRotation();
                 }
             } else {
                 const minutes = Math.floor(timeLeft / 60000);
@@ -347,78 +514,18 @@ class VeilleTechnologique {
         // Rotation automatique toutes les heures
         setInterval(() => {
             if (!this.isLoading) {
-                this.rotateArticles();
+                this.performRotation();
             }
         }, 60 * 60 * 1000);
     }
     
-    rotateArticles() {
-        // Simuler l'arrivée de nouveaux articles et rotation
-        console.log('🔄 Rotation des articles...');
+    async performRotation() {
+        console.log('🔄 Rotation automatique...');
         
-        // Changer quelques articles
-        this.simulateNewArticles();
-        
-        // Appliquer la rotation (supprimer les plus anciens)
-        this.applyRotation();
-        
-        // Mettre à jour l'affichage
-        this.updateDisplay();
-        this.updateStats();
+        // Recharger les flux RSS
+        await this.loadRealRSSFeeds();
         
         this.showNotification('Rotation effectuée - Articles mis à jour', 'info');
-    }
-    
-    simulateNewArticles() {
-        // Simuler l'arrivée de nouveaux articles (pour démonstration)
-        const newArticles = [
-            {
-                id: 'new-' + Date.now(),
-                title: "Nouvelle faille zero-day découverte dans Docker",
-                excerpt: "Une vulnérabilité critique permet l'échappement de conteneurs Docker. Patch d'urgence disponible.",
-                link: "https://www.it-connect.fr/docker-zero-day",
-                source: 'it-connect',
-                date: this.today,
-                timeAgo: 'À l\'instant',
-                category: "Sécurité",
-                addedAt: new Date()
-            },
-            {
-                id: 'new-' + (Date.now() + 1),
-                title: "AMD EPYC : Nouveaux records de virtualisation",
-                excerpt: "Les processeurs AMD EPYC établissent de nouveaux records dans les tests de densité de virtualisation.",
-                link: "https://www.01net.com/amd-epyc-virtualisation",
-                source: 'zeronet',
-                date: this.today,
-                timeAgo: 'À l\'instant',
-                category: "Hardware",
-                addedAt: new Date()
-            },
-            {
-                id: 'new-' + (Date.now() + 2),
-                title: "Alerte : Attaques par ransomware ciblant les bases de données",
-                excerpt: "Nouvelle campagne d'attaques visant spécifiquement les bases de données MongoDB et PostgreSQL.",
-                link: "https://www.cert.ssi.gouv.fr/alerte-ransomware-db",
-                source: 'cert-fr',
-                date: this.today,
-                timeAgo: 'À l\'instant',
-                category: "Sécurité",
-                addedAt: new Date()
-            }
-        ];
-        
-        // Ajouter 1-2 nouveaux articles
-        const toAdd = Math.floor(Math.random() * 2) + 1;
-        for (let i = 0; i < toAdd; i++) {
-            const randomArticle = newArticles[Math.floor(Math.random() * newArticles.length)];
-            this.articles.unshift({
-                ...randomArticle,
-                id: randomArticle.id + '-' + i
-            });
-        }
-        
-        // Mélanger légèrement
-        this.shuffleArticles();
     }
     
     setupEvents() {
@@ -435,15 +542,14 @@ class VeilleTechnologique {
         // Bouton actualiser
         if (this.elements.refreshBtn) {
             this.elements.refreshBtn.addEventListener('click', () => {
-                this.loadTodaysArticles();
-                this.showNotification('Articles actualisés', 'success');
+                this.loadRealRSSFeeds();
             });
         }
         
         // Bouton rotation manuelle
         if (this.elements.rotateBtn) {
             this.elements.rotateBtn.addEventListener('click', () => {
-                this.rotateArticles();
+                this.performRotation();
             });
         }
         
@@ -531,10 +637,19 @@ style.textContent = `
         from { opacity: 1; transform: translateX(0); }
         to { opacity: 0; transform: translateX(100%); }
     }
+    
+    .fa-spin {
+        animation: spin 1s linear infinite;
+    }
+    
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
 `;
 document.head.appendChild(style);
 
 // Démarrer le système
 document.addEventListener('DOMContentLoaded', () => {
-    window.veille = new VeilleTechnologique();
+    window.veille = new VeilleRSS();
 });

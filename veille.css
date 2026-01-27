@@ -1,78 +1,4 @@
-/* ===== RESET ET NAVBAR (identique à PPE) ===== */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    line-height: 1.6;
-    color: #333;
-    background-color: #f8fafc;
-    margin: 0;
-    padding: 0;
-}
-
-/* ===== NAVBAR ===== */
-header {
-    background: white;
-    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
-
-nav {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 1rem 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.veille-nav {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 1.2rem 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #e5e7eb;
-}
-.logo {
-    font-size: 1.3rem;
-    font-weight: 700;
-    color: #111827;
-    font-family: 'Inter', sans-serif;
-}
-
-.nav-links {
-    display: flex;
-    list-style: none;
-    gap: 2.5rem;
-    align-items: center;
-}
-
-.nav-links a {
-    text-decoration: none;
-    color: #4b5563;
-    font-weight: 500;
-    font-size: 1rem;
-    font-family: 'Inter', sans-serif;
-    transition: color 0.2s ease;
-}
-
-.nav-links a:hover {
-    color: #1d4ed8;
-}
-
-.nav-links a.active {
-    color: #1d4ed8;
-    font-weight: 600;
-}
-
-/* ===== VEILLE - STYLES SPÉCIFIQUES ===== */
+/* ===== VEILLE - STYLES SPÉCIFIQUES (pas de navbar) ===== */
 .veille-main {
     max-width: 1200px;
     margin: 0 auto;
@@ -574,8 +500,8 @@ nav {
     text-decoration: underline;
 }
 
-/* ===== FOOTER ===== */
-footer {
+/* ===== FOOTER VEILLE ===== */
+.veille-footer {
     margin-top: 4rem;
     padding: 2rem;
     text-align: center;
@@ -644,21 +570,6 @@ footer {
 
 /* ===== RESPONSIVE DESIGN ===== */
 @media (max-width: 768px) {
-    nav {
-        flex-direction: column;
-        padding: 1rem;
-    }
-    
-    .logo {
-        margin-bottom: 1rem;
-    }
-    
-    .nav-links {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 1rem;
-    }
-    
     .veille-hero {
         padding: 3rem 1.5rem;
     }
@@ -699,9 +610,5 @@ footer {
     
     .section-title {
         font-size: 1.8rem;
-    }
-    
-    .methodologie-section, .articles-section, .sources-section {
-        padding: 0;
     }
 }

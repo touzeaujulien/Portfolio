@@ -16,14 +16,14 @@ class VeilleTechnologique {
                 website: 'https://www.it-connect.fr',
                 color: '#6366f1',
                 apiUrl: 'https://api.rss2json.com/v1/api.json?rss_url=https://www.it-connect.fr/feed/',
-                maxArticles: 3
+                maxArticles: 5
             },
             'zeronet': {
                 name: '01net',
                 website: 'https://www.01net.com',
                 color: '#ef4444',
                 apiUrl: 'https://api.rss2json.com/v1/api.json?rss_url=https://www.01net.com/rss/actualites/',
-                maxArticles: 3
+                maxArticles: 5
             },
 'cert-fr': {
     name: 'CERT-FR',
@@ -33,7 +33,7 @@ class VeilleTechnologique {
     apiUrl: 'https://api.rss2json.com/v1/api.json?rss_url=https://www.cert.ssi.gouv.fr/avis/feed/',
     // URL alternative 2 : RSS des alertes
     // apiUrl: 'https://api.rss2json.com/v1/api.json?rss_url=https://www.cert.ssi.gouv.fr/alerte/feed/',
-    maxArticles: 10
+    maxArticles: 5
 }
         };
         

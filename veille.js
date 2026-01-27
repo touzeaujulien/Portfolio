@@ -1,37 +1,36 @@
-// VEILLE TECHNOLOGIQUE - VRAIS ARTICLES EN DIRECT
-// Utilisation de NewsAPI pour les articles réels
+// VEILLE TECHNOLOGIQUE - VRAIS FLUX RSS
+// Récupération des derniers articles en direct
 
-class VeilleReelle {
+class VeilleTechnologique {
     constructor() {
         this.articles = [];
         this.currentFilter = 'all';
         this.lastUpdate = new Date();
+        this.nextRotation = Date.now() + 60 * 60 * 1000;
         this.isLoading = false;
         
-        // Clé API NewsAPI (gratuite - 100 requêtes/jour)
-        // Tu dois créer un compte gratuit sur https://newsapi.org
-        this.apiKey = 'b1a3213a26b64bc68ebe2f7a44cad419'; // Clé d'exemple - à remplacer par la tienne
-        this.baseUrl = 'https://newsapi.org/v2/everything';
-        
-        // Configuration des sources pour NewsAPI
-        this.sourcesConfig = {
+        // Configuration des flux RSS
+        this.sources = {
             'it-connect': {
                 name: 'IT-Connect',
+                website: 'https://www.it-connect.fr',
                 color: '#6366f1',
-                query: 'IT-Connect OR "administration système" OR "réseau"',
-                domains: 'it-connect.fr'
+                rssUrl: 'https://www.it-connect.fr/feed/',
+                maxArticles: 3
             },
-            'technologie': {
-                name: 'Technologie',
+            'zeronet': {
+                name: '01net',
+                website: 'https://www.01net.com',
                 color: '#ef4444',
-                query: 'technologie OR informatique OR "high tech"',
-                domains: '01net.com,lemondeinformatique.fr,zdnet.fr'
+                rssUrl: 'https://www.01net.com/rss/actualites/',
+                maxArticles: 3
             },
-            'securite': {
-                name: 'Sécurité',
+            'cert-fr': {
+                name: 'CERT-FR',
+                website: 'https://www.cert.ssi.gouv.fr',
                 color: '#10b981',
-                query: 'cybersécurité OR "CERT-FR" OR vulnérabilité OR ransomware',
-                domains: 'cert.ssi.gouv.fr,cybermalveillance.gouv.fr,ssi.gouv.fr'
+                rssUrl: 'https://www.cert.ssi.gouv.fr/feed/',
+                maxArticles: 10
             }
         };
         
@@ -39,12 +38,13 @@ class VeilleReelle {
     }
     
     async init() {
-        console.log('🚀 Initialisation veille avec articles réels...');
+        console.log('🚀 Initialisation système de veille RSS...');
         
         // Initialiser le DOM
         this.elements = {
             container: document.getElementById('articles-container'),
             totalArticles: document.getElementById('total-articles'),
+            nextTimer: document.getElementById('next-timer'),
             lastUpdate: document.getElementById('last-update'),
             rssLastConnect: document.getElementById('rss-last-connect'),
             filters: document.querySelectorAll('.filter-btn'),
@@ -52,315 +52,314 @@ class VeilleReelle {
             rotateBtn: document.getElementById('rotate-now')
         };
         
-        // Charger les vrais articles
-        await this.loadRealArticles();
+        // Charger les flux RSS
+        await this.loadRSSFeeds();
         
         // Configurer les événements
         this.setupEvents();
         
-        console.log('✅ Système prêt avec articles réels');
+        // Démarrer les timers
+        this.startTimers();
+        
+        console.log('✅ Système prêt avec', this.articles.length, 'articles');
     }
     
-    async loadRealArticles() {
+    async loadRSSFeeds() {
         if (this.isLoading) return;
         
         this.isLoading = true;
         this.showLoading();
         
         try {
-            // Essayer NewsAPI d'abord
-            const newsArticles = await this.fetchFromNewsAPI();
+            // Charger les flux RSS réels
+            this.articles = await this.fetchRealRSS();
             
-            if (newsArticles.length > 0) {
-                this.articles = newsArticles;
-                console.log(`📰 ${newsArticles.length} articles réels chargés`);
-                this.showNotification('Articles réels chargés avec succès', 'success');
-            } else {
-                // Fallback vers Reddit si NewsAPI échoue
-                console.log('⚠️ NewsAPI échoué, tentative Reddit...');
-                const redditArticles = await this.fetchFromReddit();
-                this.articles = redditArticles;
-                this.showNotification('Articles Reddit chargés', 'info');
-            }
+            // Appliquer les limites par source
+            this.applyLimits();
             
-            // Trier par date
-            this.articles.sort((a, b) => new Date(b.publishedAt) - new Date(a.publishedAt));
+            // Mettre à jour la date
+            this.lastUpdate = new Date();
             
-            // Limiter à 9 articles
-            this.articles = this.articles.slice(0, 9);
+            // Mettre à jour l'affichage
+            this.updateDisplay();
+            this.updateStats();
+            
+            const realArticles = this.articles.filter(a => a.isRealRSS).length;
+            this.showNotification(`${realArticles} articles chargés depuis les flux RSS`, 'success');
             
         } catch (error) {
-            console.error('Erreur chargement articles:', error);
-            // Fallback vers données statiques
-            this.articles = this.getStaticArticles();
+            console.error('Erreur:', error);
+            this.articles = this.getFallbackArticles();
+            this.updateDisplay();
             this.showNotification('Mode démonstration activé', 'warning');
         }
         
-        // Mettre à jour
-        this.lastUpdate = new Date();
-        this.updateDisplay();
-        this.updateStats();
         this.isLoading = false;
     }
     
-    async fetchFromNewsAPI() {
-        const articles = [];
-        const today = new Date().toISOString().split('T')[0];
-        const weekAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+    async fetchRealRSS() {
+        const allArticles = [];
         
+        for (const [sourceId, source] of Object.entries(this.sources)) {
+            try {
+                console.log(`📡 Chargement ${source.name}...`);
+                
+                // Utiliser un proxy CORS
+                const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(source.rssUrl)}`;
+                const response = await fetch(proxyUrl);
+                
+                if (!response.ok) {
+                    console.warn(`❌ ${source.name} échoué:`, response.status);
+                    continue;
+                }
+                
+                const data = await response.json();
+                
+                if (data.contents) {
+                    const articles = this.parseRSS(data.contents, sourceId);
+                    allArticles.push(...articles);
+                    console.log(`✅ ${source.name}: ${articles.length} articles`);
+                }
+                
+            } catch (error) {
+                console.warn(`Erreur ${source.name}:`, error.message);
+            }
+        }
+        
+        return allArticles;
+    }
+    
+    parseRSS(xmlString, sourceId) {
         try {
-            // Recherche articles français récents sur la technologie
-            const params = new URLSearchParams({
-                q: 'informatique OR technologie OR "système" OR réseau',
-                language: 'fr',
-                from: weekAgo,
-                to: today,
-                sortBy: 'publishedAt',
-                pageSize: 20,
-                apiKey: this.apiKey
+            const parser = new DOMParser();
+            const xmlDoc = parser.parseFromString(xmlString, 'text/xml');
+            const items = xmlDoc.querySelectorAll('item');
+            const articles = [];
+            const source = this.sources[sourceId];
+            
+        items.forEach((item, index) => {
+            if (index >= source.maxArticles) return;
+            
+            const title = item.querySelector('title')?.textContent || 'Sans titre';
+            const link = item.querySelector('link')?.textContent || source.website;
+            const description = item.querySelector('description')?.textContent || '';
+            const pubDate = item.querySelector('pubDate')?.textContent;
+            
+            // Nettoyer la description
+            const cleanDesc = this.cleanDescription(description);
+            
+            // Formater la date
+            const dateInfo = this.formatDateInfo(pubDate);
+            
+            articles.push({
+                id: `${sourceId}-${Date.now()}-${index}`,
+                title: title,
+                excerpt: cleanDesc,
+                link: link,
+                source: sourceId,
+                date: dateInfo.dateStr,
+                timeAgo: dateInfo.timeAgo,
+                category: this.getCategory(sourceId, title),
+                addedAt: new Date(),
+                isRealRSS: true
             });
-            
-            const response = await fetch(`${this.baseUrl}?${params}`);
-            
-            if (!response.ok) {
-                throw new Error(`NewsAPI: ${response.status}`);
-            }
-            
-            const data = await response.json();
-            
-            if (data.articles && data.articles.length > 0) {
-                // Transformer les données NewsAPI
-                data.articles.forEach((article, index) => {
-                    if (!article.title || article.title === '[Removed]') return;
-                    
-                    // Déterminer la source basée sur le contenu
-                    let source = 'technologie';
-                    const title = article.title.toLowerCase();
-                    const description = (article.description || '').toLowerCase();
-                    
-                    if (title.includes('sécurité') || title.includes('cyber') || 
-                        description.includes('sécurité') || description.includes('vulnérabilité')) {
-                        source = 'securite';
-                    } else if (title.includes('windows') || title.includes('linux') || 
-                              title.includes('server') || title.includes('administration')) {
-                        source = 'it-connect';
-                    }
-                    
-                    articles.push({
-                        id: `news-${Date.now()}-${index}`,
-                        title: article.title,
-                        excerpt: article.description || 'Cliquez pour lire l\'article complet',
-                        link: article.url,
-                        source: source,
-                        date: new Date(article.publishedAt).toLocaleDateString('fr-FR'),
-                        timeAgo: this.getTimeAgo(new Date(article.publishedAt)),
-                        category: this.getCategory(source),
-                        addedAt: new Date(),
-                        isReal: true
-                    });
-                });
-            }
+        });
+        
+            return articles;
             
         } catch (error) {
-            console.warn('NewsAPI erreur:', error.message);
+            console.error('Erreur parsing RSS:', error);
+            return this.getFallbackForSource(sourceId);
         }
-        
-        return articles;
     }
     
-    async fetchFromReddit() {
-        const articles = [];
+    cleanDescription(text) {
+        return text
+            .replace(/<[^>]*>/g, '')
+            .replace(/&[^;]+;/g, '')
+            .replace(/\s+/g, ' ')
+            .substring(0, 150)
+            .trim() + '...';
+    }
+    
+    formatDateInfo(dateString) {
+        if (!dateString) return { dateStr: 'Date inconnue', timeAgo: '' };
         
         try {
-            // Récupérer depuis les subreddits techniques
-            const subreddits = ['sysadmin', 'networking', 'cybersecurity', 'technology'];
-            const randomSub = subreddits[Math.floor(Math.random() * subreddits.length)];
+            const dateObj = new Date(dateString);
+            const now = new Date();
+            const diffMs = now - dateObj;
+            const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
             
-            const response = await fetch(`https://www.reddit.com/r/${randomSub}/hot.json?limit=10`);
-            
-            if (!response.ok) {
-                throw new Error(`Reddit: ${response.status}`);
+            let timeAgo = '';
+            if (diffHours < 1) timeAgo = 'À l\'instant';
+            else if (diffHours < 24) timeAgo = `Il y a ${diffHours}h`;
+            else {
+                const diffDays = Math.floor(diffHours / 24);
+                timeAgo = `Il y a ${diffDays}j`;
             }
             
-            const data = await response.json();
+            return {
+                dateStr: dateObj.toLocaleDateString('fr-FR'),
+                timeAgo: timeAgo
+            };
             
-            if (data.data && data.data.children) {
-                data.data.children.forEach((post, index) => {
-                    const postData = post.data;
-                    
-                    if (!postData.title || postData.title === '[Removed]') return;
-                    
-                    // Déterminer la source
-                    let source = 'technologie';
-                    const title = postData.title.toLowerCase();
-                    
-                    if (randomSub === 'cybersecurity') {
-                        source = 'securite';
-                    } else if (randomSub === 'sysadmin') {
-                        source = 'it-connect';
-                    }
-                    
-                    articles.push({
-                        id: `reddit-${Date.now()}-${index}`,
-                        title: postData.title,
-                        excerpt: postData.selftext ? 
-                            postData.selftext.substring(0, 150) + '...' : 
-                            'Article Reddit - Cliquez pour lire',
-                        link: `https://reddit.com${postData.permalink}`,
-                        source: source,
-                        date: new Date(postData.created_utc * 1000).toLocaleDateString('fr-FR'),
-                        timeAgo: this.getTimeAgo(new Date(postData.created_utc * 1000)),
-                        category: this.getCategory(source),
-                        addedAt: new Date(),
-                        isReal: true
-                    });
-                });
-            }
-            
-        } catch (error) {
-            console.warn('Reddit erreur:', error.message);
+        } catch {
+            return { dateStr: 'Date inconnue', timeAgo: '' };
         }
-        
-        return articles;
     }
     
-    getStaticArticles() {
-        // Données de fallback REALISTES
-        const today = new Date();
-        const yesterday = new Date(today.getTime() - 24 * 60 * 60 * 1000);
-        const twoDaysAgo = new Date(today.getTime() - 2 * 24 * 60 * 60 * 1000);
+    getCategory(source, title) {
+        const categories = {
+            'it-connect': ['Windows', 'Linux', 'Réseau', 'Sécurité', 'Cloud', 'DevOps'],
+            'zeronet': ['Hardware', 'Réseau', 'Cloud', 'Innovation', 'Mobile', 'Logiciel'],
+            'cert-fr': ['Vulnérabilité', 'Alerte', 'Patch', 'Sécurité', 'Avis', 'Bulletin']
+        };
         
+        const sourceCats = categories[source] || ['Actualité'];
+        return sourceCats[Math.floor(Math.random() * sourceCats.length)];
+    }
+    
+    getFallbackForSource(sourceId) {
+        // Données de secours spécifiques par source
+        const fallbacks = {
+            'it-connect': [
+                {
+                    title: "Windows Server 2025 : déploiement des premières mises à jour critiques",
+                    excerpt: "Microsoft publie les premières mises à jour de sécurité pour Windows Server 2025 avec corrections de vulnérabilités importantes.",
+                    link: "https://www.it-connect.fr",
+                    date: new Date().toLocaleDateString('fr-FR'),
+                    timeAgo: "Aujourd'hui",
+                    category: "Sécurité"
+                },
+                {
+                    title: "Kubernetes 1.31 : gestion avancée des réseaux overlay",
+                    excerpt: "Nouvelle version avec support natif des réseaux overlay multi-cloud et optimisations performances.",
+                    link: "https://www.it-connect.fr",
+                    date: new Date().toLocaleDateString('fr-FR'),
+                    timeAgo: "Aujourd'hui",
+                    category: "Cloud"
+                },
+                {
+                    title: "Guide Ansible : automatisation infrastructure 2026",
+                    excerpt: "Tutoriel complet sur les dernières fonctionnalités d'automatisation avec Ansible pour les environnements complexes.",
+                    link: "https://www.it-connect.fr",
+                    date: new Date().toLocaleDateString('fr-FR'),
+                    timeAgo: "Aujourd'hui",
+                    category: "DevOps"
+                }
+            ],
+            'zeronet': [
+                {
+                    title: "Intel Lunar Lake : performances record annoncées",
+                    excerpt: "Intel dévoile les benchmarks des processeurs Lunar Lake avec des gains significatifs en efficacité énergétique.",
+                    link: "https://www.01net.com",
+                    date: new Date().toLocaleDateString('fr-FR'),
+                    timeAgo: "Aujourd'hui",
+                    category: "Hardware"
+                },
+                {
+                    title: "5G Advanced : tests confirmant les débits à 10 Gb/s",
+                    excerpt: "Validation des performances de la 5G Advanced ouvrant de nouvelles possibilités pour les applications professionnelles.",
+                    link: "https://www.01net.com",
+                    date: new Date().toLocaleDateString('fr-FR'),
+                    timeAgo: "Aujourd'hui",
+                    category: "Réseau"
+                },
+                {
+                    title: "Wi-Fi 7 : adoption massive en entreprise confirmée",
+                    excerpt: "Étude montrant le déploiement accéléré du Wi-Fi 7 dans les infrastructures réseau d'entreprise.",
+                    link: "https://www.01net.com",
+                    date: new Date().toLocaleDateString('fr-FR'),
+                    timeAgo: "Aujourd'hui",
+                    category: "Réseau"
+                }
+            ],
+            'cert-fr': [
+                {
+                    title: "Multiples vulnérabilités critiques dans Apache HTTP Server",
+                    excerpt: "Avis urgent concernant plusieurs vulnérabilités permettant l'exécution de code à distance. Correctifs disponibles.",
+                    link: "https://www.cert.ssi.gouv.fr",
+                    date: new Date().toLocaleDateString('fr-FR'),
+                    timeAgo: "Aujourd'hui",
+                    category: "Vulnérabilité"
+                },
+                {
+                    title: "Campagne d'attaques ciblant les solutions VPN",
+                    excerpt: "Nouvelle vague d'attaques exploitant des failles dans les solutions VPN d'entreprise.",
+                    link: "https://www.cert.ssi.gouv.fr",
+                    date: new Date().toLocaleDateString('fr-FR'),
+                    timeAgo: "Aujourd'hui",
+                    category: "Alerte"
+                },
+                {
+                    title: "Vulnérabilité critique dans VMware vSphere",
+                    excerpt: "Patch d'urgence pour une faille permettant l'élévation de privilèges sur les hyperviseurs.",
+                    link: "https://www.cert.ssi.gouv.fr",
+                    date: new Date().toLocaleDateString('fr-FR'),
+                    timeAgo: "Aujourd'hui",
+                    category: "Patch"
+                },
+                {
+                    title: "Faille zero-day dans les produits Fortinet",
+                    excerpt: "Vulnérabilité critique découverte dans les appliances FortiGate nécessitant une mise à jour immédiate.",
+                    link: "https://www.cert.ssi.gouv.fr",
+                    date: new Date().toLocaleDateString('fr-FR'),
+                    timeAgo: "Hier",
+                    category: "Sécurité"
+                },
+                {
+                    title: "Attaques par ransomware ciblant ESXi",
+                    excerpt: "Alerte concernant une campagne d'attaques visant spécifiquement les hyperviseurs VMware ESXi.",
+                    link: "https://www.cert.ssi.gouv.fr",
+                    date: new Date().toLocaleDateString('fr-FR'),
+                    timeAgo: "Hier",
+                    category: "Alerte"
+                }
+            ]
+        };
+        
+        const articles = fallbacks[sourceId] || [];
+        return articles.map((article, index) => ({
+            ...article,
+            id: `${sourceId}-fallback-${index}`,
+            source: sourceId,
+            addedAt: new Date(Date.now() - index * 3600000), // Espacer de 1h
+            isRealRSS: false
+        }));
+    }
+    
+    getFallbackArticles() {
+        // Articles de secours complets
         return [
-            {
-                id: 'real-1',
-                title: "Windows Server 2025 : Les nouvelles fonctionnalités de sécurité dévoilées",
-                excerpt: "Microsoft annonce les améliorations de sécurité majeures pour Windows Server 2025 avec un focus sur la protection Zero Trust.",
-                link: "https://www.microsoft.com/fr-fr/windows-server",
-                source: 'it-connect',
-                date: today.toLocaleDateString('fr-FR'),
-                timeAgo: "Aujourd'hui",
-                category: "Sécurité",
-                addedAt: today,
-                isReal: false
-            },
-            {
-                id: 'real-2',
-                title: "Apache publie un patch critique pour une faille zero-day",
-                excerpt: "Une vulnérabilité critique dans Apache HTTP Server permet l'exécution de code à distance. Mise à jour urgente recommandée.",
-                link: "https://httpd.apache.org/security/vulnerabilities",
-                source: 'securite',
-                date: today.toLocaleDateString('fr-FR'),
-                timeAgo: "Aujourd'hui",
-                category: "Sécurité",
-                addedAt: today,
-                isReal: false
-            },
-            {
-                id: 'real-3',
-                title: "Kubernetes 1.31 améliore la gestion des réseaux overlay",
-                excerpt: "La nouvelle version apporte des optimisations significatives pour les réseaux dans les environnements cloud hybrides.",
-                link: "https://kubernetes.io/blog",
-                source: 'it-connect',
-                date: yesterday.toLocaleDateString('fr-FR'),
-                timeAgo: "Hier",
-                category: "Cloud",
-                addedAt: yesterday,
-                isReal: false
-            },
-            {
-                id: 'real-4',
-                title: "Intel dévoile Lunar Lake : 40% plus économe en énergie",
-                excerpt: "Les nouveaux processeurs Intel promettent des gains d'efficacité énergétique significatifs pour les datacenters.",
-                link: "https://www.intel.com/content/www/fr/fr/products/details/processors.html",
-                source: 'technologie',
-                date: today.toLocaleDateString('fr-FR'),
-                timeAgo: "Aujourd'hui",
-                category: "Hardware",
-                addedAt: today,
-                isReal: false
-            },
-            {
-                id: 'real-5',
-                title: "Le CERT-FR alerte sur une campagne d'attaques par ransomware",
-                excerpt: "Nouvelle vague d'attaques ciblant les infrastructures VMware. Recommandations de protection publiées.",
-                link: "https://www.cert.ssi.gouv.fr",
-                source: 'securite',
-                date: yesterday.toLocaleDateString('fr-FR'),
-                timeAgo: "Hier",
-                category: "Sécurité",
-                addedAt: yesterday,
-                isReal: false
-            },
-            {
-                id: 'real-6',
-                title: "Déploiement massif du Wi-Fi 7 dans les entreprises françaises",
-                excerpt: "65% des grandes entreprises ont déjà adopté le Wi-Fi 7 selon une étude récente.",
-                link: "https://www.arcep.fr/actualites/les-communiques-de-presse/detail/n/wifi7-entreprises.html",
-                source: 'technologie',
-                date: twoDaysAgo.toLocaleDateString('fr-FR'),
-                timeAgo: "Il y a 2 jours",
-                category: "Réseau",
-                addedAt: twoDaysAgo,
-                isReal: false
-            },
-            {
-                id: 'real-7',
-                title: "Guide Ansible : Automatisation avancée pour administrateurs",
-                excerpt: "Tutoriel complet sur les techniques avancées d'automatisation avec Ansible en environnement de production.",
-                link: "https://www.ansible.com/blog",
-                source: 'it-connect',
-                date: twoDaysAgo.toLocaleDateString('fr-FR'),
-                timeAgo: "Il y a 2 jours",
-                category: "DevOps",
-                addedAt: twoDaysAgo,
-                isReal: false
-            },
-            {
-                id: 'real-8',
-                title: "5G Advanced : Les premiers tests montrent des débits records",
-                excerpt: "Les opérateurs confirment des performances jusqu'à 10 Gb/s en conditions réelles.",
-                link: "https://www.arcep.fr/5g",
-                source: 'technologie',
-                date: yesterday.toLocaleDateString('fr-FR'),
-                timeAgo: "Hier",
-                category: "Réseau",
-                addedAt: yesterday,
-                isReal: false
-            },
-            {
-                id: 'real-9',
-                title: "Nouvelle faille critique dans Docker nécessitant une mise à jour urgente",
-                excerpt: "Vulnérabilité permettant l'échappement de conteneurs. Correctif disponible immédiatement.",
-                link: "https://www.docker.com/blog/security",
-                source: 'securite',
-                date: today.toLocaleDateString('fr-FR'),
-                timeAgo: "Aujourd'hui",
-                category: "Sécurité",
-                addedAt: today,
-                isReal: false
-            }
+            ...this.getFallbackForSource('it-connect'),
+            ...this.getFallbackForSource('zeronet'),
+            ...this.getFallbackForSource('cert-fr')
         ];
     }
     
-    getTimeAgo(date) {
-        const now = new Date();
-        const diffMs = now - date;
-        const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
+    applyLimits() {
+        // Appliquer les limites par source
+        const sourceCount = {};
+        const limited = [];
         
-        if (diffHours < 1) return 'À l\'instant';
-        if (diffHours < 24) return `Il y a ${diffHours}h`;
+        // Trier par date (plus récent d'abord)
+        this.articles.sort((a, b) => b.addedAt - a.addedAt);
         
-        const diffDays = Math.floor(diffHours / 24);
-        return diffDays === 1 ? 'Hier' : `Il y a ${diffDays}j`;
-    }
-    
-    getCategory(source) {
-        const categories = {
-            'it-connect': 'Technique',
-            'technologie': 'High-Tech',
-            'securite': 'Sécurité'
-        };
-        return categories[source] || 'Actualité';
+        // Appliquer les limites
+        this.articles.forEach(article => {
+            if (!sourceCount[article.source]) {
+                sourceCount[article.source] = 0;
+            }
+            
+            const max = this.sources[article.source]?.maxArticles || 3;
+            if (sourceCount[article.source] < max) {
+                limited.push(article);
+                sourceCount[article.source]++;
+            }
+        });
+        
+        this.articles = limited;
     }
     
     showLoading() {
@@ -370,9 +369,9 @@ class VeilleReelle {
             <div class="loading-state">
                 <div class="loading-content">
                     <i class="fas fa-sync-alt fa-spin"></i>
-                    <p>Recherche d'articles réels en cours...</p>
+                    <p>Connexion aux flux RSS...</p>
                     <small style="color: #94a3b8; margin-top: 1rem; display: block;">
-                        <i class="fas fa-newspaper"></i> Connexion aux sources d'actualités
+                        <i class="fas fa-rss"></i> Récupération des derniers articles
                     </small>
                 </div>
             </div>
@@ -390,8 +389,8 @@ class VeilleReelle {
                 <div class="loading-state">
                     <div class="loading-content">
                         <i class="fas fa-inbox"></i>
-                        <p>Chargement des articles...</p>
-                        <button onclick="window.veille.loadRealArticles()" 
+                        <p>Aucun article disponible</p>
+                        <button onclick="window.veille.loadRSSFeeds()" 
                                 style="margin-top: 1rem; padding: 0.5rem 1rem; background: #6366f1; color: white; border: none; border-radius: 8px; cursor: pointer;">
                             Recharger
                         </button>
@@ -412,12 +411,11 @@ class VeilleReelle {
             
             // Source badge
             const badge = clone.querySelector('.source-badge');
-            badge.textContent = this.sourcesConfig[article.source]?.name || article.source;
-            badge.style.background = this.sourcesConfig[article.source]?.color || '#6366f1';
+            badge.textContent = this.sources[article.source]?.name || article.source;
+            badge.style.background = this.sources[article.source]?.color || '#6366f1';
             
-            // Indicateur article réel
-            if (article.isReal) {
-                badge.innerHTML += ' <i class="fas fa-bolt" style="margin-left: 5px; font-size: 0.7em;"></i>';
+            if (article.isRealRSS) {
+                badge.innerHTML += ' <i class="fas fa-rss" style="margin-left: 5px; font-size: 0.7em;"></i>';
             }
             
             // Date
@@ -468,7 +466,7 @@ class VeilleReelle {
             }
         }
         
-        // Dernière connexion
+        // Dernière connexion RSS
         if (this.elements.rssLastConnect) {
             const timeStr = this.lastUpdate.toLocaleTimeString('fr-FR', {
                 hour: '2-digit',
@@ -476,6 +474,48 @@ class VeilleReelle {
             });
             this.elements.rssLastConnect.textContent = timeStr;
         }
+        
+        // Compter les articles par source
+        const counts = {};
+        this.articles.forEach(article => {
+            counts[article.source] = (counts[article.source] || 0) + 1;
+        });
+        
+        console.log('📊 Articles par source:', counts);
+    }
+    
+    startTimers() {
+        // Timer de rotation
+        const updateTimer = () => {
+            if (!this.elements.nextTimer) return;
+            
+            const now = Date.now();
+            const timeLeft = this.nextRotation - now;
+            
+            if (timeLeft <= 0) {
+                // Rotation automatique
+                this.nextRotation = now + 60 * 60 * 1000;
+                this.elements.nextTimer.textContent = '60:00';
+                
+                if (!this.isLoading) {
+                    this.loadRSSFeeds();
+                }
+            } else {
+                const minutes = Math.floor(timeLeft / 60000);
+                const seconds = Math.floor((timeLeft % 60000) / 1000);
+                this.elements.nextTimer.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+            }
+        };
+        
+        updateTimer();
+        setInterval(updateTimer, 1000);
+        
+        // Rotation automatique toutes les heures
+        setInterval(() => {
+            if (!this.isLoading) {
+                this.loadRSSFeeds();
+            }
+        }, 60 * 60 * 1000);
     }
     
     setupEvents() {
@@ -492,14 +532,15 @@ class VeilleReelle {
         // Bouton actualiser
         if (this.elements.refreshBtn) {
             this.elements.refreshBtn.addEventListener('click', () => {
-                this.loadRealArticles();
+                this.loadRSSFeeds();
             });
         }
         
-        // Bouton rotation
+        // Bouton rotation manuelle
         if (this.elements.rotateBtn) {
             this.elements.rotateBtn.addEventListener('click', () => {
-                this.rotateArticles();
+                this.simulateNewArticle();
+                this.showNotification('Rotation manuelle - Nouvel article simulé', 'info');
             });
         }
         
@@ -514,12 +555,56 @@ class VeilleReelle {
         }
     }
     
-    async rotateArticles() {
-        // Rotation : charger de nouveaux articles
-        console.log('🔄 Rotation des articles...');
+    simulateNewArticle() {
+        // Simuler l'arrivée d'un nouvel article (démonstration)
+        const sources = ['it-connect', 'zeronet', 'cert-fr'];
+        const randomSource = sources[Math.floor(Math.random() * sources.length)];
+        const source = this.sources[randomSource];
         
-        await this.loadRealArticles();
-        this.showNotification('Nouveaux articles chargés', 'info');
+        const newArticle = {
+            id: `new-${Date.now()}`,
+            title: `[TEST] Nouveau : ${this.getRandomTitle(randomSource)}`,
+            excerpt: "Ceci est une simulation d'un nouvel article pour démontrer le système de rotation automatique.",
+            link: source.website,
+            source: randomSource,
+            date: new Date().toLocaleDateString('fr-FR'),
+            timeAgo: 'À l\'instant',
+            category: this.getCategory(randomSource, ''),
+            addedAt: new Date(),
+            isRealRSS: false
+        };
+        
+        // Ajouter au début
+        this.articles.unshift(newArticle);
+        
+        // Appliquer les limites (supprime les plus anciens)
+        this.applyLimits();
+        
+        // Mettre à jour l'affichage
+        this.updateDisplay();
+    }
+    
+    getRandomTitle(source) {
+        const titles = {
+            'it-connect': [
+                "Guide avancé PowerShell 7",
+                "Optimisation des performances Windows Server",
+                "Sécurisation des APIs REST"
+            ],
+            'zeronet': [
+                "Nouveaux processeurs AMD annoncés",
+                "Innovations dans le stockage NVMe",
+                "Tendances cloud computing 2026"
+            ],
+            'cert-fr': [
+                "Nouvelle vulnérabilité critique découverte",
+                "Alerte sécurité pour les routeurs Cisco",
+                "Patch urgent pour VMware"
+            ]
+        };
+        
+        const sourceTitles = titles[source] || ['Actualité technique'];
+        return sourceTitles[Math.floor(Math.random() * sourceTitles.length)];
     }
     
     setFilter(filter) {
@@ -595,19 +680,10 @@ style.textContent = `
         from { opacity: 1; transform: translateX(0); }
         to { opacity: 0; transform: translateX(100%); }
     }
-    
-    .fa-spin {
-        animation: spin 1s linear infinite;
-    }
-    
-    @keyframes spin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
-    }
 `;
 document.head.appendChild(style);
 
 // Démarrer le système
 document.addEventListener('DOMContentLoaded', () => {
-    window.veille = new VeilleReelle();
+    window.veille = new VeilleTechnologique();
 });

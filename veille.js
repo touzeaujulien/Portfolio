@@ -25,13 +25,16 @@ class VeilleTechnologique {
                 apiUrl: 'https://api.rss2json.com/v1/api.json?rss_url=https://www.01net.com/rss/actualites/',
                 maxArticles: 3
             },
-            'cert-fr': {
-                name: 'CERT-FR',
-                website: 'https://www.cert.ssi.gouv.fr',
-                color: '#10b981',
-                apiUrl: 'https://api.rss2json.com/v1/api.json?rss_url=https://www.cert.ssi.gouv.fr/feed/',
-                maxArticles: 10
-            }
+'cert-fr': {
+    name: 'CERT-FR',
+    website: 'https://www.cert.ssi.gouv.fr',
+    color: '#10b981',
+    // URL alternative 1 : RSS des avis
+    apiUrl: 'https://api.rss2json.com/v1/api.json?rss_url=https://www.cert.ssi.gouv.fr/avis/feed/',
+    // URL alternative 2 : RSS des alertes
+    // apiUrl: 'https://api.rss2json.com/v1/api.json?rss_url=https://www.cert.ssi.gouv.fr/alerte/feed/',
+    maxArticles: 10
+}
         };
         
         this.init();

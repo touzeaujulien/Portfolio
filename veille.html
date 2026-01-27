@@ -24,9 +24,189 @@
         </nav>
     </header>
 
-    <!-- Le reste du contenu HTML existant -->
+
     <main class="veille-main">
-        <!-- ... -->
+        <section class="veille-hero">
+            <div class="hero-background">
+                <div class="background-circle circle-1"></div>
+                <div class="background-circle circle-2"></div>
+            </div>
+            
+            <div class="hero-content">
+                <h1 class="hero-title fade-in">
+                    <i class="fas fa-satellite-dish"></i>
+                    Veille Technologique
+                </h1>
+                <p class="hero-subtitle fade-in stagger-delay-1">
+                    Surveillance continue des innovations en administration système et réseau.
+                    Système automatisé de rotation des dernières actualités techniques.
+                </p>
+                
+                <div class="hero-stats">
+                    <div class="hero-stat fade-in stagger-delay-2">
+                        <span class="stat-number" id="total-articles">9</span>
+                        <span class="stat-label">Articles actifs</span>
+                    </div>
+                    <div class="hero-stat fade-in stagger-delay-3">
+                        <span class="stat-number">3</span>
+                        <span class="stat-label">Sources principales</span>
+                    </div>
+                    <div class="hero-stat fade-in stagger-delay-4">
+                        <span class="stat-number" id="next-timer">60:00</span>
+                        <span class="stat-label">Prochaine rotation</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="methodologie-section">
+            <div class="section-header">
+                <h2 class="section-title fade-in">
+                    <i class="fas fa-search"></i>
+                    Ma Méthodologie de Veille
+                </h2>
+                <p class="section-subtitle fade-in stagger-delay-1">
+                    Une approche multi-canale pour une information complète et actualisée
+                </p>
+            </div>
+            
+            <div class="methodologie-content">
+                <div class="methodologie-card slide-in-left">
+                    <div class="methodologie-icon">
+                        <i class="fas fa-rss"></i>
+                    </div>
+                    <h3>Flux RSS & Agregateurs</h3>
+                    <p>J'utilise <strong>Feedly</strong> pour centraliser tous mes flux RSS et suivre automatiquement les publications de mes sources principales. Cette plateforme me permet de :</p>
+                    <ul>
+                        <li>Centraliser IT-Connect, 01net et CERT-FR</li>
+                        <li>Organiser par catégories techniques</li>
+                    </ul>
+                </div>
+                
+                <div class="methodologie-card fade-in">
+                    <div class="methodologie-icon">
+                        <i class="fas fa-hashtag"></i>
+                    </div>
+                    <h3>Réseaux Sociaux Professionnels</h3>
+                    <p>Sur <strong>LinkedIn</strong>, je suis des influenceurs tech, des communautés spécialisées et des entreprises du secteur :</p>
+                    <ul>
+                        <li>Entreprises mondiales</li>
+                        <li>Groupes LinkedIn spécialisés</li>
+                        <li>Alertes en temps réel sur les tendances</li>
+                    </ul>
+                </div>
+                
+                <div class="methodologie-card slide-in-right">
+                    <div class="methodologie-icon">
+                        <i class="fas fa-bell"></i>
+                    </div>
+                    <h3>Automatisation</h3>
+                    <p>Mise en place d'un système automatisé pour ne rien manquer :</p>
+                    <ul>
+                        <li>Récupération des articles les plus rècents</li>
+                        <li>Veille réglementaire automatisée</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="articles-section">
+            <div class="section-header">
+                <h2 class="section-title fade-in">
+                    <i class="fas fa-newspaper"></i>
+                    Actualités du Jour
+                </h2>
+                <p class="section-subtitle fade-in stagger-delay-1">
+                    Les dernières publications triées par source
+                </p>
+            </div>
+            
+            <div class="sources-filters">
+                <button class="filter-btn active" data-filter="all">
+                    <i class="fas fa-layer-group"></i> Toutes
+                </button>
+                <button class="filter-btn" data-filter="it-connect">
+                    <i class="fas fa-server"></i> IT-Connect
+                </button>
+                <button class="filter-btn" data-filter="zeronet">
+                    <i class="fas fa-globe"></i> 01net
+                </button>
+                <button class="filter-btn" data-filter="cert-fr">
+                    <i class="fas fa-shield-alt"></i> CERT-FR
+                </button>
+            </div>
+            
+            <div class="articles-container" id="articles-container">
+                <!-- Articles chargés par JavaScript -->
+            </div>
+            
+            <div class="update-bar">
+                <div class="update-info">
+                    <i class="fas fa-sync-alt"></i>
+                    <span>Dernière actualisation : <strong id="last-update">à l'instant</strong></span>
+                </div>
+                <div class="control-buttons">
+                    <button id="rotate-now" class="control-btn">
+                        <i class="fas fa-random"></i> Rotation manuelle
+                    </button>
+                    <button id="refresh-now" class="control-btn primary">
+                        <i class="fas fa-redo"></i> Actualiser
+                    </button>
+                </div>
+            </div>
+            
+            <div class="rotation-info">
+                <i class="fas fa-info-circle"></i>
+                <span>Rotation automatique active</span>
+            </div>
+        </section>
+
+        <section class="sources-section">
+            <div class="section-header">
+                <h2 class="section-title fade-in">
+                    <i class="fas fa-satellite"></i>
+                    Sources Principales
+                </h2>
+                <p class="section-subtitle fade-in stagger-delay-1">
+                    Les trois piliers de ma veille quotidienne
+                </p>
+            </div>
+            
+            <div class="sources-grid">
+                <div class="source-card">
+                    <div class="source-icon" style="background: linear-gradient(135deg, #6366f1, #4f46e5);">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    <h3>IT-Connect</h3>
+                    <p>La référence francophone pour les administrateurs systèmes et réseaux. Tutoriels techniques, analyses approfondies et actualités du secteur.</p>
+                    <a href="https://www.it-connect.fr" target="_blank" class="source-link">
+                        <i class="fas fa-external-link-alt"></i> Visiter le site
+                    </a>
+                </div>
+                
+                <div class="source-card">
+                    <div class="source-icon" style="background: linear-gradient(135deg, #ef4444, #dc2626);">
+                        <i class="fas fa-newspaper"></i>
+                    </div>
+                    <h3>01net</h3>
+                    <p>Actualités high-tech généralistes avec une couverture complète des évolutions infrastructurelles, hardware et innovations technologiques.</p>
+                    <a href="https://www.01net.com" target="_blank" class="source-link">
+                        <i class="fas fa-external-link-alt"></i> Visiter le site
+                    </a>
+                </div>
+                
+                <div class="source-card">
+                    <div class="source-icon" style="background: linear-gradient(135deg, #10b981, #059669);">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <h3>CERT-FR</h3>
+                    <p>Centre gouvernemental d'alerte et de réponse aux attaques informatiques. Source officielle pour les vulnérabilités critiques et patches de sécurité.</p>
+                    <a href="https://www.cert.ssi.gouv.fr" target="_blank" class="source-link">
+                        <i class="fas fa-external-link-alt"></i> Visiter le site
+                    </a>
+                </div>
+            </div>
+        </section>
     </main>
     
     <footer class="veille-footer">

@@ -30,7 +30,7 @@ class VeilleTechnologique {
     website: 'https://www.cert.ssi.gouv.fr',
     color: '#10b981',
     // URL alternative 1 : RSS des avis
-apiUrl: 'https://api.rss2json.com/v1/api.json?rss_url=https://www.cert.ssi.gouv.fr/avis/feed/',    
+apiUrl: 'https://api.rss2json.com/v1/api.json?rss_url=https://www.cert.ssi.gouv.fr/feed/',    
     maxArticles: 5
 }
         };

@@ -26,6 +26,7 @@
     <main>
         <h1>Mes expériences en stage</h1>
         
+        <!-- Stage 1 : Almeria -->
         <section class="stage-entreprise">
             <div class="entreprise-header">
                 <img src="https://imgs.search.brave.com/ol9o4C6cwvjaXdzUGL_QZKqP0cqfuvB_yaJm--g1E0o/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly93d3cu/cGFnZXNqYXVuZXMu/ZnIvbWVkaWEvbmV3/ZGFtL3ByZXNldC1l/eHBvcnQtbGFyZ2Uv/YmYvNzgvNjAvMDAv/MDAvZjMvYjIvZWQv/NDQvOTQvNjA1OGJm/Nzg2MDAwMDBmM2Iy/ZWQ0NDk0LzYwNThi/Zjc4NjAwMDAwZjNi/MmVkNDQ5NS5wbmc" alt="Logo Almeria" class="entreprise-logo">
@@ -56,6 +57,7 @@
             </div>
         </section>
         
+        <!-- Stage 2 : Établissements scolaires -->
         <section class="stage-entreprise">
             <div class="entreprise-header">
                 <img src="https://www.pagesjaunes.fr/media/newdam/preset-thumbnail-logo-desktop/6b/6c/30/00/00/39/00/04/57/67/66226b6c3000003900045767/66226b6c300000587004576a.png" alt="Logo Établissements scolaires" class="entreprise-logo">
@@ -90,6 +92,36 @@
                     </ul>
                 </div>
             </div>
+            
+            <div class="entreprise-description">
+                <h3>Répartition des activités réalisées</h3>
+                <div class="chart-container">
+                    <canvas id="activitesEtablissementsChart"></canvas>
+                </div>
+                
+                <h3>Tâches principales réalisées</h3>
+                <ul>
+                    <li><strong>Configuration et gestion du système (24.2%) :</strong> Administration des serveurs, gestion des comptes utilisateurs, maintenance du système d'exploitation, mise à jour des composants système</li>
+                    <li><strong>Support et assistance utilisateur (9.1%) :</strong> Aide aux enseignants et au personnel administratif, résolution des problèmes courants, formation aux outils informatiques</li>
+                    <li><strong>Gestion du matériel (9.1%) :</strong> Maintenance des postes informatiques, configuration du matériel, inventaire du parc, remplacement des composants défectueux</li>
+                    <li><strong>Configuration réseau (6.1%) :</strong> Paramétrage des équipements réseau, résolution des incidents de connectivité, gestion des accès</li>
+                    <li><strong>Gestion des accès utilisateurs (6.1%) :</strong> Création et suppression de comptes, gestion des droits et permissions, sécurisation des accès</li>
+                    <li><strong>Authentification et sécurité (6.1%) :</strong> Mise en place des politiques de mots de passe, gestion des identifiants, configuration de l'authentification</li>
+                    <li><strong>Logistique matérielle (6.1%) :</strong> Installation de nouveaux équipements, organisation du parc, suivi des commandes</li>
+                    <li><strong>Configuration des postes utilisateurs (6.1%) :</strong> Installation et paramétrage des postes de travail, déploiement des applications</li>
+                    <li><strong>Sauvegarde des données (3.0%) :</strong> Mise en place de procédures de sauvegarde, vérification de l'intégrité des données</li>
+                    <li><strong>Vérification et contrôle (3.0%) :</strong> Tests de bon fonctionnement, audits de sécurité, contrôles réguliers</li>
+                </ul>
+                
+                <h3>Compétences développées</h3>
+                <ul>
+                    <li>Administration système (Windows Server, Linux)</li>
+                    <li>Gestion de parc informatique</li>
+                    <li>Support technique et relation utilisateur</li>
+                    <li>Sécurité des systèmes et des accès</li>
+                    <li>Gestion des sauvegardes et de la continuité d'activité</li>
+                </ul>
+            </div>
         </section>
     </main>
 
@@ -98,7 +130,7 @@
     </footer>
 
     <script>
-        // Données pour le camembert
+        // Données pour le premier camembert (Almeria)
         const activitesData = {
             labels: [
                 'Support/Supervision',
@@ -123,10 +155,34 @@
             }]
         };
 
-        // Configuration du graphique
-        const config = {
+        // Données pour le second camembert (Établissements scolaires) basées sur le tableau fourni
+        const activitesEtablissementsData = {
+            labels: [
+                'Système',
+                'Affichage',
+                'Hardware',
+                'Accès utilisateur',
+                'Réseau',
+                'Authentification',
+                'Logistique matériel',
+                'Poste utilisateur',
+                'Sauvegarde données',
+                'Vérification'
+            ],
+            datasets: [{
+                data: [24.2, 9.1, 9.1, 6.1, 6.1, 6.1, 6.1, 6.1, 3.0, 3.0],
+                backgroundColor: [
+                    '#2c3e50', '#3498db', '#e74c3c', '#f39c12', '#2ecc71',
+                    '#9b59b6', '#1abc9c', '#e67e22', '#95a5a6', '#34495e'
+                ],
+                borderWidth: 1,
+                borderColor: '#ffffff'
+            }]
+        };
+
+        // Configuration commune des graphiques
+        const chartConfig = {
             type: 'pie',
-            data: activitesData,
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
@@ -152,10 +208,21 @@
             }
         };
 
-        // Création du graphique
+        // Création des graphiques au chargement de la page
         window.onload = function() {
-            const ctx = document.getElementById('activitesChart').getContext('2d');
-            new Chart(ctx, config);
+            // Graphique Almeria
+            const ctx1 = document.getElementById('activitesChart').getContext('2d');
+            new Chart(ctx1, {
+                ...chartConfig,
+                data: activitesData
+            });
+
+            // Graphique Établissements scolaires
+            const ctx2 = document.getElementById('activitesEtablissementsChart').getContext('2d');
+            new Chart(ctx2, {
+                ...chartConfig,
+                data: activitesEtablissementsData
+            });
         };
     </script>
 </body>

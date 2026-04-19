@@ -35,49 +35,6 @@
                 </div>
             </div>
 
-            <!-- Certifications -->
-            <div class="certifications">
-                <h2><i class="fas fa-certificate"></i> Certifications</h2>
-                <div class="certifications-grid">
-                    <div class="certification-card">
-                        <div class="certification-icon">
-                            <i class="fas fa-spell-check"></i>
-                        </div>
-                        <div class="certification-content">
-                            <h3>Certification Voltaire</h3>
-                            <p class="certification-score">Score : 700/700</p>
-                            <p class="certification-description">Certification en orthographe française, niveau avancé.</p>
-                            <div class="certification-verify">
-                                <i class="fas fa-qrcode"></i>
-                                <span>Code de vérification : <strong>6UFYPDH</strong></span>
-                            </div>
-                            <a href="#" class="certification-link" onclick="showVoltaireCert()">
-                                <i class="fas fa-download"></i> Voir l'attestation
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="certification-card">
-                        <div class="certification-icon">
-                            <i class="fas fa-shield-alt"></i>
-                        </div>
-                        <div class="certification-content">
-                            <h3>WALLIX Certified Administrator</h3>
-                            <p class="certification-score">WCA-P PAM Bastion B12</p>
-                            <p class="certification-description">Certification en administration de la solution PAM (Privileged Access Management) de WALLIX.</p>
-                            <div class="certification-skills">
-                                <span class="skill-tag">Gestion des accès privilégiés</span>
-                                <span class="skill-tag">Sécurité des comptes</span>
-                                <span class="skill-tag">Bastion B12</span>
-                            </div>
-                            <a href="#" class="certification-link" onclick="showWallixCert()">
-                                <i class="fas fa-download"></i> Voir l'attestation
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
             <div class="skills">
                 <h2>Compétences</h2>
                 <div class="skill-category">
@@ -112,6 +69,51 @@
                 </div>
             </div>
 
+            <!-- Certifications après les compétences -->
+            <div class="certifications">
+                <h2>Certifications</h2>
+                <div class="certifications-grid">
+                    <div class="certification-card">
+                        <div class="certification-icon">
+                            <i class="fas fa-spell-check"></i>
+                        </div>
+                        <div class="certification-content">
+                            <h3>Certification Voltaire</h3>
+                            <p class="certification-score">Score : 700</p>
+                            <p class="certification-date">Obtenue en Octobre 2025</p>
+                            <p class="certification-description">Certification en orthographe française, niveau avancé.</p>
+                            <div class="certification-verify">
+                                <i class="fas fa-qrcode"></i>
+                                <span>Code de vérification : <strong>6UFYPDH</strong></span>
+                            </div>
+                            <a href="#" class="certification-link" onclick="showVoltaireCert()">
+                                <i class="fas fa-download"></i> Voir l'attestation
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="certification-card">
+                        <div class="certification-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div class="certification-content">
+                            <h3>WALLIX Certified Administrator</h3>
+                            <p class="certification-score">WCA-P PAM Bastion B12</p>
+                            <p class="certification-date">Obtenue en Avril 2026</p>
+                            <p class="certification-description">Certification en administration de la solution PAM (Privileged Access Management) de WALLIX.</p>
+                            <div class="certification-skills">
+                                <span class="skill-tag">Gestion des accès privilégiés</span>
+                                <span class="skill-tag">Sécurité des comptes</span>
+                                <span class="skill-tag">Bastion B12</span>
+                            </div>
+                            <a href="#" class="certification-link" onclick="showWallixCert()">
+                                <i class="fas fa-download"></i> Voir l'attestation
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="education">
                 <h2>Parcours scolaire</h2>
                 <div class="timeline">
@@ -138,11 +140,11 @@
 
     <script>
         function showVoltaireCert() {
-            alert("Attestation Certificat Voltaire\n\nScore : 700/700\nCode de vérification : 6UFYPDH\n\nL'attestation officielle est disponible dans vos documents personnels.");
+            alert("Attestation Certificat Voltaire\n\nScore : 700\nDate : Octobre 2025\nCode de vérification : 6UFYPDH\n\nL'attestation officielle est disponible dans vos documents personnels.");
         }
         
         function showWallixCert() {
-            alert("Certification WALLIX Certified Administrator (WCA-P)\n\nCertification : WCA-P PAM Bastion B12\n\nCompétences validées :\n- Administration de la solution PAM\n- Gestion des accès privilégiés\n- Configuration du Bastion B12\n\nL'attestation officielle est disponible dans vos documents personnels.");
+            alert("Certification WALLIX Certified Administrator (WCA-P)\n\nCertification : WCA-P PAM Bastion B12\nDate : Avril 2026\n\nCompétences validées :\n- Administration de la solution PAM\n- Gestion des accès privilégiés\n- Configuration du Bastion B12\n\nL'attestation officielle est disponible dans vos documents personnels.");
         }
     </script>
 </body>

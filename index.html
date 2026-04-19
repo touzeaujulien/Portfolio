@@ -26,87 +26,116 @@
 
     <main>
         <section class="about-section">
-            <div class="profile">
-                <img src="photo-profil.JPG" alt="Photo de Julien TOUZEAU" class="profile-img">
-                <div class="profile-info">
-                    <h1>Julien TOUZEAU</h1>
-                    <h2>Étudiant en BTS SIO option SISR</h2>
-                    <p>Autonome, curieux et persévérant, je cherche constamment à comprendre le fonctionnement des systèmes informatiques et des structures réseaux.</p>
+            <!-- Profile Card Redesign -->
+            <div class="profile-card">
+                <div class="profile-card-inner">
+                    <div class="profile-avatar">
+                        <img src="photo-profil.JPG" alt="Photo de Julien TOUZEAU" class="profile-img">
+                        <div class="avatar-badge">
+                            <i class="fas fa-code"></i>
+                        </div>
+                    </div>
+                    <div class="profile-info">
+                        <h1>Julien TOUZEAU</h1>
+                        <h2>Étudiant en BTS SIO option SISR</h2>
+                        <div class="profile-tags">
+                            <span class="profile-tag"><i class="fas fa-network-wired"></i> Réseau</span>
+                            <span class="profile-tag"><i class="fas fa-server"></i> Système</span>
+                            <span class="profile-tag"><i class="fas fa-shield-alt"></i> Sécurité</span>
+                        </div>
+                        <p>Autonome, curieux et persévérant, je cherche constamment à comprendre le fonctionnement des systèmes informatiques et des structures réseaux.</p>
+                        <div class="profile-contact">
+                            <a href="contactportfolio.html" class="contact-btn">
+                                <i class="fas fa-envelope"></i> Me contacter
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
 
+            <!-- Skills Section Redesign -->
             <div class="skills">
-                <h2>Compétences</h2>
-                <div class="skill-category">
-                    <h3>Réseau</h3>
-                    <ul>
-                        <li>Configuration de pare-feux Watchguard, switchs, postes</li>
-                        <li>Audit</li>
-                    </ul>
-                </div>
-                <div class="skill-category">
-                    <h3>Système</h3>
-                    <ul>
-                        <li>Installation d'OS (Windows Server, ESX)</li>
-                        <li>Réalisation de PingCastle</li>
-                        <li>Virtualisation (ESX, Hyper-V, VMware)</li>
-                    </ul>
-                </div>
-                <div class="skill-category">
-                    <h3>Télephonie</h3>
-                    <ul>
-                        <li>Mise en place softphone (3CX)</li>
-                        <li>Utilisation de la console d'administration 3CX (ajout d'utilisateurs, des jours fériés, des horaires)</li>
-                    </ul>
-                </div>
-                <div class="skill-category">
-                    <h3>Transversale</h3>
-                    <ul>
-                        <li>Communication</li>
-                        <li>Rédaction de rapport</li>
-                        <li>Autonomie</li>
-                    </ul>
+                <h2><i class="fas fa-cogs"></i> Compétences techniques</h2>
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <div class="skill-icon"><i class="fas fa-network-wired"></i></div>
+                        <h3>Réseau</h3>
+                        <ul>
+                            <li>Configuration de pare-feux Watchguard</li>
+                            <li>Configuration switchs et postes</li>
+                            <li>Audit réseau</li>
+                            <li>VLAN, OSPF, ACL</li>
+                        </ul>
+                    </div>
+                    <div class="skill-category">
+                        <div class="skill-icon"><i class="fas fa-server"></i></div>
+                        <h3>Système</h3>
+                        <ul>
+                            <li>Installation d'OS (Windows Server, ESX)</li>
+                            <li>Réalisation de PingCastle</li>
+                            <li>Virtualisation (ESX, Hyper-V, VMware)</li>
+                            <li>Active Directory & GPO</li>
+                        </ul>
+                    </div>
+                    <div class="skill-category">
+                        <div class="skill-icon"><i class="fas fa-phone-alt"></i></div>
+                        <h3>Téléphonie</h3>
+                        <ul>
+                            <li>Mise en place softphone (3CX)</li>
+                            <li>Administration console 3CX</li>
+                            <li>Gestion utilisateurs et horaires</li>
+                        </ul>
+                    </div>
+                    <div class="skill-category">
+                        <div class="skill-icon"><i class="fas fa-users"></i></div>
+                        <h3>Transversale</h3>
+                        <ul>
+                            <li>Communication professionnelle</li>
+                            <li>Rédaction de rapports techniques</li>
+                            <li>Autonomie et gestion de projets</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
 
-            <!-- Certifications après les compétences -->
+            <!-- Certifications Section avec orange -->
             <div class="certifications">
-                <h2>Certifications</h2>
+                <h2><i class="fas fa-certificate"></i> Certifications</h2>
                 <div class="certifications-grid">
                     <div class="certification-card">
-                        <div class="certification-icon">
+                        <div class="certification-icon orange">
                             <i class="fas fa-spell-check"></i>
                         </div>
                         <div class="certification-content">
                             <h3>Certification Voltaire</h3>
-                            <p class="certification-score">Score : 700</p>
-                            <p class="certification-date">Obtenue en Octobre 2025</p>
+                            <div class="certification-badge">Score : 700</div>
+                            <p class="certification-date"><i class="far fa-calendar-alt"></i> Octobre 2025</p>
                             <p class="certification-description">Certification en orthographe française, niveau avancé.</p>
                             <div class="certification-verify">
                                 <i class="fas fa-qrcode"></i>
-                                <span>Code de vérification : <strong>6UFYPDH</strong></span>
+                                <span>Code : <strong>6UFYPDH</strong></span>
                             </div>
-                            <a href="#" class="certification-link" onclick="showVoltaireCert()">
+                            <a href="#" class="certification-link orange-link" onclick="showVoltaireCert()">
                                 <i class="fas fa-download"></i> Voir l'attestation
                             </a>
                         </div>
                     </div>
 
                     <div class="certification-card">
-                        <div class="certification-icon">
+                        <div class="certification-icon orange">
                             <i class="fas fa-shield-alt"></i>
                         </div>
                         <div class="certification-content">
                             <h3>WALLIX Certified Administrator</h3>
-                            <p class="certification-score">WCA-P PAM Bastion B12</p>
-                            <p class="certification-date">Obtenue en Avril 2026</p>
-                            <p class="certification-description">Certification en administration de la solution PAM (Privileged Access Management) de WALLIX.</p>
+                            <div class="certification-badge">WCA-P PAM Bastion B12</div>
+                            <p class="certification-date"><i class="far fa-calendar-alt"></i> Avril 2026</p>
+                            <p class="certification-description">Certification en administration de la solution PAM (Privileged Access Management).</p>
                             <div class="certification-skills">
-                                <span class="skill-tag">Gestion des accès privilégiés</span>
-                                <span class="skill-tag">Sécurité des comptes</span>
-                                <span class="skill-tag">Bastion B12</span>
+                                <span class="skill-tag orange-tag">Accès privilégiés</span>
+                                <span class="skill-tag orange-tag">Sécurité des comptes</span>
+                                <span class="skill-tag orange-tag">Bastion B12</span>
                             </div>
-                            <a href="#" class="certification-link" onclick="showWallixCert()">
+                            <a href="#" class="certification-link orange-link" onclick="showWallixCert()">
                                 <i class="fas fa-download"></i> Voir l'attestation
                             </a>
                         </div>
@@ -114,20 +143,35 @@
                 </div>
             </div>
 
+            <!-- Education Section Redesign -->
             <div class="education">
-                <h2>Parcours scolaire</h2>
+                <h2><i class="fas fa-graduation-cap"></i> Parcours scolaire</h2>
                 <div class="timeline">
                     <div class="timeline-item">
-                        <h3>2024-2026 - BTS SIO option SISR</h3>
-                        <p>ESUPEC, Cholet</p>
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h3>BTS SIO option SISR</h3>
+                            <p class="timeline-date">2024 - 2026</p>
+                            <p class="timeline-location">ESUPEC, Cholet</p>
+                        </div>
                     </div>
                     <div class="timeline-item">
-                        <h3>2021-2024 - Baccalauréat Professionnel SN option RISC (mention très bien)</h3>
-                        <p>Lycée de l'Hyrôme, Chemillé</p>
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h3>Baccalauréat Professionnel SN option RISC</h3>
+                            <p class="timeline-date">2021 - 2024</p>
+                            <p class="timeline-location">Lycée de l'Hyrôme, Chemillé</p>
+                            <p class="timeline-mention">Mention très bien</p>
+                        </div>
                     </div>
                     <div class="timeline-item">
-                        <h3>2017-2021 - Brevet (mention assez bien)</h3>
-                        <p>Collège le Pont de Moine, Montfaucon-Montigné</p>
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h3>Brevet des collèges</h3>
+                            <p class="timeline-date">2017 - 2021</p>
+                            <p class="timeline-location">Collège le Pont de Moine, Montfaucon-Montigné</p>
+                            <p class="timeline-mention">Mention assez bien</p>
+                        </div>
                     </div>
                 </div>
             </div>

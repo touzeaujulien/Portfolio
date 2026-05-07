@@ -171,3 +171,89 @@
         height: 50px;
     }
 }
+  /* styles additionnels pour les listes de tâches avec preuves */
+        .tasks-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .task-item {
+            background-color: #f9f9f9;
+            border-left: 4px solid #3498db;
+            margin-bottom: 12px;
+            padding: 12px 15px;
+            border-radius: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            transition: all 0.2s ease;
+        }
+        .task-item:hover {
+            background-color: #f0f7ff;
+            transform: translateX(3px);
+        }
+        .task-name {
+            font-weight: 600;
+            color: #2c3e50;
+            flex: 1;
+            font-size: 0.95rem;
+        }
+        .proof-btn {
+            background-color: #2c3e50;
+            color: white;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: background 0.2s;
+            white-space: nowrap;
+        }
+        .proof-btn:hover {
+            background-color: #1e3c72;
+            transform: scale(1.02);
+        }
+        .proof-btn::before {
+            content: "📄";
+            font-size: 0.9rem;
+        }
+        .badge-stage {
+            display: inline-block;
+            background-color: #e74c3c20;
+            color: #c0392b;
+            border-radius: 20px;
+            padding: 3px 10px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        .section-title-icon {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .alert-note {
+            background-color: #fff3cd;
+            border-left: 4px solid #f39c12;
+            padding: 8px 15px;
+            margin-top: 15px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            color: #856404;
+        }
+        @media (max-width: 680px) {
+            .task-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .proof-btn {
+                align-self: flex-start;
+            }
+        }

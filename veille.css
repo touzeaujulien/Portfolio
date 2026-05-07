@@ -551,3 +551,67 @@
 .stagger-delay-1, .stagger-delay-2, .stagger-delay-3, .stagger-delay-4 {
     opacity: 1;
 }
+/* ===== SYNTHESE VEILLE ===== */
+.synthèse-section {
+    margin-bottom: 4rem;
+}
+
+.synthèse-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.synthèse-card {
+    background: white;
+    border-radius: 10px;
+    padding: 1.8rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e2e8f0;
+    transition: all 0.2s ease;
+}
+
+.synthèse-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.synthèse-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #0f766e, #14b8a6);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.2rem;
+    color: white;
+    font-size: 1.5rem;
+}
+
+.synthèse-card h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 0.8rem;
+}
+
+.synthèse-card p {
+    color: #475569;
+    line-height: 1.6;
+    font-size: 0.95rem;
+    margin-bottom: 0;
+}
+
+/* Responsive pour la synthèse */
+@media (max-width: 768px) {
+    .synthèse-content {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+    }
+    
+    .synthèse-card {
+        padding: 1.5rem;
+    }
+}
